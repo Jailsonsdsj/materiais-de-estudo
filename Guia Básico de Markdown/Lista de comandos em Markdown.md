@@ -59,7 +59,7 @@ O código para inserir uma imagem no conteúdo é semelhante ao código de inser
 
 #### Citação (Quote)
 
-Para transformar um texto em uma citação ou comentário, semelhante ao código HTML <blockquote>, utilize o sinal de maior no início da linha que será formatada:
+Para transformar um texto em uma citação ou comentário, semelhante ao código HTML, utilize o sinal de maior no início da linha que será formatada:
 
 >Este é um *blockquote*. O sinal usado abre e fecha este código no HTML. 
 >Para adicionar mais uma linha à citação, basta teclar Enter para um novo
