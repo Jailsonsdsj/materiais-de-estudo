@@ -2,7 +2,7 @@
 
 
 
-Uma associação de todos os conhecimentos adquiridos na linguagem Python 3, através do curso em vídeo, produzido por Gustavo Guanabara, e as demais fontes referências existentes na internet.
+Uma associação de todos os conhecimentos adquiridos na linguagem Python 3 através do curso em vídeo, produzido por Gustavo Guanabara, e as demais fontes de referências existentes na internet.
 
 
 
