@@ -20,7 +20,7 @@ Basta clicar com o botão direito dou mouse na aba de schema e, em seguida, crea
 
 
 
-#### Importando um Banco de Dados existente
+### Importando um Banco de Dados existente
 
 1. Server data 
 2. Data Import
@@ -30,15 +30,19 @@ Basta clicar com o botão direito dou mouse na aba de schema e, em seguida, crea
 
 
 
-#### Limitando a quantidade de linhas em um select
+### Limitando a quantidade de registros exibidos
 
 ~~~~
 limit 10
 ~~~~
 
+~~~~mysql
+SELECT * FROM projetos LIMIT 10,5;
+~~~~
 
 
-#### Como retornar valores únicos com o DISTINCT
+
+### Como retornar valores únicos com o DISTINCT
 
 Caso queria consultar apenas os valores existentes numa tabela, basta usar o comando DISTINCT.
 
@@ -102,7 +106,7 @@ Dessa forma, cada valor será exibido apenas uma vez:
 
 
 
-#### Criando um filtro entre intervalos (between)
+### Criando um filtro entre intervalos (between)
 
 
 
@@ -167,7 +171,7 @@ O comando between vai exibir apenas os preços que estão entre 5 e 12
 
 
 
-#### Criando um filtro IN
+### Criando um filtro IN
 
 O filtro IN possibilita mostrar apenas os valores selecionados no parênteses. No caso abaixo, 5 e 30:
 
@@ -227,7 +231,7 @@ order by precounitario;
 
 
 
-#### Filtrando valores por tempo
+### Filtrando valores por tempo
 
 Tabela
 
@@ -278,7 +282,7 @@ where year(data_pedido) = '2007';
 
 
 
-#### Função Count
+### Função Count
 
 Contando a quantidade de pedidos em um determinado ano
 
@@ -298,7 +302,7 @@ where year(data_pedido) = '2007';
 
 
 
-#### Operador Group By
+### Operador Group By
 
 Utilizado para realizar o somatório em relatórios.
 
@@ -359,7 +363,7 @@ Será exibido a soma referente a cada tempo de entrega
 
 
 
-#### Operador HAVING
+### Operador HAVING
 
 Filtrando o total arrecadado por cada status do pedido:
 
@@ -410,12 +414,94 @@ Outra diferença é que o where vem antes do Group / Order by. Portanto, a perfo
 
 ----
 
-#### Rascunho
+### Rascunho
 
 ~~~~mysql
-select tempoentrega, count(produtoID) as total
-from produtos
-group by tempoentrega
-order by total desc;
++-----------------------+
+| Tables_in_aulas       |
++-----------------------+
+| categorias            |
+| clientes              |
+| departamentos         |
+| estados               |
+| fornecedores          |
+| fornecedores_contatos |
+| franquias             |
+| pedidos               |
+| pedidos_item          |
+| pedidos_status        |
+| produtos              |
+| transportadoras       |
++-----------------------+
+
+TABELA PRODUTOS
++---------------+---------------+------+-----+---------+----------------+
+| Field         | Type          | Null | Key | Default | Extra          |
++---------------+---------------+------+-----+---------+----------------+
+| produtoID     | int           | NO   | PRI | NULL    | auto_increment |
+| nomeproduto   | varchar(50)   | YES  |     | NULL    |                |
+| descricao     | longtext      | YES  |     | NULL    |                |
+| codigobarra   | varchar(15)   | YES  |     | NULL    |                |
+| tempoentrega  | tinyint       | YES  |     | NULL    |                |
+| precorevenda  | decimal(10,2) | YES  |     | NULL    |                |
+| precounitario | decimal(10,2) | YES  |     | NULL    |                |
+| estoque       | mediumint     | YES  |     | NULL    |                |
+| imagemgrande  | varchar(100)  | YES  |     | NULL    |                |
+| imagempequena | varchar(100)  | YES  |     | NULL    |                |
+| descontinuado | tinyint(1)    | YES  |     | 0       |                |
+| fornecedorID  | tinyint       | YES  |     | NULL    |                |
+| categoriaID   | tinyint       | YES  |     | NULL    |                |
++---------------+---------------+------+-----+---------+----------------+
+
+TABELA CATEGORIAS
++-------------+---------------+
+| categoriaID | nomecategoria |
++-------------+---------------+
+|           1 | Coffee        |
+|           2 | Food          |
+|           3 | Merchandise   |
+|           4 | Clothing      |
++-------------+---------------+
+
+
+SELECT NOMECATEGORIA, COUNT(PRODUTOID) AS TOTAL
+FROM PRODUTOS P
+INNER JOIN CATEGORIAS C
+ON P.CATEGORIAID = C.CATEGORIAID
+GROUP BY P.CATEGORIAID;
+
+~~~~
+
+---
+
+
+
+# Acrescentar na organização do arquivo
+
+
+
+Operador group by
+
+Serve para agrupar um determinado tipo de registro. No exemplo abaixo, irá exibir a quantidade de produtos pertencentes a cada categoria de comida.
+
+É importante que seja utilizando com a função COUNT().
+
+~~~~mysql
+SELECT NOMECATEGORIA, COUNT(PRODUTOID) AS TOTAL
+FROM PRODUTOS P
+INNER JOIN CATEGORIAS C
+ON P.CATEGORIAID = C.CATEGORIAID
+GROUP BY P.CATEGORIAID;
+~~~~
+
+~~~~mysql
++---------------+-------+
+| NOMECATEGORIA | TOTAL |
++---------------+-------+
+| Food          |     7 |
+| Merchandise   |     6 |
+| Clothing      |     4 |
+| Coffee        |     5 |
++---------------+-------+
 ~~~~
 
