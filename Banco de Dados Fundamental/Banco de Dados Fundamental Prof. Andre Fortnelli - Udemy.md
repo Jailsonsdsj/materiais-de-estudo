@@ -12,8 +12,6 @@ Link para a primeira edição da apostila:
 
 
 
-
-
 ### Criando um banco de dados no Workbench
 
 Basta clicar com o botão direito dou mouse na aba de schema e, em seguida, create schema.
@@ -302,63 +300,29 @@ where year(data_pedido) = '2007';
 
 
 
-### Operador Group By
+### Operador group by
 
-Utilizado para realizar o somatório em relatórios.
+Serve para agrupar um determinado tipo de registro. No exemplo abaixo, irá exibir a quantidade de produtos pertencentes a cada categoria de comida.
 
-
-
-Tempo de entrega da tabela produtos:
-
-~~~~
-+--------------+
-| tempoentrega |
-+--------------+
-|           15 |
-|            8 |
-|            8 |
-|            5 |
-|           15 |
-|           15 |
-|            8 |
-|           30 |
-|            5 |
-|            5 |
-|           15 |
-|           15 |
-|            5 |
-|            5 |
-|            5 |
-|            5 |
-|            5 |
-|            5 |
-|            8 |
-|           15 |
-|           30 |
-|           30 |
-+--------------+
-~~~~
-
-Realizando o somatório:
+É importante que seja utilizando com a função COUNT().
 
 ~~~~mysql
-select tempoentrega, count(produtoID) as total
-from produtos
-group by tempoentrega
-order by total desc;
+SELECT NOMECATEGORIA, COUNT(PRODUTOID) AS TOTAL
+FROM PRODUTOS P
+INNER JOIN CATEGORIAS C
+ON P.CATEGORIAID = C.CATEGORIAID
+GROUP BY P.CATEGORIAID;
 ~~~~
 
-Será exibido a soma referente a cada tempo de entrega
-
-~~~~
-+--------------+-------+
-| tempoentrega | total |
-+--------------+-------+
-|            5 |     9 |
-|           15 |     6 |
-|            8 |     4 |
-|           30 |     3 |
-+--------------+-------+
+~~~~mysql
++---------------+-------+
+| NOMECATEGORIA | TOTAL |
++---------------+-------+
+| Food          |     7 |
+| Merchandise   |     6 |
+| Clothing      |     4 |
+| Coffee        |     5 |
++---------------+-------+
 ~~~~
 
 
@@ -410,98 +374,65 @@ Outra diferença é que o where vem antes do Group / Order by. Portanto, a perfo
 
 
 
+### A diferença entre Inner Join, Left join e Right join
 
-
-----
-
-### Rascunho
-
-~~~~mysql
-+-----------------------+
-| Tables_in_aulas       |
-+-----------------------+
-| categorias            |
-| clientes              |
-| departamentos         |
-| estados               |
-| fornecedores          |
-| fornecedores_contatos |
-| franquias             |
-| pedidos               |
-| pedidos_item          |
-| pedidos_status        |
-| produtos              |
-| transportadoras       |
-+-----------------------+
-
-TABELA PRODUTOS
-+---------------+---------------+------+-----+---------+----------------+
-| Field         | Type          | Null | Key | Default | Extra          |
-+---------------+---------------+------+-----+---------+----------------+
-| produtoID     | int           | NO   | PRI | NULL    | auto_increment |
-| nomeproduto   | varchar(50)   | YES  |     | NULL    |                |
-| descricao     | longtext      | YES  |     | NULL    |                |
-| codigobarra   | varchar(15)   | YES  |     | NULL    |                |
-| tempoentrega  | tinyint       | YES  |     | NULL    |                |
-| precorevenda  | decimal(10,2) | YES  |     | NULL    |                |
-| precounitario | decimal(10,2) | YES  |     | NULL    |                |
-| estoque       | mediumint     | YES  |     | NULL    |                |
-| imagemgrande  | varchar(100)  | YES  |     | NULL    |                |
-| imagempequena | varchar(100)  | YES  |     | NULL    |                |
-| descontinuado | tinyint(1)    | YES  |     | 0       |                |
-| fornecedorID  | tinyint       | YES  |     | NULL    |                |
-| categoriaID   | tinyint       | YES  |     | NULL    |                |
-+---------------+---------------+------+-----+---------+----------------+
-
-TABELA CATEGORIAS
-+-------------+---------------+
-| categoriaID | nomecategoria |
-+-------------+---------------+
-|           1 | Coffee        |
-|           2 | Food          |
-|           3 | Merchandise   |
-|           4 | Clothing      |
-+-------------+---------------+
-
-
-SELECT NOMECATEGORIA, COUNT(PRODUTOID) AS TOTAL
-FROM PRODUTOS P
-INNER JOIN CATEGORIAS C
-ON P.CATEGORIAID = C.CATEGORIAID
-GROUP BY P.CATEGORIAID;
-
-~~~~
-
----
+- INNER JOIN: mostra apenas os registros q "casam" e aparecem nas duas tabelas.
+- LEFT JOIN: mostra todos os registros q "casam" da 1a. tabela, mesmo que não estejam na 2a.
+- RIGHT JOIN: mostra todos os registros q "casam" da 2a. tabela, mesmo que  não estejam na 1a.
+- FULL JOIN: mostra todos os registros q "casam", mesmo estando ele na 1a. e não na 2a., ou estando na 2a. e não na 1a.
 
 
 
-# Acrescentar na organização do arquivo
-
-
-
-Operador group by
-
-Serve para agrupar um determinado tipo de registro. No exemplo abaixo, irá exibir a quantidade de produtos pertencentes a cada categoria de comida.
-
-É importante que seja utilizando com a função COUNT().
+### Relacionando três tabelas
 
 ~~~~mysql
-SELECT NOMECATEGORIA, COUNT(PRODUTOID) AS TOTAL
-FROM PRODUTOS P
-INNER JOIN CATEGORIAS C
-ON P.CATEGORIAID = C.CATEGORIAID
-GROUP BY P.CATEGORIAID;
+select distinct p.clienteid, c.nomecompleto, c.telefone, c.email, pi.pedidoid, pi.produtoid, pi.quantidade
+from clientes c
+inner join pedidos p on c.clienteid = p.clienteid
+inner join pedidos_item pi on pi.pedidoid = p.pedidoid
+where produtoid = 2;
 ~~~~
 
-~~~~mysql
-+---------------+-------+
-| NOMECATEGORIA | TOTAL |
-+---------------+-------+
-| Food          |     7 |
-| Merchandise   |     6 |
-| Clothing      |     4 |
-| Coffee        |     5 |
-+---------------+-------+
-~~~~
+
+
+
+
+## Data Types
+
+
+
+### Numeric
+
+
+
+**Integrer**
+
+<a href="https://imgur.com/xDqlG12"><img src="https://i.imgur.com/xDqlG12.png" title="source: imgur.com" /></a>
+
+
+
+**Decimal**
+
+- salário (10,2) - Amazena até 10 dígitos, sendo 2 para campos decimais
+- preco (10,4) - Dos 10 dígitos, 4 serão decimais
+
+
+
+**Date and Time**
+
+| Tipo      | Exemplo             | Descrição                                       |
+| --------- | ------------------- | ----------------------------------------------- |
+| Date      | 0000-00-00          |                                                 |
+| Time      | 00:00:00            |                                                 |
+| datetime  | 0000-00-00 00:00:00 | Armazena datas; 4 bytes de amazenamento         |
+| timestamp | 0000-00-00 00:00:00 | Armazena a data de uma determinada ação; 8 byte |
+| year      | 0000                |                                                 |
+
+
+
+**String**
+
+<a href="https://imgur.com/yyVDdU7"><img src="https://i.imgur.com/yyVDdU7.png" title="source: imgur.com" /></a>
+
+
 
