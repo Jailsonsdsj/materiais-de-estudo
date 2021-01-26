@@ -1,0 +1,1 @@
+Necessário copiar a pasta avançado e colar dentro do xampp > htdocs. 
