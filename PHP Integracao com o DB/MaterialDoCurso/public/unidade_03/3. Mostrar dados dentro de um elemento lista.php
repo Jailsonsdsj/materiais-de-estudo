@@ -47,7 +47,7 @@
             <?php
                 }
 
-            // PASSO 7 - Encerrando a query para liberar espaço na memória
+            // PASSO 7 - Encerrando a consulta para liberar espaço na memória
                 mysqli_free_result($produtos);    
             ?>
         </ul>

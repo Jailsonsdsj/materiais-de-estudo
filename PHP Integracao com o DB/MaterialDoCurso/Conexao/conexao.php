@@ -1,4 +1,5 @@
 <?php 
+    //este código deverá ser importado sempre que a conexão com o banco de dados for necessário
     $servidor = "localhost";
     $usuario = "root";
     $senha = "";
@@ -10,3 +11,4 @@
         die("Conexão falhou: ".mysqli_conect_errno());
     }
 ?>
+
