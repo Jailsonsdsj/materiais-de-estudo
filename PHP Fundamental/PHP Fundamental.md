@@ -2,7 +2,7 @@
 
 
 
-##### **Requisitos**
+### **Requisitos**
 
 - Máquina virtual
 - XAMPP
@@ -11,22 +11,22 @@
 
 
 
-##### **Para abrir os arquivos**
+### **Para abrir os arquivos**
 
 - Ativar o Xampp
 - http://localhost/Pasta_dos_arquivos/
 
 
 
-### Comandos Iniciais
+## Comandos Iniciais
 
 ---
 
 
 
-##### **Tag PHP**
+### **Tag PHP**
 
-~~~~
+~~~~php+HTML
 <!doctype html>
 <html>
     <head>
@@ -41,9 +41,9 @@
 
 
 
-##### **Comentários**
+### **Comentários**
 
-~~~~
+~~~~php+HTML
 <body>
       <!-- Este é um comentário no código do HTML-->
      <?php 
@@ -55,9 +55,9 @@
 
 
 
-##### **Como criar suas primeiras variáveis PHP**
+### **Como criar suas primeiras variáveis PHP**
 
-~~~~
+~~~~php+HTML
 <?php 
 
 //Esta área pode ser destinada à criação de variáveis para que o código fique mais organizado
@@ -87,9 +87,9 @@
 
 
 
-##### **Variáveis de Strings**
+### **Variáveis de Strings**
 
-~~~~
+~~~~php+HTML
 <?php
     $_marca= "Fiat";
     $_nome = "Uno";
@@ -102,9 +102,9 @@
 
 
 
-**Funções de Strings**
+### **Funções de Strings**
 
-~~~~
+~~~~php+HTML
 <?php 
     $_nome = "Curso PHP Fundamental";
 ?>
@@ -135,9 +135,9 @@
 
 
 
-**Funções Numéricas**
+### **Funções Numéricas**
 
-~~~~
+~~~~php+HTML
 <?php 
     $_salario = 800;
     $_meses   = 3;
@@ -169,9 +169,9 @@
 
 
 
-##### Testar os tipos de variáveis
+### Testar os tipos de variáveis
 
-~~~~
+~~~~php+HTML
 <?php
     $_salario = 1095;
     $_gasolina = 4.55;
@@ -217,9 +217,9 @@ echo "É um valor nulo? ". is_null($_nome)."<br>";
 
 
 
-##### Arredondar variáveis
+### Arredondar variáveis
 
-~~~~
+~~~~php+HTML
 <?php
     $_gasolina = 4.44;
 ?>
@@ -238,9 +238,9 @@ echo "É um valor nulo? ". is_null($_nome)."<br>";
 
 
 
-##### ISSET
+### ISSET
 
-~~~~
+~~~~php+HTML
 <?php
     $_nome = "Andre";
     $_telefone = "3464-0544";
@@ -260,9 +260,9 @@ echo "É um valor nulo? ". is_null($_nome)."<br>";
 
 
 
-##### Criando um Array na prática
+### Criando um Array na prática
 
-~~~~
+~~~~php+HTML
 Criando um Array na prática
 <?php 
     //declarando um array
@@ -290,9 +290,9 @@ Criando um Array na prática
 
 
 
-##### Funções para array
+### Funções para array
 
-~~~~
+~~~~php+HTML
 <?php
     $_megasena = array(47,29,42,04,27,21);
 
@@ -315,9 +315,9 @@ Para mais funções do array,[Clique Aqui]()
 
 
 
-##### Pesquisa dentro do array
+### Pesquisa dentro do array
 
-~~~~
+~~~~php+HTML
 <?php
     $_salada = array("Laranja","Uva","Abacate");
 ?>
@@ -345,9 +345,9 @@ Para mais funções do array,[Clique Aqui]()
 
 
 
-##### IF, IF ELSE, ELSE
+### IF, IF ELSE, ELSE
 
-~~~~
+~~~~php+HTML
 <?php 
             $_a = 5;
             $_b = 3;
@@ -364,9 +364,9 @@ Para mais funções do array,[Clique Aqui]()
 
 
 
-##### SWITCH, CASE
+### SWITCH, CASE
 
-~~~~
+~~~~php+HTML
 <?php 
            $_dia = "Quarta";
 
@@ -392,9 +392,9 @@ Para mais funções do array,[Clique Aqui]()
 
 
 
-##### Operador Ternário (If else compacto)
+### Operador Ternário (If else compacto)
 
-~~~~
+~~~~php+HTML
 $_idade = 17;
             //se a variável for maior que 18, a mensagem "de maior" será exibida. Os “:” representa o else, neste caso, "de menor".
             $_maioridade = ($_idade >= 18)? "de maior":"de menor";
@@ -404,9 +404,9 @@ $_idade = 17;
 
 
 
-##### Operadores Lógicos
+### Operadores Lógicos
 
-~~~~
+~~~~php+HTML
 <?php 
             $_fumante = true;
 
@@ -422,7 +422,7 @@ $_idade = 17;
 
 
 
-##### Representações dos sinais de igual:
+### Representações dos sinais de igual:
 
 - = Atribuição de valor
 - == Compara se o valor é igual
@@ -430,7 +430,7 @@ $_idade = 17;
 
 
 
-~~~~
+~~~~php+HTML
 <?php 
             $_numero1 = 5;
             $_numero2 = "5";
@@ -450,7 +450,7 @@ $_idade = 17;
 
 
 
-##### Operadores Lógicos
+### Operadores Lógicos
 
 | Exemplo    | Nome | Resultado                                                |
 | ---------- | ---- | -------------------------------------------------------- |
@@ -477,9 +477,9 @@ Para mais informações, [clique aqui](https://www.php.net/manual/pt_BR/language
 
 
 
-##### While
+### While
 
-~~~~
+~~~~php+HTML
 <?php                    
         $_contador = 1;
         while ($_contador <=5){
@@ -493,9 +493,9 @@ Para mais informações, [clique aqui](https://www.php.net/manual/pt_BR/language
 
 
 
-##### Do While
+### Do While
 
-~~~~
+~~~~php+HTML
 <?php                    
         $_contador = 1;
        do{
@@ -509,9 +509,9 @@ Para mais informações, [clique aqui](https://www.php.net/manual/pt_BR/language
 
 
 
-##### For
+### For
 
-~~~~
+~~~~php+HTML
 <?php             
     //EM ORDEM CRESCENTE
         $_contador = 1;
@@ -537,9 +537,9 @@ Para mais informações, [clique aqui](https://www.php.net/manual/pt_BR/language
 
 
 
-##### Foreach
+### Foreach
 
-~~~~
+~~~~php+HTML
 <?php                    
         $_salada = array ("Laranja","Uva","Abacate","Maça","Melão");
 
@@ -557,9 +557,9 @@ Para mais informações, [clique aqui](https://www.php.net/manual/pt_BR/language
 
 
 
-##### Segundo método
+### Segundo método
 
-~~~~
+~~~~php+HTML
 <?php                    
         $_cadastro = array("Nome" => "Adilson",
                             "Telefone" => "8199959-0878",
@@ -575,9 +575,9 @@ Para mais informações, [clique aqui](https://www.php.net/manual/pt_BR/language
 
 
 
-##### Projeto Megasena
+### Projeto Megasena
 
-~~~~
+~~~~php+HTML
 <?php  
         $_sort = array();
         $_count = 0;
@@ -611,9 +611,9 @@ Para mais informações, [clique aqui](https://www.php.net/manual/pt_BR/language
 
 
 
-##### Funções
+### Funções
 
-~~~~
+~~~~php+HTML
 <?php 
         function retornarDiaria(){
             return number_format(1900/30,2); //,2 representa duas casas decimais após a vírgula (ponto)
@@ -625,9 +625,9 @@ Para mais informações, [clique aqui](https://www.php.net/manual/pt_BR/language
 
 
 
-##### Funções com parâmetros
+### Funções com parâmetros
 
-~~~~
+~~~~php+HTML
     <?php 
 	//Função para calcular a diária de um assalariado 
         function retornarDiaria($_a,$_b){
@@ -652,9 +652,9 @@ Para mais informações, [clique aqui](https://www.php.net/manual/pt_BR/language
 
 
 
-##### Getdate
+### Getdate
 
-~~~~
+~~~~php+HTML
 <?php
         //determinando o horário local
         date_default_timezone_set('America/Recife');
@@ -682,7 +682,7 @@ Deixando o nome do mês e da semana em português, [clique aqui](https://www.php
 
 
 
-~~~~
+~~~~php+HTML
 <?php
        //importando o set locale para traduzir os nomes para o português
 
@@ -709,13 +709,13 @@ Deixando o nome do mês e da semana em português, [clique aqui](https://www.php
 
 
 
-##### DIFF
+### DIFF
 
 O DIFF é uma função fundamental para tratar controles de acesso, pagamento, expiração etc, através da data-hora.
 
 Ex.: Data do último pagamento para data atual
 
-~~~~
+~~~~php+HTML
 <?php
             
             $_data1 = new DateTime("2020-01-01");
@@ -744,13 +744,13 @@ Para mais informações, [Clique aqui](https://www.php.net/manual/pt_BR/datetime
 
 
 
-##### Links com parâmetro
+### Links com parâmetro
 
 
 
 Arquivo: inicial.php
 
-~~~~
+~~~~php+HTML
 <body>  
         <ul>
         <!--COMO FAZER UM LINK COM PARÂMETRO-->
@@ -769,7 +769,7 @@ Arquivo: inicial.php
 
 Arquivo: destino.php
 
-~~~~
+~~~~php+HTML
 <body> 
         <?php
             //A variável destino foi criada para receber o valor da variável código declarada no html do arquivo inicial.php
@@ -782,9 +782,9 @@ Arquivo: destino.php
 
 
 
-##### Mostrar informações do formulário na prática
+### Mostrar informações do formulário na prática
 
-~~~~
+~~~~php+HTML
 <body> 
         <?php
             //um array é criado para receber o caminho de todas as imagens
@@ -801,9 +801,9 @@ Arquivo: destino.php
 
 
 
-##### Exemplo prático: ligando as páginas via PHP
+### Exemplo prático: ligando as páginas via PHP
 
-~~~~
+~~~~php+HTML
 <!doctype html>
 <html>
     <head>
@@ -829,9 +829,9 @@ Arquivo: destino.php
 
 
 
-##### No arquivo PHP:
+### No arquivo PHP:
 
-~~~~
+~~~~php+HTML
 <!doctype html>
 <html>
     <head>
@@ -859,9 +859,9 @@ Arquivo: destino.php
 
 
 
-##### Enviando os dados do formulário com o atributo GET no HTML/PHP
+### Enviando os dados do formulário com o atributo GET no HTML/PHP
 
-~~~~
+~~~~php+HTML
 <form action="/action_page.php" method="get">
   <label for="fname">First name:</label>
   <input type="text" id="fname" name="fname"><br><br>
@@ -875,11 +875,11 @@ Obs: os dados são enviados via URL
 
 
 
-##### Resgatar informações do formulário
+### Resgatar informações do formulário
 
 No arquivo “Formulario.php”
 
-~~~~
+~~~~php+HTML
 <!-- O method post foi usado para ocultar as informações enviadas via URL-->
         <form action="destino.php" method="post">
             <label for="nome">Nome Completo</label>
@@ -900,7 +900,7 @@ No arquivo “Formulario.php”
 
 No arquivo “destino.php”
 
-~~~~
+~~~~php+HTML
 <body> 
         <pre>
             <?php
@@ -918,9 +918,9 @@ No arquivo “destino.php”
 
 
 
-##### Identificação do recebimento
+### Identificação do recebimento
 
-~~~~
+~~~~php+HTML
 <body> 
         <pre>
             <?php
@@ -954,9 +954,9 @@ No arquivo “destino.php”
 
 
 
-##### Identificar o operador ternário
+### Identificar o operador ternário
 
-~~~~
+~~~~php+HTML
 <?php
 
         //Forma simplificada do método anterior
@@ -972,9 +972,9 @@ No arquivo “destino.php”
 
 
 
-##### Form
+### Form
 
-~~~~
+~~~~php+HTML
 <?php
     //pegando os dados do subimit do formulário abaixo
     if(isset($_POST['nome'])){
