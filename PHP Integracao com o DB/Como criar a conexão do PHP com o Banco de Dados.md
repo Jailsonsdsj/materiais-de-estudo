@@ -445,6 +445,7 @@ Criando a consulta ao banco de dados
     $consulta = "SELECT * ";
     $consulta .= " FROM produtos ";
     $consulta .= "WHERE produtoID = {$produtoID}"; 
+	//OBSERVAÇÃO IMPORTANTE: a query deve ser construída com o uso de aspas duplas ("")
     //o produtoID, após o where, referece ao ID do banco de dados, que serviu de parâmetro para o link da imagem no arquivo listagem.php
     //Já variável produtoID é referente ao produtoID localizado acima.
     //Vale lembrar que a variável $conecta é referente a conexão com o banco, localizado na pasta privada
