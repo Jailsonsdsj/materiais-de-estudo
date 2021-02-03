@@ -73,7 +73,6 @@
                     <li>Preço Revenda: <?php echo real_format($precovenda) ?></li>
                     <li>Preço Unitário: <?php echo real_format($precounitario) ?></li>
                     <li>Estoque: <?php echo $estoque ?></li>
-                   
                 </ul>
            </div>
         </main>
