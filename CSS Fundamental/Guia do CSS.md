@@ -365,7 +365,7 @@ Para evitar, basta algumas das seguintes propriedades:
 | Propriedade  | Descrição                                                    |
 | ------------ | ------------------------------------------------------------ |
 | block        | Cada elemento será posicionado em uma única linha            |
-| inline       | Todos os elementos serão posicionados na mesma linha. width e height não são considerados. Necessário utilizar o pading. |
+| inline       | Todos os elementos serão posicionados na mesma linha. width e height não são considerados. Necessário utilizar o pading para alterar os tamanhos. |
 | inline-block | Todos os elementos também serão posicionados na mesma linha, porém width e height serão considerados. |
 
 
@@ -394,31 +394,227 @@ https://stackoverflow.com/questions/5078239/how-do-i-remove-the-space-between-in
 
 
 
+### Altura e Largura
+
+Por padrão, o HTML e o body ocupam toda a largura da tela mas a altura não. Para alterar a altura do documento, é necessário especificar o tamanho. A altura considera apenas o elementos contidos na página.
+
+Elementos inline altura e largura são desconsideradas (por exemplo, a tag span).
+
+
+
+### Box-sizing
+
+A propriedade CSS box-sizing é utilizada para alterar a propriedade padrão da box model, usada para calcular larguras (widths) e alturas (heights) dos elementos. É possível usar essa propriedade para emular o comportamento dos navegadores (browsers) que não suportam corretamente a especificação da propriedade CSS box model.
+
+| Propriedade             | Descrição                                                    |
+| ----------------------- | ------------------------------------------------------------ |
+| box-sizing: content-box | As propriedades [`width`](https://developer.mozilla.org/pt-BR/docs/Web/CSS/width) (largura) e [`height`](https://developer.mozilla.org/pt-BR/docs/Web/CSS/height) (altura) são medidas incluindo só o conteúdo, mas não o padding, border ou margin |
+| box-sizing: border-box  | As propriedades de largura ([`width`](https://developer.mozilla.org/pt-BR/docs/Web/CSS/width)) e de altura ([`height`](https://developer.mozilla.org/pt-BR/docs/Web/CSS/height)) incluem o tamanho padding size e a propriedade border, mas não incluem a propriedade margin. |
+
+
+
+### Overflow
+
+A propriedade `overflow` especifica quando o conteúdo de um elemento de nível de bloco deve ser cortado, exibido com barras de rolagem ou se transborda do elemento.
+
+~~~~css
+overflow:  visible | hidden | scroll | auto | inherit
+~~~~
+
+
+
+| Propriedade | Descrição                                                    |
+| ----------- | ------------------------------------------------------------ |
+| visible     | Valor padrão. O conteúdo não é cortado e pode ser renderizado para fora da caixa de conteúdo. |
+| hidden      | O conteúdo é cortado e nenhuma barra de rolagem é exibida.   |
+| scroll      | O conteúdo é acessível através de barras de rolagem que são exibidas mesmo que o conteúdo não precise. Isso evita o problema de barras de rolagem aparecendo e desaparecendo quando o conteúdo é dinâmico. Impressoras podem imprimir o conteúdo vazado |
+| auto        | Depende do navegador utilizado. Navegadores desktop como o Firefox geralmente exibem barras de rolagem apenas quando necessário |
+
+
+
+### Float
+
+Determina que um elemento deve ser retirado do seu fluxo normal e colocado ao longo do lado direito ou esquerdo do seu containêr, onde textos  e elementos em linha irão se posicionar ao seu redor.
+
+Um elemento flutuante é um tipo de elemento cujo valor de `float `é diferente de `none.`
+
+
+
+| Propriedade  | Descrição                                                    |
+| ------------ | ------------------------------------------------------------ |
+| left         | elemento deve flutuar à esquerda do bloco.                   |
+| right        | elemento deve flutuar à direita do bloco                     |
+| none         | É uma palavra-chave que indica que o elemtno não deve flutuar. |
+| inline-start | É uma palavra-chave que indica que o elemento deve flutuar no lado inicial do seu bloco, ou seja, o lado esquerdo em scripts `ltr` e no direito em scripts `rtl`. |
+| inline-end   | É uma palavra-chave que indica que o elemento deve flutuar no lado final do seu bloco, ou seja, o lado direito em scripts `ltr` e no esquerdo em scripts `rtl`. |
+
+
+
+### Clear
+
+Especifica se um elemento pode ter elementos [flutuantes](https://developer.mozilla.org/en-US/docs/CSS/float) ao seu lado ou se devem ser movidos para abaixo dele (clear). Essa propriedade se aplica à elementos flutuantes ou não flutuantes. 
+
+
+
+| Propriedade  | Descrição                                                    |
+| ------------ | ------------------------------------------------------------ |
+| none         | o elemento não foi movido para baixo para limpar os elementos flutuantes anteriores. |
+| left         | o elemento foi movido para baixo para limpar os últimos flutuantes da esquerda. |
+| right        | o elemento foi movido para baixo para liberar os últimos elementos flutuantes. |
+| both         | o elemento será movido para baixo para limpar os elementos flutuantes do lado esquerdo e direito. |
+| inline-start | o elemento será movido para baixo para limpar os elementos flutuantes no lado inicial de seu bloco, ou seja, os da esquerda flutuam nos scripts de ltr e os da direita nos scripts de rtl |
+| inline-end   | o elemento será movido para baixo para limpar os flutuantes no final de seu bloco, os da direita nos scripts de ltr e os flutuantes da esquerda nos scripts de rtl. |
+
+
+
+### Cores
+
+- HSL Calculator: https://www.w3schools.com/colors/colors_hsl.asp
+
+- Site para paletas de cores: https://coolors.co/c5afa4-cc7e85-cf4d6f-a36d90-76818e
+
 
 
 
 
 ~~~~css
-
+body{
+    background-color: green;
+    background-color: #00ff00;
+    background-color: rgb(55,110,220);
+    background-color: rgb(55,110,220, 1.0); /*o último valor representa a transparência*/    
+}
 ~~~~
 
 
+
+### Unidades de dimensões
+
+
+
+#### Absolutos
+
+- px
+- cm
+- mm
+- ...
+
+
+
+#### Viewport
+
+Uma viewport representa uma área poligonal (normalmente retangular) que está sendo exibida no momento. Em termos de navegador web, se refere a parte do documento que é exibida na janela (ou tela, se o documento estiver exibido em modo tela-cheia). Conteúdos fora da viewport não são visíveis na janela/tela até que seja rolado para sua área de visualização.
+
+
+
+- vh
+- vw
+- vmin
+- vmax
+
+
+
+#### Font
+
+- rem
+
+- em
+
+
+
+### Texto
+
+
+
+#### Famílias
 
 ~~~~css
-
+font-family: monospace;
+font-family: georgia, serif;
+font-family: verdana, sans-serif;
+font-family: 'Indie Flower',cursive;
 ~~~~
 
 
+
+#### Tamanhos padrões
+
+~~~~~css
+font-size: 1em;
+font-size: 100%;
+font-size: 16px;
+font-size: 12pt;
+~~~~~
+
+
+
+#### Tamanhos absolutos
 
 ~~~~css
-
+font-size: 100px; Tamanho do pixel da tela
+font-size: 27pt; Pontos
+font-size: lin; Polegadas
 ~~~~
 
 
+
+#### Peso
 
 ~~~~css
+font-weight: 100;
+font-style: italic;
+text-transform: uppercase; 
+text-decoration: overline; 
+word-spacing: 10px;
+latter-spacing: 20px;
+line-height: 2.5em;
+text-align: center
+~~~~
+
+Obs: verificar as propriedades disponíveis
+
+
+
+#### Exemplo prático
+
+Criar um botão estilizado que possua um efeito ao clicar.
+
+~~~~css
+.botao{
+    font-size:28px;
+    text-decoration: none;
+    padding: 10px 30px;
+    border-radius: 25px;
+}
+
+.destaque{
+    color: #ffff;
+    background: tomato;
+    box-shadow: 2px 2px 1px 1px #000;
+}
+
+.destaque:active{
+	box-shadow: none;
+}
+
 
 ~~~~
+
+
+
+### Position
+
+Define como um elemento pode ser posicionado (renderizado) no documento (página). Essa propriedade (**`position`**) pode ser acompanhada de outras, tais como, [`top`](https://developer.mozilla.org/pt-BR/docs/Web/CSS/top), [`right`](https://developer.mozilla.org/pt-BR/docs/Web/CSS/right), [`bottom`](https://developer.mozilla.org/pt-BR/docs/Web/CSS/bottom), and [`left`](https://developer.mozilla.org/pt-BR/docs/Web/CSS/left), que determinam como ficará a localização final do objeto, permitindo seu deslocamento, como será apresentado adiante.
+
+
+
+| Valor    | Descrição                                                    |
+| -------- | ------------------------------------------------------------ |
+| static   | O elemento é posicionado de acordo com o fluxo normal do documento. A top, right, bottom, left, e z-indexpropriedades têm nenhum efeito . Este é o valor padrão |
+| relative | O elemento é posicionado de acordo com o fluxo normal do documento, e, em seguida, deslocado em relação à própria base nos valores de top, right, bottom, e left. O deslocamento não afeta a posição de nenhum outro elemento; assim, o espaço dado para o elemento no layout da página é o mesmo como se a posição fosse static. |
+| absolute | O elemento é removido do fluxo normal de documentos e nenhum espaço é criado para o elemento no layout da página. Ele é posicionado em relação ao seu ancestral mais próximo posicionado, se houver; caso contrário, ele é colocado em relação ao bloco inicial . A sua posição final é determinada pelos valores de top, right, bottom, e left. |
+| fixed    | O elemento é removido do fluxo normal de documentos e nenhum espaço é criado para o elemento no layout da página. |
+| sticky   | O elemento é posicionado de acordo com o fluxo normal do documento, e, em seguida, deslocada em relação ao seu antepassado rolagem mais próxima e contendo bloco (antepassado de nível de bloqueio mais próxima), incluindo elementos relacionados com a tabela, com base nos valores de top, right, bottom, e left. O deslocamento não afeta a posição de nenhum outro elemento. |
 
 
 
