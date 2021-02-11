@@ -444,7 +444,7 @@ Um elemento flutuante é um tipo de elemento cujo valor de `float `é diferente 
 | ------------ | ------------------------------------------------------------ |
 | left         | elemento deve flutuar à esquerda do bloco.                   |
 | right        | elemento deve flutuar à direita do bloco                     |
-| none         | É uma palavra-chave que indica que o elemtno não deve flutuar. |
+| none         | É uma palavra-chave que indica que o elemento não deve flutuar. |
 | inline-start | É uma palavra-chave que indica que o elemento deve flutuar no lado inicial do seu bloco, ou seja, o lado esquerdo em scripts `ltr` e no direito em scripts `rtl`. |
 | inline-end   | É uma palavra-chave que indica que o elemento deve flutuar no lado final do seu bloco, ou seja, o lado direito em scripts `ltr` e no esquerdo em scripts `rtl`. |
 
@@ -618,97 +618,289 @@ Define como um elemento pode ser posicionado (renderizado) no documento (página
 
 
 
+### Media Query
+
+Define as orientações dos elementos, seja retrato ou paisagem, além de deixar o site responsivo.
+
+
+
 ~~~~css
+div{
+    font-size: 40px;
+    margin: 20px;
+    padding: 20px;
+    background-color: coral;
+    border: solid 5px;
+    display: none;
+}
+/*CRITÉRIO PARA APLICAR OU NÃO O MEDIA QUERY*/
+
+/*Se a largura do elemento for igual ou menor a 600px, a classe será aplicada*/
+@media(max-width: 600px){
+    .muito-pequeno{ display: block}
+}
+
+/*Se a orientação for do tipo portrait (retrato), a classe será aplicada*/
+@media (max-width: 1000px), (orientation:portrait) {
+    .pequeno-retrato{display:block;}
+    
+}
+/*Se a orientação for do tipo landscape(paisagem), a classe será aplicada*/
+@media (max-width: 1000px), (orientation:landscape) {
+    .pequeno-retrato{display:block;}
+    
+}
+
+/*Irá aplicar a classe no intervalo de 500px e 1000px*/
+@media(min-width: 500px) and (max-width: 1000px){
+    .intervalo {display:block;}
+}
+ 
 
 ~~~~
 
 
 
-~~~~css
+### Flex Box
 
+![Flex Box](https://css-tricks.com/wp-content/uploads/2018/11/00-basic-terminology.svg)
+
+
+
+#### Flex Direction
+
+Define como os itens flexíveis são colocados no contêiner flexível, definindo o eixo principal e a direção (normal ou invertido).
+
+
+
+~~~~css
+flex-direction: row;
 ~~~~
 
-
+<a href="https://imgur.com/wGsUzGu"><img src="https://i.imgur.com/wGsUzGu.png" title="source: imgur.com" /></a>
 
 ~~~~css
-
+flex-direction: row-reverse;
 ~~~~
 
-
+<a href="https://imgur.com/Wg94Per"><img src="https://i.imgur.com/Wg94Per.png" title="source: imgur.com" /></a>
 
 ~~~~css
-
+flex-direction: column;
 ~~~~
 
-
+<a href="https://imgur.com/Ch5MEwy"><img src="https://i.imgur.com/Ch5MEwy.png" title="source: imgur.com" /></a>
 
 ~~~~css
-
+flex-direction: column-reverse;
 ~~~~
 
+<a href="https://imgur.com/JO75o6r"><img src="https://i.imgur.com/JO75o6r.png" title="source: imgur.com" /></a>
+
+
+
+
+
+#### Flex-wrap
+
+Define se os itens flexíveis são forçados a ficarem na mesma linha ou se podem ser quebradas em varias linhas. Se o argumento for valido, ele define a direção em que as linhas são empilhadas.
+
 
 
 ~~~~css
-
+flex-wrap: nowrap;
 ~~~~
 
-
+<a href="https://imgur.com/KeXCfGp"><img src="https://i.imgur.com/KeXCfGp.png" title="source: imgur.com" /></a>
 
 ~~~~css
-
+flex-wrap: wrap;
 ~~~~
 
-
+<a href="https://imgur.com/xfTvRks"><img src="https://i.imgur.com/xfTvRks.png" title="source: imgur.com" /></a>
 
 ~~~~css
-
+flex-wrap: wrap-reverse;
 ~~~~
 
+<a href="https://imgur.com/iOQwEOs"><img src="https://i.imgur.com/iOQwEOs.png" title="source: imgur.com" /></a>
 
+
+
+#### Justify-content
+
+Define como o navegador distribui o espaço entre e ao redor dos itens de conteúdo ao longo do [eixo principal](https://developer.mozilla.org/en-US/docs/Glossary/Main_Axis) de um contêiner flexível e do eixo embutido de um contêiner de grade.
 
 ~~~~css
-
+justify-content: start;
 ~~~~
 
-
+<a href="https://imgur.com/Vrpf0MV"><img src="https://i.imgur.com/Vrpf0MV.png" title="source: imgur.com" /></a>
 
 ~~~~css
-
+justify-content: center;
 ~~~~
 
-
+<a href="https://imgur.com/5vO8TBw"><img src="https://i.imgur.com/5vO8TBw.png" title="source: imgur.com" /></a>
 
 ~~~~css
-
+justify-content: space-between;
 ~~~~
 
-
+<a href="https://imgur.com/fznkXWZ"><img src="https://i.imgur.com/fznkXWZ.png" title="source: imgur.com" /></a>
 
 ~~~~css
-
+justify-content: space-around;
 ~~~~
 
-
+<a href="https://imgur.com/UWCuZ2B"><img src="https://i.imgur.com/UWCuZ2B.png" title="source: imgur.com" /></a>
 
 ~~~~css
-
+justify-content: space-evenly;
 ~~~~
 
+<a href="https://imgur.com/NdPxilJ"><img src="https://i.imgur.com/NdPxilJ.png" title="source: imgur.com" /></a>
 
+
+
+#### Flex-flow
+
+É uma junção das propriedades flex-direction e flex-wrap.
 
 ~~~~css
+flex-flow: row;
+flex-flow: row-reverse;
+flex-flow: column;
+flex-flow: column-reverse;
 
+flex-flow: nowrap;
+flex-flow: wrap;
+flex-flow: wrap-reverse;
+
+flex-flow: row nowrap;
+flex-flow: column wrap;
+flex-flow: column-reverse wrap-reverse;
+
+flex-flow: inherit;
+flex-flow: initial;
+flex-flow: unset;
 ~~~~
 
+Consulte [`flex-direction`](https://developer.mozilla.org/pt-BR/docs/Web/CSS/flex-direction) e [`flex-wrap`](https://developer.mozilla.org/pt-BR/docs/Web/CSS/flex-wrap) para ver os detalhes sobre os valores.
 
+
+
+#### Align-content
+
+Define a distribuição entre e ao redor dos items do conteúdo do eixo transversal de uma flexbox ou do eixo de bloco de uma grid.
 
 ~~~~css
-
+align-content: start;
 ~~~~
 
+<a href="https://imgur.com/FvCR41B"><img src="https://i.imgur.com/FvCR41B.png" title="source: imgur.com" /></a>
+
+~~~~css
+align-content: center;
+~~~~
+
+<a href="https://imgur.com/RVXzZNY"><img src="https://i.imgur.com/RVXzZNY.png" title="source: imgur.com" /></a>
+
+~~~~css
+align-content: space-between;
+~~~~
+
+<a href="https://imgur.com/zT9QiC7"><img src="https://i.imgur.com/zT9QiC7.png" title="source: imgur.com" /></a>
+
+~~~~css
+align-content: space-around;
+~~~~
+
+<a href="https://imgur.com/KzcJG7O"><img src="https://i.imgur.com/KzcJG7O.png" title="source: imgur.com" /></a>
+
+
+
+#### Align-items
+
+Estabelece o valor align-self em todos filhos diretos como um grupo. A propriedade align-self estabelece o alinhamento de um certo item dentro do bloco que o contém. Em Flexbox ele controla o alinhamento dos itens em Cross Axis, enquanto que no Grid Layout, controla o alinhamento dos itens no Eixo de Bloco dentro de sua  grid área.
+
 
 
 ~~~~css
+align-items: stretch;
+~~~~
+
+<a href="https://imgur.com/cXvJUIT"><img src="https://i.imgur.com/cXvJUIT.png" title="source: imgur.com" /></a>
+
+~~~~css
+align-items: center;
+~~~~
+
+<a href="https://imgur.com/l0dx40y"><img src="https://i.imgur.com/l0dx40y.png" title="source: imgur.com" /></a>
+
+~~~~css
+align-items: start;
+~~~~
+
+<a href="https://imgur.com/QcfmUxG"><img src="https://i.imgur.com/QcfmUxG.png" title="source: imgur.com" /></a>
+
+~~~~css
+align-items: end;
+~~~~
+
+<a href="https://imgur.com/Q8Ko6qv"><img src="https://i.imgur.com/Q8Ko6qv.png" title="source: imgur.com" /></a>
+
+
+
+####  Exemplo Prático Flex-box #1
+
+
+
+~~~~css
+div {
+    border: solid 5px dodgerblue;
+    font-size: 40px.
+}
+
+.flex-container div{
+    box-sizing: border-box;
+}
+
+.flex-container{
+    display: flex /*vai deixar os elemwentos do container um ao lado do outro*/
+    height: 300px;
+    width: 600px;
+}
+
+/*alteração no 3 elemento do container*/
+.flex-container div:nth-child(3){
+    background-color; indianred;
+    order: 1; /*manipula a ordem dos elementos. Vai passar a ter uma ordem maior que os demais elementos. Logo, passará a ser o ultimo elemento da lista e será exibido por útimo*/
+  	order: 0;/*Passa a ser o último elemento da lista*/
+    order: -1; /*passa a ser o primeiro elemento da lista*/
+    align-self: center; /*alinhado ao centro*/
+    align-self: flex-end; /*alinhado no final*/
+    align-self: flex-start; /*alinhado no começo*/
+    align-self: stretch;/*valor default*/
+    
+}
+.flex-conatiner div{ /*vai para todas as divs*/
+	width: 100px;
+    flex-grow: 1; /*todas as divs do container terão peso 1*/  
+}
+
+.flex-container div:nth-child(1){
+    flex-grow: 2; /*isso fará com que o elemento 1 seja maior devido ao peso, em realção as outras divs*/
+}
+
+.flex-container{
+    width: 300px;
+    flex-shrink: 1;
+}
+.flex-container div:nth-child(1){
+    flex-shrink: 5;
+    
+}
 
 ~~~~
 
