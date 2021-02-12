@@ -867,7 +867,7 @@ div {
 }
 
 .flex-container{
-    display: flex /*vai deixar os elemwentos do container um ao lado do outro*/
+    display: flex; /*vai deixar os elemwentos do container um ao lado do outro*/
     height: 300px;
     width: 600px;
 }
@@ -903,6 +903,14 @@ div {
 }
 
 ~~~~
+
+
+
+
+
+
+
+
 
 
 
