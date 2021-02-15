@@ -6,7 +6,14 @@
 
     // Consulta ao banco de dados
     $produtos = "SELECT produtoID, nomeproduto, tempoentrega, precounitario, imagempequena ";
-    $produtos .= "FROM produtos ";
+    $produtos .= " FROM produtos ";
+    //Condição para realizar o filtro se o input produto (o campo de pesquisa) do formulário estiver incrementado
+    if ( isset($_GET['produto'])){
+        //A pesquisa será atribuída a uma variável e, em seguida, jogada para o select;
+        $nome_produto = $_GET["produto"];
+        $produtos .= " WHERE nomeproduto LIKE '%{$nome_produto}%'  ";
+    }
+    
     $resultado = mysqli_query($conecta, $produtos);
     if(!$resultado) {
         die("Falha na consulta ao banco");   
@@ -21,13 +28,21 @@
         <!-- estilo -->
         <link href="_css/estilo.css" rel="stylesheet">
         <link href="_css/produtos.css" rel="stylesheet">
+        <link href="_css/produto_pesquisa.css" rel="stylesheet">
     </head>
 
     <body>
         <?php include_once("../_incluir/topo.php"); ?>
         <?php include_once("../_incluir/funcoes.php"); ?>
         
-        <main>        
+        <main>  
+            <!--Adicionando a barra de pesquisa com o método GET-->
+            <div id="janela_pesquisa">
+                <form action="listagem.php" method="get">
+                    <input type="text" name="produto" placeholder="Nome do Produto">
+                    <input type="image" name="pesquisa" src="../_assets/botao_search.png">
+                </form>
+            </div>      
             
            <div id="listagem_produtos"> 
             <?php

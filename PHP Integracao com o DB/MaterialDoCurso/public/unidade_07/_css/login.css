@@ -1,4 +1,5 @@
 /* estilos da pesquisa */
+
 main div#janela_login {
     width:860px;
     margin:100px auto 30px;
@@ -54,4 +55,6 @@ main div#janela_login form input[type="submit"] {
     outline: none;
     cursor: pointer;
 }
-/* fim do estilo da pesquisa */
+
+
+

@@ -631,7 +631,7 @@ Para certificar que o usuário está logado em todas as páginas, basta imprimir
 
 ### Encerrar a variável de sessão
 
-Crie uma novo arquivo php e utilize pelomenos uma das seguintes variáveis:
+Crie uma novo arquivo php e utilize pelo menos uma das seguintes variáveis:
 
 
 
@@ -653,25 +653,106 @@ Crie uma novo arquivo php e utilize pelomenos uma das seguintes variáveis:
 
 
 ~~~~php+html
+ <main>  
 
+            <div id="janela_login">
+                <!--necessário usar o moethod post, pois o GET exibe as informações na barra de endereço-->
+                <form action="login.php" method="post">
+                    <h2>Tela de Login</h2>
+                    <input type="text" name="usuario" placeholder="Usuário">
+                    <input type="password" name="senha" placeholder="Senha" >
+                    <input type="submit" value='Login'>
+                </form>
+            </div>
+
+
+        </main>
 ~~~~
 
 
 
-~~~~php+html
+### Recebendo as informações enviadas
 
+
+
+No arquivo login.php
+
+~~~~php+html
+<?php
+    if (isset($_POST["usuario"])){
+        $usuario = $_POST["usuario"];
+        $senha = $_POST["senha"];
+         //validação de dados
+        echo $usuario."<br>";
+        echo $senha;      
+   
+?>
 ~~~~
 
 
 
+### Realizar o filtro de login no banco de dados
+
+Arquivo login.php
+
 ~~~~php+html
+<?php
+    if (isset($_POST["usuario"])){
+        $usuario = $_POST["usuario"];
+        $senha = $_POST["senha"];
+
+        //REALIZANDO O FILTRO NO BANCO DE DADOS
+        $login = " SELECT * FROM clientes WHERE usuario = '{$usuario}' and senha = '{$senha}' ";
+
+        //ATRIBUINDO OS RESULTADOS À VARIÁVEL ACESSO
+        $acesso = mysqli_query($conecta,$login);
+
+        //TESTANDO CONEXÃO
+        if (!$acesso){
+            die ("Falha na consulta ao banco de dados");
+        }
+
+        $informacao = mysqli_fetch_assoc($acesso);
+
+        //VALIDANDO DADOS(CASO O USUÁRIO NÃO SEJA ENCONTRADO). 
+        if (empty($informacao)){
+            $mensagem = "Usuário não localizado.";
+        }else{
+            //SE FOR ENCONTRADO, SERÁ REDIRECIONADO PARA A PÁGINDA DE LISTAGEM
+            header("location:listagem.php");
+        }
+    }
+  
+?>
 
 ~~~~
 
-
+No html do arquivo:
 
 ~~~~php+html
+<main>  
+            <div id="janela_login">
+                <!--necessário usar o moethod post, pois o GET exibe as informações na barra de endereço-->
+                <form action="login.php" method="post">
+                    <h2>Tela de Login</h2>
+                    <input type="text" name="usuario" placeholder="Usuário">
+                    <input type="password" name="senha" placeholder="Senha" >
+                    <input type="submit" value='Login'>
 
+                    <!--Exibindo a mensagem de erro-->
+                    <?php   
+                        //se a variável mensagem foi definida:
+                        if (isset($mensagem)){   
+                    ?>
+                        <p><?php echo $mensagem ?></p>
+
+                    <?php
+                        }
+                    ?>
+
+                </form>
+            </div>
+        </main>
 ~~~~
 
 

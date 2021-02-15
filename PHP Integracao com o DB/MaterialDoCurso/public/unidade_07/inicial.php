@@ -1,4 +1,13 @@
 <?php require_once("../../conexao/conexao.php"); ?>
+<?php
+    //iniciar a sessão de login. Esta função precisa estar aberta em todas as páginas do projeto
+    session_start();
+
+    //Criar uma variável de sessão
+    $_SESSION["usuario"] = "Junior";
+
+?>
+
 
 <!doctype html>
 <html>
@@ -15,7 +24,10 @@
         <?php include_once("../_incluir/funcoes.php"); ?>
         
         <main>  
-            
+            <?php
+                echo $_SESSION["usuario"];   
+            ?>
+            <p><a href="pagina1.php">Página 1</a></p>
         </main>
 
         <?php include_once("../_incluir/rodape.php"); ?>  

@@ -1,5 +1,7 @@
 <?php require_once("../../conexao/conexao.php"); ?>
-<?php  session_start(); ?>
+<?php session_start(); ?>
+
+
 <!doctype html>
 <html>
     <head>
@@ -14,15 +16,20 @@
         <?php include_once("../_incluir/topo.php"); ?>
         <?php include_once("../_incluir/funcoes.php"); ?>
         
-        <main>
+        <main>  
             <?php
-                echo $_SESSION["usuario"];   
-            ?>
+                //REMOVE A VARIÁVEL SESSION MENCIONADAS
+                unset($_SESSION["usuario"]);
+                
+                //DESTROI TODAS AS VARIÁVEIS DE SESSÃO DO PROJETO
+                session_destroy();
 
-            <p><a href="pagina2.php">Página 2</a></p>
+            ?>
+            
+          
         </main>
 
-        <?php include_once("../_incluir/rodape.php"); ?> 
+        <?php include_once("../_incluir/rodape.php"); ?>  
     </body>
 </html>
 
