@@ -545,39 +545,110 @@ Agora, vamos criar os elementos da lista e utilizar as variáveis declaradas aci
 
 
 
-~~~~php+html
+### Criar um Formulário de Pesquisa
 
-~~~~
-
-
-
-~~~~php+html
-
-~~~~
+*Arquivo avancado>unidade 06> listagem.php*
 
 
 
 ~~~~php+html
-
+ <!--Adicionando a barra de pesquisa com o método GET-->
+            <div id="janela_pesquisa">
+                <form action="istagem.plhp" method="get">
+                    <input type="text" name="produto" placeholder="Nome do Produto">
+                    <input id="botao_pesquisa"type="image" name="pesquisa" src="../_assets/botao_search.png">
+                </form>
+            </div>      
 ~~~~
+
+
+
+Gerando a pesquisa no banco de dados:
+
+~~~~php+html
+<?php
+      // Consulta ao banco de dados
+    $produtos = "SELECT produtoID, nomeproduto, tempoentrega, precounitario, imagempequena ";
+    $produtos .= " FROM produtos ";
+    //Condição para realizar o filtro se o input produto (o campo de pesquisa) do formulário estiver incrementado
+    if ( isset($_GET['produto'])){
+        //A pesquisa será atribuída a uma variável e, em seguida, jogada para o select;
+        $nome_produto = $_GET["produto"];
+        $produtos .= " WHERE nomeproduto LIKE '%{$nome_produto}%'  ";
+    }
+    
+    $resultado = mysqli_query($conecta, $produtos);
+    if(!$resultado) {
+        die("Falha na consulta ao banco");   
+    }
+?>
+~~~~
+
+O LIKE, junto com o caractere coringa (%) que vem antes e depois da variável, buscará os produtos, mesmo se o nome não for digitado corretamente.
+
+O nome da variável que recebe o $_GET[] na condição isset precisa ser o nome do input inserido no HTML:
+
+~~~~php+html
+<input type="image" name="pesquisa" src="../_assets/botao_search.png">
+~~~~
+
+
+
+### Criar uma variável de sessão
+
+
+
+Primeiramente, é necessário que todas as páginas do projeto possuam a função session_start();. Essa função é responsável por manter o usuário logado nas páginas.
+
+Em seguida, cria-se uma variável session e atribuímos a ela as credenciais de login se senha. Inicialmente utilizaremos apenas o login.
 
 
 
 ~~~~php+html
+<?php
+    //iniciar a sessão de login. 
+    session_start();
+
+    //Criar uma variável de sessão
+    $_SESSION["usuario"] = "Junior";
+
+?>
 
 ~~~~
+
+Para certificar que o usuário está logado em todas as páginas, basta imprimir na tela a variável session
+
+~~~~php+html
+<main>  
+            <?php
+                echo $_SESSION["usuario"];   
+            ?>
+            <p><a href="pagina1.php">Página 1</a></p>
+        </main>
+~~~~
+
+
+
+### Encerrar a variável de sessão
+
+Crie uma novo arquivo php e utilize pelomenos uma das seguintes variáveis:
 
 
 
 ~~~~php+html
+<?php
+                //REMOVE A VARIÁVEL SESSION MENCIONADAS
+                unset($_SESSION["usuario"]);
+                
+                //DESTROI TODAS AS VARIÁVEIS DE SESSÃO DO PROJETO
+                session_destroy();
 
+            ?>
 ~~~~
 
 
 
-~~~~php+html
-
-~~~~
+### Criar uma tela de Login
 
 
 
