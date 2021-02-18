@@ -665,7 +665,7 @@ div{
 
 ![Flex Box](https://css-tricks.com/wp-content/uploads/2018/11/00-basic-terminology.svg)
 
-
+Para ativar os comandos abaixo, é necessário que o elemento contenha a propriedade display.
 
 #### Flex Direction
 
@@ -912,10 +912,44 @@ div {
 
 
 
+## Exemplos práticos
 
 
-~~~~css
 
+
+
+
+
+#### Como centralizar elementos de forma organizada:
+
+~~~~html
+ <style>
+        body{margin: 0 auto; padding: 0 auto;}
+        .div-primaria{background-color:rgb(110, 204, 101);}       
+        .div-secundaria{background-color:rgb(102, 196, 191);}
+        .div-primaria, .div-secundaria{width: 400px;height: 200px;}
+
+
+        .div-principal{
+            background-color: rgb(201, 168, 231);
+            width: 1000px;
+            height: 500px; 
+            display: flex; 
+            justify-content: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="div-principal">
+        <div class="div-primaria">
+            <p>Div primária</p>
+        </div>
+        <div class="div-secundaria">
+            <p>Div Segundária</p> 
+        </div>
+    </div>
+</body>
 ~~~~
 
 

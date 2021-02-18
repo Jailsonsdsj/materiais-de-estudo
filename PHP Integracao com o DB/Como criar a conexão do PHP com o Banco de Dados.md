@@ -757,15 +757,41 @@ No html do arquivo:
 
 
 
-~~~~php+html
+### Acrescentando a variável sessão
 
+
+
+Crie uma nova página php para servir de segurança e, em seguida, atribua a ela o código de segurança:
+
+~~~~php+html
+<!--Iniciando a variável sessão e protegendo a página-->
+<?php 
+    session_start(); 
+
+    //se a variável session não estiver definida, o site será redirecionado para a página de login
+    if (!isset($_SESSION["user_portal"])){
+        header("location:login.php");
+    }
+
+?>
+~~~~
+
+Para proteger as demais páginas, basta inserir o código acima através do require_once no início de todas as páginas do projeto:
+
+~~~~php+html
+<!---require de conexão com o bd-->
+<?php require_once("../../conexao/conexao.php"); ?>
+<!--require de segurança-->
+<?php require_once("../../conexao/seguranca.php");?>
 ~~~~
 
 
 
-~~~~php+html
 
-~~~~
+
+
+
+
 
 
 
