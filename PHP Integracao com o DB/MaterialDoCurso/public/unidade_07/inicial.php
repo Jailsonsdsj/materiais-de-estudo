@@ -1,4 +1,8 @@
+<!---require de conexão com o bd-->
 <?php require_once("../../conexao/conexao.php"); ?>
+<!--require de segurança-->
+<?php require_once("../../conexao/seguranca.php");?>
+
 <?php
     //iniciar a sessão de login. Esta função precisa estar aberta em todas as páginas do projeto
     session_start();

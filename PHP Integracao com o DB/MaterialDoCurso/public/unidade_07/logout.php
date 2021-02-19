@@ -1,6 +1,7 @@
+<!---require de conexão com o bd-->
 <?php require_once("../../conexao/conexao.php"); ?>
-<?php session_start(); ?>
-
+<!--require de segurança-->
+<?php require_once("../../conexao/seguranca.php");?>
 
 <!doctype html>
 <html>

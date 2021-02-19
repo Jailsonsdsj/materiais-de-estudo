@@ -1,4 +1,7 @@
+<!---require de conexão com o bd-->
 <?php require_once("../../conexao/conexao.php"); ?>
+<!--require de segurança-->
+<?php require_once("../../conexao/seguranca.php");?>
 
 <?php
     // Determinar localidade BR
@@ -41,6 +44,9 @@
             </div>
             
             <div id="listagem_produtos"> 
+           
+            <!--Fim da exibição-->
+
             <?php
                 while($linha = mysqli_fetch_assoc($resultado)) {
             ?>

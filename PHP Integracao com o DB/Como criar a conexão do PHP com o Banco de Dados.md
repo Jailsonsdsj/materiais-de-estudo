@@ -789,25 +789,66 @@ Para proteger as demais páginas, basta inserir o código acima através do requ
 
 
 
+### Criando uma rotina de saudação
 
-
-
-
-
+*Arquivo _incluir>topo.php*
 
 ~~~~php+html
+<?php
+            if (isset($_SESSION["user_portal"])){
+                $user = $_SESSION["user_portal"];
 
+                $saudacao = "SELECT nomecompleto ";
+                $saudacao .= " FROM clientes ";
+                $saudacao .= " where clienteID = {$user} ";
+
+                $saudacao_login = mysqli_query($conecta, $saudacao);
+                if (!$saudacao_login){
+                    die("Falha no banco");
+                }
+                $saudacao_login = mysqli_fetch_assoc($saudacao_login);
+                $nome= $saudacao_login ["nomecompleto"];
+        ?>
+        
+        <div id="header_saudacao"> 
+            <h5>Bem vindo, <?php echo $nome; ?>! </h5>
+        </div>
+
+
+        <?php
+            }
+        ?>
 ~~~~
 
 
 
-~~~~php+html
+### Criando uma página de Logout
 
+Arquivo *_incluir>topo.php*
+
+~~~~php+html
+<h5>Bem vindo, <?php echo $nome; ?>! - <a href="sair.php"> Sair <a> </h5>
+~~~~
+
+Novo arquivo *sair.php*
+
+~~~~php+html
+<?php
+    session_start();
+    unset($_SESSION["user_portal"]);
+    header("location:login.php");
+?>
 ~~~~
 
 
 
-~~~~php+html
+### Inserindo dados no Banco de Dados
+
+
+
+Query MySQL
+
+~~~~mysqlo
 
 ~~~~
 

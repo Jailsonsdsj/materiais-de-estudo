@@ -1,10 +1,17 @@
+<!---require de conexão com o bd-->
 <?php require_once("../../conexao/conexao.php"); ?>
+<!--require de segurança-->
+<?php require_once("../../conexao/seguranca.php");?>
+
 <?php
-    if ( isset($_GET["codigo"]) ) {
-        $produto_id = $_GET["codigo"];
-    } else {
-        Header("Location: inicial.php");
-    }
+
+//Validaçãod de segurança para páginas com códigos do produto.
+if (isset($_GET["codigo"])){
+    $produto_id = $_GET["codigo"];
+}else{
+    Header("Location: login.php");
+}
+
 
     // Consulta ao banco de dados
     $consulta = "SELECT * ";

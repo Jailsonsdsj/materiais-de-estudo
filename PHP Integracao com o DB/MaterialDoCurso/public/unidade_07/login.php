@@ -1,6 +1,11 @@
 <?php require_once("../../conexao/conexao.php"); ?>
 <?php
+    //INICIANDO A VARIÁVEL SESSÃO
+    session_start();
+
+    //VALIDANDO DADOS DO LOGIN
     if (isset($_POST["usuario"])){
+        
         $usuario = $_POST["usuario"];
         $senha = $_POST["senha"];
 
@@ -21,6 +26,10 @@
         if (empty($informacao)){
             $mensagem = "Usuário não localizado.";
         }else{
+            //INCREMENTANDO A VARIÁVEL DE LOGIN
+            $_SESSION["user_portal"] = $informacao["clienteID"];
+            //Neste, caso inserimos o id do usuário no login do portal
+
             //SE FOR ENCONTRADO, SERÁ REDIRECIONADO PARA A PÁGINDA DE LISTAGEM
             header("location:listagem.php");
         }
@@ -55,7 +64,7 @@
                     <input type="text" name="usuario" placeholder="Usuário">
                     <input type="password" name="senha" placeholder="Senha" >
                     <input type="submit" value='Login'>
-
+                    
                     <!--Exibindo a mensagem de erro-->
                     <?php   
                         //se a variável mensagem foi definida:
