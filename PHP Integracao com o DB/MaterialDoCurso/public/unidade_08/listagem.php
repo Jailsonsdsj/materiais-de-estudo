@@ -35,7 +35,7 @@
                 <ul>
                     <li><?php echo $linha["nometransportadora"] ?></li>
                     <li><?php echo $linha["cidade"] ?></li>
-                    <li><a href="alteracao.php?codigo=<?php echo $linha["transportadoraID"] ?>">Alterar</a> </li>
+                    <li><a href="alteracao.php?codigo= <?php echo $linha["transportadoraID"] ?>">Alterar</a> </li>
                 </ul>
                 <?php
                     }

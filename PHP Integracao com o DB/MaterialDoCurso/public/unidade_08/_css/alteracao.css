@@ -11,7 +11,7 @@ main div#janela_formulario form {
 
 main div#janela_formulario form h2  {
     font-family: sans-serif;
-    color:#C5996B;
+    color:#9A9668;
 }
 
 main div#janela_formulario form p {
@@ -26,25 +26,26 @@ main div#janela_formulario form p {
     text-align: center;
 }
 
+main div#janela_formulario form label {
+    display: block;
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 3px;
+    color: #9A9668;    
+}
+
 main div#janela_formulario form input[type="text"] {
-    width:280px;
+    width:350px;
     padding:10px;
     border:1px solid #CDC99B;
     border-radius: 5px;
     outline: none;
-    margin-bottom:15px;
+    margin-bottom: 25px;
 }
 
 main div#janela_formulario form select {
-    width:280px;
-    height: 40px;
-    padding-top:5px;
-    padding-bottom: 5px;
-    padding-left:5px;
-    border:1px solid #CDC99B;
-    border-radius: 5px;
-    outline: none;
-    margin-bottom:15px;
+    margin-bottom: 25px;
 }
 
 main div#janela_formulario form input[type="submit"] {

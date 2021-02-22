@@ -994,7 +994,7 @@ Criando a consulta no banco que será exibida na tela de login
 <?php
     $tr = "SELECT * ";
     $tr .=" FROM transportadoras ";
-    if(isset($_GET["cogido"])){
+    if(isset($_GET["codigo"])){
         $id = $_GET["codigo"];
         // o ID do código do produto será atribuído à query
         $tr .= "WHERE transportadaoraID = {$id} "; 
@@ -1020,7 +1020,7 @@ Criando a consulta no banco que será exibida na tela de login
 
 Criando um array que será jogado no value de cada campo do formulário
 
-~~~~php+html
+~~~~php
 $info_transportadora = mysqli_fetch_assoc($con_transportadora);
 ~~~~
 
@@ -1037,26 +1037,65 @@ No formulário HTML:
 
 
 
-~~~~php+html
+#### Preenchendo automaticamente campos com select
 
+
+
+~~~~php
+$estados = "SELECT * FROM estados";
+    //essa variável será jogana no mysqli_fetch_assoc do campo value
+    $lista_estados = mysqli_query($conecta,$estados);
+    if (!$lista_estados){
+        die ("Falha na consulta ao banco de dados");
+    }
+~~~~
+
+No HTML:
+
+~~~~php+html
+<select id="estados" name="estados">
+                        <?php
+                            //A variável meuestado receberá o código do estado
+                            $meuestado = $info_transportadora["estadoID"];
+                            while($linha = mysqli_fetch_assoc($lista_estados)){
+                                $estado_principal = $linha["estadoID"];
+                                if($meuestado == $estado_principal){
+                        ?>
+                            <option value="<?php echo $linha["estadoID"]; ?>"> 
+                                <?php echo $linha["nome"]; ?>
+                            </option>
+
+                        <?php
+                            }else{
+
+                            }
+                        ?>
+                        <?php
+                        }
+                        ?>
 ~~~~
 
 
 
-~~~~php+html
+Receber as informações alteradas no formulário
 
+~~~~php
+if (isset($_POST["nometransportadora"])){
+        $nome       = $_POST["nometransportadora"];
+        $endereco   = $_POST["endereco"];
+        $cidade     = $_POST["cidade"];
+        $estados    = $_POST["estados"];
+        $cep        = $_POST["cep"];
+        $cnpj       = $_POST["cnpj"];
+        $telefone   = $_POST["telefone"];
+        $id   = $_POST["transportadoraID"];
+    }
 ~~~~
 
-
-
-~~~~php+html
-
-~~~~
-
-
+Observação: o id, por ser uma chave estrangeira, foi recebido através de um campo oculto no formulário, vide código abaixo:
 
 ~~~~php+html
-
+<input type="hidden" name="transportadoraID" value="<?php echo $info_transportadora["transportadoraID"]; ?>">
 ~~~~
 
 
