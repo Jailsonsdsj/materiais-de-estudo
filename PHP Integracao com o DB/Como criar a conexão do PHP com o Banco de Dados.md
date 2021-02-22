@@ -755,6 +755,16 @@ No html do arquivo:
         </main>
 ~~~~
 
+#### Caracteres UTF8
+
+Caso os caracteres especiais não sejam exibidos no site, basta utilizar a função utf8_encode
+
+~~~~php+html
+<?php echo utf8_encode ($linha["nome"]); ?>
+~~~~
+
+
+
 
 
 ### Acrescentando a variável sessão
@@ -840,66 +850,189 @@ Novo arquivo *sair.php*
 ?>
 ~~~~
 
+### Criando formulário de inserção de dados (HTML)
+
+~~~~php+HTML
+  <main>  
+            <div id="janela_formulario">
+                <form action="inserir.php" method="post">
+                    <input type="text" name="nometransportadora" placeholder="Nome da Transportadora">
+                    <input type="text" name="endereco" placeholder="Endereço">
+                    <input type="text" name="telefone" placeholder="Telefone">
+                    <input type="text" name="cidade" placeholder="Cidade">
+                    <select name="estados">
+                        <?php
+                            while($linha=mysqli_fetch_assoc($lista_estados)){
+
+                        ?>
+                        <option value="<?php echo $linha["estadoID"]; ?>">
+                            <?php echo $linha["nome"]; ?>
+                        </option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                    <input type="text" name="cep" placeholder="CEP">
+                    <input type="text" name="cnpj" placeholder="CNPJ">
+                    <input type="submit" name="enviar" placeholder="Enviar">
+                    
+                </form>
+            </div>
+        </main>
+~~~~
+
+Select para os estados cadastrados no banco
+
+~~~php+HTML
+<?php
+    $select = "SELECT estadoID, nome FROM estados";
+    $lista_estados = mysqli_query($conecta,$select);
+    if (!$lista_estados){
+        die("Erro no banco de dados");
+    }
+?>
+~~~
+
+verificando se algum campo foi preenchido. nesse caso, será o nome da transportadora
+
+~~~php
+
+    if (isset($_POST["nometransportadora"])){
+        print_r($_POST);
+    }
+~~~
+
 
 
 ### Inserindo dados no Banco de Dados
 
 
 
-Query MySQL
+Query de inserção MySQL
 
-~~~~mysqlo
+~~~~php
+    //jogando os dados do forumário em variáveis
+    if (isset($_POST["nometransportadora"])){
+        $nome       = $_POST["nometransportadora"];
+        $endereco   = $_POST["endereco"];
+        $cidade     = $_POST["cidade"];
+        $estados    = $_POST["estados"];
+        $cep        = $_POST["cep"];
+        $cnpj       = $_POST["cnpj"];
+        $telefone   = $_POST["telefone"];
 
+        //select de inserção
+        $inserir    =" INSERT INTO transportadoras VALUES ";
+        $inserir   .=" (null, '$nome','$endereco','$cidade',$estados,'$cep','$cnpj','$telefone')";
+
+
+        $operacao_inserir = mysqli_query($conecta,$inserir);
+
+        //verificando casos de erro
+        if(!$operacao_inserir){
+            die("Falha ao cadastrar transportadoras");
+        }
+    }
 ~~~~
 
 
 
-~~~~php+html
+#### Decodificando os caracteres UTF-8
 
+É provável quem, em alguns casos, os caracteres especiais não sejam reconhecidos pelo banco. Dessa forma, é necessário utilizar a função utf8_decode antes da variável $_POST. **É importante realizar o teste antes de acrescentar a função, pois, caso o banco reconheça os caracteres, a função poderá fazer o efeito contrário.**
+
+~~~~php
+ $nome       = utf8_decode ($_POST["nometransportadora"]);
 ~~~~
 
 
 
-~~~~php+html
+### Alterando dados no Banco de Dados
 
+
+
+Criando o formulário de alteração
+
+~~~~php+html
+<div id="janela_formulario">
+                <form action="alteracao.php" method="post">
+                    <h2> Alteração de Transportadoras </h2>
+                    <!--O label é responsável por focar o título do campo, a área de preenchimento-->
+                    <label for="nometransportadora">Nome da Transportadora</label>
+                    <input type="text" value="" name="nometransportadora" id="nometransportadora">
+
+                    <label for="endereco">Endereço</label>
+                    <input type="text" value="" name="endereco" id="endereco">
+
+                    <label for="cidade">Cidade</label>
+                    <input type="text" value="" name="cidade" id="cidade">
+
+                    <label for="estados">Estado</label>
+                    <select id="estados" name="estados">
+
+                    </select>
+
+                    <label for="cep">CEP</label>
+                    <input type="text" value="" name="cep" id="cep">
+
+                    <label for="telefone">Telefone</label>
+                    <input type="text" value="" name="telefone" id="nometransportadora">
+
+                    <label for="cnpj">CNPJ</label>
+                    <input type="text" value="" name="cnpj" id="nometranspocnpjrtadora">
+
+                    <input type="submit" name="salvar" placeholder="Salvar">
+
+
+                </form>
+            </div>
 ~~~~
 
-#### Caracteres UTF8
-
-Caso os caracteres especiais não sejam exibidos no site, basta utilizar a função utf8_encode
+Criando a consulta no banco que será exibida na tela de login
 
 ~~~~php+html
-<?php echo utf8_encode ($linha["nome"]); ?>
+<?php
+    $tr = "SELECT * ";
+    $tr .=" FROM transportadoras ";
+    if(isset($_GET["cogido"])){
+        $id = $_GET["codigo"];
+        // o ID do código do produto será atribuído à query
+        $tr .= "WHERE transportadaoraID = {$id} "; 
+    }else{
+        //Caso o usuário acesse diretamente a página alteração, sem clicar em algum produto, ele será redirecionado para o produtoi de código 1
+        $tr .= "WHERE transportadoraID = 1 ";
+    }
+
+    $con_transportadora = mysqli_query($conecta,$tr);
+    if(!$con_transportadora){
+        die("Falha na consulta");
+    }
+?>
 ~~~~
 
 
 
-~~~~php+html
 
+
+### Preenchendo os campos do formulário de alteração automaticamente
+
+
+
+Criando um array que será jogado no value de cada campo do formulário
+
+~~~~php+html
+$info_transportadora = mysqli_fetch_assoc($con_transportadora);
 ~~~~
 
 
 
-~~~~php+html
-
-~~~~
-
-
+No formulário HTML:
 
 ~~~~php+html
-
-~~~~
-
-
-
-~~~~php+html
-
-~~~~
-
-
-
-~~~~php+html
-
+<h2> Alteração de Transportadoras </h2>
+                  
+    <label for="nometransportadora">Nome da Transportadora</label>
+ 	<input type="text" value="<?php echo $info_transportadora["nometransportadora"]; ?> " name="nometransportadora" id="nometransportadora">
 ~~~~
 
 
