@@ -1098,29 +1098,99 @@ Observação: o id, por ser uma chave estrangeira, foi recebido através de um c
 <input type="hidden" name="transportadoraID" value="<?php echo $info_transportadora["transportadoraID"]; ?>">
 ~~~~
 
+Criando o objeto de alteração:
 
+~~~~php
+$alterar  = " UPDATE transportadoras  ";
+        $alterar .= " SET ";
+        $alterar .= " nometransportadora = '{$nome}',";
+        $alterar .= " endereco = '{$endereco}',";
+        $alterar .= " cidade = '{$cidade}',";
+        $alterar .= " estadoID = {$estados},";
+        $alterar .= " cep = '{$cep}',";
+        $alterar .= " cnpj = '{$cnpj}',";
+        $alterar .= " telefone = '{$telefone}' ";
+        $alterar .= " WHERE ";
+        $alterar .= " transportadoraID = {$tID}";
 
-~~~~php+html
-
+        $operacao_alterar = mysqli_query($conecta,$alterar);
+        if (!$operacao_alterar){
+            die("Erro na alteração dos dados");
+        }else{
+            header("location:listagem.php");
+        }
+    }
 ~~~~
 
 
 
-~~~~php+html
+### Excluir dados do banco de dados
 
+
+
+Criando a consulta a tabela de transportadora
+
+~~~~php
+$tr=" SELECT * FROM transportadoras ";
+    if( isset($_GET["codigo"])){
+        $id = $_GET["codigo"];
+        $tr .= " WHERE transportadoraID = {$id} ";
+    }
+
+    $con_transportadora = mysqli_query($conecta, $tr);
+    if (!$con_transportadora){
+        die("Erro na consulta");
+    }
+    $info_transportadora = mysqli_fetch_assoc($con_transportadora);
 ~~~~
 
 
 
-~~~~php+html
+Formulário de confirmação de exclusão (o mesmo de alteração, com campos reduzidos)
 
+~~~~php+html
+<main>  
+            <div id="janela_formulario">
+                <form action="exclusao.php" method="post">
+                    <h2>Exclusão de Transportadoras</h2>
+                    
+                    <label for="nometransportadora">Nome da Transportadora</label>
+                    <input type="text" value="<?php echo $info_transportadora["nometransportadora"]  ?>" name="nometransportadora" id="nometransportadora">
+
+                    <label for="endereco">Endereço</label>
+                    <input type="text" value="<?php echo $info_transportadora["endereco"]  ?>" name="endereco" id="endereco">
+                    
+                    <label for="cidade">Cidade</label>
+                    <input type="text" value="<?php echo $info_transportadora["cidade"]  ?>" name="cidade" id="cidade">          
+
+                    <input type="hidden" name="transportadoraID" value="<?php echo $info_transportadora["transportadoraID"] ?>">
+                    <input type="submit" value="Confirmar Exclusão">                    
+                </form>   
+            </div>
+        </main>
+
+~~~~
+
+Excluindo o registro:
+
+~~~~php
+if (isset($_POST["nometransportadora"])){
+        $t_id = $_POST["transportadoraID"];
+
+        $exclusao  = "DELETE FROM transportadoras ";
+        $exclusao .= " WHERE transportadoraID = {$t_id}";
+        $con_exclusao = mysqli_query($conecta,$exclusao);
+        if (!$con_exclusao){
+            die("Falha ao excluir o registro");
+        }else{
+            header("Location:listagem.php");
+        }
+    }
 ~~~~
 
 
 
-~~~~php+html
-
-~~~~
+### Realizando o upload de arquivos
 
 
 
