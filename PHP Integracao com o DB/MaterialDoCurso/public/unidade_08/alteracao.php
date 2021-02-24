@@ -1,8 +1,42 @@
 <?php require_once("../../conexao/conexao.php"); ?>
 <?php
 
+    //RECEBENDO AS INFORMAÇÕES ALTERADAS NO FORMULÁRIPO (PASSO 3)
+    if (isset($_POST["nometransportadora"])){
+        $nome       = $_POST["nometransportadora"];
+        $endereco   = $_POST["endereco"];
+        $cidade     = $_POST["cidade"];
+        $estados    = $_POST["estados"];
+        $cep        = $_POST["cep"];
+        $cnpj       = $_POST["cnpj"];
+        $telefone   = $_POST["telefone"];
+        $tID         = $_POST["transportadoraID"];
 
-    // CRIANDO A CONSULTA NO BANCO DE DADOS PARA SER EXIBIDA NA TELA DE LOGIN
+        //OBJETO PARA ALTERAR
+        $alterar  = " UPDATE transportadoras  ";
+        $alterar .= " SET ";
+        $alterar .= " nometransportadora = '{$nome}',";
+        $alterar .= " endereco = '{$endereco}',";
+        $alterar .= " cidade = '{$cidade}',";
+        $alterar .= " estadoID = {$estados},";
+        $alterar .= " cep = '{$cep}',";
+        $alterar .= " cnpj = '{$cnpj}',";
+        $alterar .= " telefone = '{$telefone}' ";
+        $alterar .= " WHERE ";
+        $alterar .= " transportadoraID = {$tID}";
+
+        $operacao_alterar = mysqli_query($conecta,$alterar);
+        if (!$operacao_alterar){
+            die("Erro na alteração dos dados");
+        }else{
+            header("location:listagem.php");
+        }
+    }
+    
+
+    
+
+    // CRIANDO A CONSULTA NO BANCO DE DADOS PARA SER EXIBIDA NA TELA DE LOGIN (PASSO 1)
     $tr = "SELECT * ";
     $tr .=" FROM transportadoras ";
     if(isset($_GET["codigo"])){
@@ -19,7 +53,7 @@
         die("Falha na consulta");
     }
 
-    //PREENCHENDO OS CAMPOS DO FORUMLÁRIO AUTOMATICAMENTE
+    //PREENCHENDO OS CAMPOS DO FORUMLÁRIO AUTOMATICAMENTE (PASSO 2)
     //Esse array será jogado no value de cada campo do formulário
     $info_transportadora = mysqli_fetch_assoc($con_transportadora);
 
@@ -31,18 +65,11 @@
         die ("Falha na consulta ao banco de dados");
     }
 
-    //RECEBENDO AS INFORMAÇÕES ALTERADAS NO FORMULÁRIPO
-    if (isset($_POST["nometransportadora"])){
-        $nome       = $_POST["nometransportadora"];
-        $endereco   = $_POST["endereco"];
-        $cidade     = $_POST["cidade"];
-        $estados    = $_POST["estados"];
-        $cep        = $_POST["cep"];
-        $cnpj       = $_POST["cnpj"];
-        $telefone   = $_POST["telefone"];
-        $id   = $_POST["transportadoraID"];
-    }
-   
+     
+    
+    
+
+
 ?>
 <!doctype html>
 <html>
@@ -103,10 +130,10 @@
                     <input type="text" value="<?php echo $info_transportadora["cep"]; ?>" name="cep" id="cep">
 
                     <label for="telefone">Telefone</label>
-                    <input type="text" value="<?php echo $info_transportadora["telefone"]; ?>" name="telefone" id="nometransportadora">
+                    <input type="text" value="<?php echo $info_transportadora["telefone"]; ?>" name="telefone" id="telefone">
 
                     <label for="cnpj">CNPJ</label>
-                    <input type="text" value="<?php echo $info_transportadora["cnpj"]; ?>" name="cnpj" id="nometranspocnpjrtadora">
+                    <input type="text" value="<?php echo $info_transportadora["cnpj"]; ?>" name="cnpj" id="cnpj">
 
                     <!--Campo de tipo oculto apenas para identificar a chave estrangeira-->
                     <input type="hidden" name="transportadoraID" value="<?php echo $info_transportadora["transportadoraID"]; ?>">
