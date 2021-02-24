@@ -1,5 +1,9 @@
 <?php require_once("../../conexao/conexao.php"); ?>
+<?php
 
+    //NÃO HÁ CONTEÚDO NESTA UNIDADE. OS ASSUNTOS DE ALTERAÇÃO FORAM INSERIDOS NA UNIDADE 8
+
+?>
 <!doctype html>
 <html>
     <head>

@@ -1222,12 +1222,14 @@ Crie uma pasta para servir de uploads e defina o privilégio dela como "leitura 
             <!--O atributo enctype multipart/form-data define o formulário como upload de arquivos-->
             <form action="upload.php" method="post" enctype="multipart/form-data">
 
-            <!--input MAX_FILE_SIZE define o tamanho máximo de upload de algum arquivo-->
-            <input type="hidden" name="MAX_FILE_SIZE" value="100">
-            <!--O tipo de input file permite que o navegador abra uma janela para no explore para selecionar arquivos-->
-            <input type="file" name="upload_file">
-            <input type="submit" name="enviar" value="Publicar" >
+                <!--input MAX_FILE_SIZE define o tamanho máximo de upload de algum arquivo-->
+                <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
 
+                <!--O tipo de input file permite que o navegador abra uma janela para no explore para selecionar arquivos-->
+
+                <input type="file" name="upload_file">
+                <input type="submit" name="enviar" value="Publicar" >'
+            </form>
 
         </main>
 ~~~~
@@ -1289,7 +1291,7 @@ Valor: 4; Nenhum arquivo foi enviado.
 
 **`UPLOAD_ERR_NO_TMP_DIR`**
 
-Valor: 6; Pasta temporária ausênte. Introduzido no PHP 5.0.3.
+Valor: 6; Pasta temporária ausente. Introduzido no PHP 5.0.3.
 
 **`UPLOAD_ERR_CANT_WRITE`**
 
@@ -1339,26 +1341,101 @@ Valor: 8; Uma extensão do PHP interrompeu o upload do arquivo. O PHP não forne
 
 Mais informações: https://www.php.net/manual/pt_BR/features.file-upload.errors.php
 
-~~~php
 
+
+#### Movendo os arquivos da pasta temporária para a permanente
+
+
+
+~~~php
+if(isset($_POST["enviar"])){
+        $numero_erro = $_FILES['upload_file']['error'];
+        $mensagem = $array_erro[$numero_erro];
+        
+        //Capturando o arquivo da pasta temporária
+        $arquivo_temporario = $_FILES['upload_file']['tmp_name'];
+    
+        //A função basename captura apenas o nome do arquivo
+        $arquivo = basename($_FILES['upload_file']['name']);
+        $diretorio = "uploads";
+
+        //A função move_uploaded_file é responsável por mover o arquivo da pasta temporária para a permanente (uploads)
+        if (move_uploaded_file($arquivo_temporario,$diretorio."/".$arquivo)){
+            $mensagem = "Arquivo publicado com sucesso!";
+        }else{
+            $numero_erro = $_FILES['upload_file']['error'];
+            $mensagem = $array_erro[$numero_erro];
+        }
+    }   
 ~~~
 
 
 
-~~~~php
+Para exibir o status da ação, basta imprimir a mensagem no HTML do arquivo:
 
+~~~~php
+ <?php       
+     if(isset($mensagem)){
+      	echo $mensagem;
+     }
+  ?>
 ~~~~
 
 
 
-~~~php
+#### Otimizando o código de upload
 
+Crie um novo arquivo chamado funcoes.php e leve todo o código de erro e processamento de arquivo para ele
+
+~~~php
+<?php
+    function mostrarAvisoPublicacao($numero){
+        $array_erro = array(
+            UPLOAD_ERR_OK => "Sem erro.",
+            UPLOAD_ERR_INI_SIZE => "O arquivo enviado excede o limite definido na diretiva upload_max_filesize do php.ini.",
+            UPLOAD_ERR_FORM_SIZE => "O arquivo excede o limite definido em MAX_FILE_SIZE no formulário HTML",
+            UPLOAD_ERR_PARTIAL => "O upload do arquivo foi feito parcialmente.",
+            UPLOAD_ERR_NO_FILE => "Nenhum arquivo foi enviado.",
+            UPLOAD_ERR_NO_TMP_DIR => "Pasta temporária ausente.",
+            UPLOAD_ERR_CANT_WRITE => "Falha em escrever o arquivo em disco.",
+            UPLOAD_ERR_EXTENSION => "Uma extensão do PHP interrompeu o upload do arquivo."
+        ); 
+
+        return $array_erro[$numero];
+    }
+
+    function publicarArquivo($imagem){
+         //Capturando o arquivo da pasta temporária
+         $arquivo_temporario = $imagem['tmp_name'];
+         //A função basename captura apenas o nome do arquivo
+         $arquivo = basename($imagem['name']);
+         $diretorio = "uploads";
+ 
+    
+         //A função move_uploaded_file é responsável por mover o arquivo da pasta temporária para a permanente (uploads)
+         if (move_uploaded_file($arquivo_temporario,$diretorio."/".$arquivo)){
+             $mensagem = "Arquivo publicado com sucesso!";
+         }else{
+             $numero_erro = $_FILES['upload_file']['error'];
+             $mensagem = mostrarAvisoPublicacao($imagem['error']);
+         }
+
+         return $mensagem;
+    }
+?>
 ~~~
 
-
+No arquivo upload.php:
 
 ~~~~php
+<?php
+    
+    if(isset($_POST["enviar"])){
+        $mensagem = publicarArquivo($_FILES['upload_file']);   
+    }   
 
+
+?>
 ~~~~
 
 
