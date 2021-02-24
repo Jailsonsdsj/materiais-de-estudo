@@ -1192,9 +1192,382 @@ if (isset($_POST["nometransportadora"])){
 
 ### Realizando o upload de arquivos
 
+Configuração do PHP.INI para uploads
+
+- file_uploads tem que estar ON (true)
+
+- upload_tmp_dir
+
+- post_max_size(128MB)
+
+- upload_max_filesize (128MD) - Configuração para tamanho máximo do arquivo
+- max_execution_time (30s) - Tempo máximo de processamento para um determinado serviço
+- max_input_time(60s) - Tempo máximo de execução de algum script
+
+
+
+Crie uma pasta para servir de uploads e defina o privilégio dela como "leitura e gravação". 
+
+É importante que essa configuração seja informada ao provedor de hospedagem do site. Por motivos de segurança, essa pasta não deve **rodar ou publicar algum arquivo de script**.
+
+
+
+#### Criando o formulário de upload de arquivos
+
 
 
 ~~~~php+html
+<main>  
+            
+            <!--O atributo enctype multipart/form-data define o formulário como upload de arquivos-->
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+
+            <!--input MAX_FILE_SIZE define o tamanho máximo de upload de algum arquivo-->
+            <input type="hidden" name="MAX_FILE_SIZE" value="100">
+            <!--O tipo de input file permite que o navegador abra uma janela para no explore para selecionar arquivos-->
+            <input type="file" name="upload_file">
+            <input type="submit" name="enviar" value="Publicar" >
+
+
+        </main>
+~~~~
+
+#### 
+
+#### Reconhecendo o $_FILES
+
+
+
+~~~~php
+if(isset($_POST["enviar"])){
+        echo "<pre>";
+        print_r($_FILES["upload_flie"]);
+        echo "<pre>";
+    }
+~~~~
+
+Resultado após realizar o upload de algum arquivo:
+
+
+
+<a href="https://imgur.com/bts5b40"><img src="https://i.imgur.com/bts5b40.png" title="source: imgur.com" /></a>
+
+Tendo em vista que o array do $_FILES é associativo, é possível pegar apenas os dados desejados
+
+Exemplo:
+
+~~~php
+print_r($_FILES["upload_flie"]["name"]);
+
+//RESULTADO
+DataTechnology_Coursebook.pdf
+~~~
+
+
+
+#### Analisando mensagens de erro
+
+**`UPLOAD_ERR_OK`**
+
+Valor: 0; não houve erro, o upload foi bem sucedido.
+
+**`UPLOAD_ERR_INI_SIZE`**
+
+Valor 1; O arquivo enviado excede o limite definido na diretiva [upload_max_filesize](https://www.php.net/manual/pt_BR/ini.core.php#ini.upload-max-filesize) do php.ini.
+
+**`UPLOAD_ERR_FORM_SIZE`**
+
+Valor: 2; O arquivo excede o limite definido em *MAX_FILE_SIZE* no formulário HTML.
+
+**`UPLOAD_ERR_PARTIAL`**
+
+Valor: 3; O upload do arquivo foi feito parcialmente.
+
+**`UPLOAD_ERR_NO_FILE`**
+
+Valor: 4; Nenhum arquivo foi enviado.
+
+**`UPLOAD_ERR_NO_TMP_DIR`**
+
+Valor: 6; Pasta temporária ausênte. Introduzido no PHP 5.0.3.
+
+**`UPLOAD_ERR_CANT_WRITE`**
+
+Valor: 7; Falha em escrever o arquivo em disco. Introduzido no PHP 5.1.0.
+
+**`UPLOAD_ERR_EXTENSION`**
+
+Valor: 8; Uma extensão do PHP interrompeu o upload do arquivo. O PHP não fornece uma maneira de determinar qual extensão causou a interrupção. Examinar a lista das extensões carregadas com o [phpinfo()](https://www.php.net/manual/pt_BR/function.phpinfo.php) pode ajudar. Introduzido no PHP 5.2.0.
+
+
+
+#### Exibindo a mensagem de erro no navegador
+
+
+
+~~~~php
+<?php
+    //TABELA DE POSSÍVEIS ERROS (em ordem correta, de acordo com a documentação)
+    $array_erro = array(
+        UPLOAD_ERR_OK => "Sem erro.",
+        UPLOAD_ERR_INI_SIZE => "O arquivo enviado excede o limite definido na diretiva upload_max_filesize do php.ini.",
+        UPLOAD_ERR_FORM_SIZE => "O arquivo excede o limite definido em MAX_FILE_SIZE no formulário HTML",
+        UPLOAD_ERR_PARTIAL => "O upload do arquivo foi feito parcialmente.",
+        UPLOAD_ERR_NO_FILE => "Nenhum arquivo foi enviado.",
+        UPLOAD_ERR_NO_TMP_DIR => "Pasta temporária ausente.",
+        UPLOAD_ERR_CANT_WRITE => "Falha em escrever o arquivo em disco.",
+        UPLOAD_ERR_EXTENSION => "Uma extensão do PHP interrompeu o upload do arquivo."
+    ); 
+
+    //RECONHECENDO O $_FILES
+    if(isset($_POST["enviar"])){
+        //associando o número do erro ao erro afim de saber a causa.
+        $numero_erro = $_FILES['upload_file']['error'];
+        //o index do array_erro é o número referente ao erro
+        $mensagem = $array_erro[$numero_erro];
+
+        echo "<pre>";
+        print_r($_FILES["upload_file"]); //Array associativo
+        echo "<pre>";
+        echo "<hr>";
+        echo $mensagem;
+    }
+
+
+?>
+~~~~
+
+Mais informações: https://www.php.net/manual/pt_BR/features.file-upload.errors.php
+
+~~~php
+
+~~~
+
+
+
+~~~~php
 
 ~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
+
+
+
+~~~~php
+
+~~~~
+
+
+
+~~~php
+
+~~~
 
