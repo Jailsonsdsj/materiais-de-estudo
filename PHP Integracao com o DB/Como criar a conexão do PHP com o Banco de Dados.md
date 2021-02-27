@@ -16,7 +16,7 @@
 
 
 
-~~~~php
+~~~~php+HTML
 <?php 
 //PASSO 1 - criando os dados do servidor
     $servidor = "localhost";
@@ -71,7 +71,7 @@ Caso não exiba nenhum erro, significa que a conexão foi estabelecida.
 
 ### Criando uma listagem de dados
 
-~~~~php
+~~~~php+HTML
 <!doctype html>
 <html>
     <head>
@@ -850,6 +850,8 @@ Novo arquivo *sair.php*
 ?>
 ~~~~
 
+
+
 ### Criando formulário de inserção de dados (HTML)
 
 ~~~~php+HTML
@@ -905,8 +907,6 @@ verificando se algum campo foi preenchido. nesse caso, será o nome da transport
 
 
 ### Inserindo dados no Banco de Dados
-
-
 
 Query de inserção MySQL
 
@@ -1437,6 +1437,10 @@ No arquivo upload.php:
 
 ?>
 ~~~~
+
+
+
+
 
 
 
