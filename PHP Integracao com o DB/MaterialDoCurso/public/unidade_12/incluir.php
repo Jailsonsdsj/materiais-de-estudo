@@ -1,10 +1,12 @@
 <?php require_once("../../conexao/conexao.php"); ?>
+<?php require_once("funcoes.php"); ?>
 
 <?php
     // conferir se a navegacao veio pelo preenchimento do formulario
     if( isset($_POST['nomeproduto']) ) {
-        $resultado1 = publicarImagem($_FILES['foto_grande']);
-        $resultado2 = publicarImagem($_FILES['foto_pequena']);
+        $resultado1 = publicarArquivo($_FILES['foto_grande']);
+        $resultado2 = publicarArquivo($_FILES['foto_pequena']);
+       
 
         $mensagem1 = $resultado1[0]; 
         $mensagem2 = $resultado2[0];
@@ -21,13 +23,13 @@
         $imagem_pequena = $resultado2[1];
         
         // Insercao no banco
-        $inserir = "INSERT INTO produtos ";
-        $inserir .="(nomeproduto,codigobarra,tempoentrega,categoriaID,fornecedorID,precounitario,precorevenda,estoque,imagemgrande,imagempequena) ";
-        $inserir .="VALUES ";
-        $inserir .="('$nomeproduto','$codigobarra',$tempoentrega,$categoriaID,$fornecedorID,$precounitario,$precorevenda,$estoque,'$imagem_grande','$imagem_pequena')";
+        $inserir = " INSERT INTO produtos ";
+        $inserir .=" (nomeproduto,codigobarra,tempoentrega,categoriaID,fornecedorID,precounitario,precorevenda,estoque,imagemgrande,imagempequena) ";
+        $inserir .=" VALUES ";
+        $inserir .=" ('$nomeproduto','$codigobarra',$tempoentrega,$categoriaID,$fornecedorID,$precounitario,$precorevenda,$estoque,'$imagem_grande','$imagem_pequena') ";
         $qInserir = mysqli_query($conecta,$inserir);
         if(!$qInserir) {
-            die("Erro na insercao");   
+            die("Erro ao inserir dados no bd");   
         } else {
             $mensagem = "Inserção ocorreu com sucesso.";
         }
