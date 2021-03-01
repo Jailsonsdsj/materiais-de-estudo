@@ -1,5 +1,18 @@
 <?php require_once("../../conexao/conexao.php"); ?>
+<?php require_once("funcoes.php"); ?>
+<?php
+    if (isset($_POST['enviar'])){
+        if (enviarMensagem($_POST)){
+            $mensagem = "Mensagem enviada com sucesso!";
+        }else{
+            $mensagem = "Erro ao enviar a mensagem.";
+        }
+     
+    }
 
+
+
+?>
 <!doctype html>
 <html>
     <head>
@@ -18,8 +31,10 @@
         <main> 
             <div id="janela_formulario">
                 <form action="contato.php" method="post">
+
                     <input type="text" name="nome" placeholder="Digite seu nome">
                     <input type="email" name="email" placeholder="Digite seu email">
+                    
                     <label>Mensagem</label>
                     <textarea name="mensagem"></textarea>
                     <input type="submit" name="enviar" value="Enviar Mensagem">
