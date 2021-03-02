@@ -10,6 +10,7 @@ MÓDULO 1 - BANCO DE DADOS RELACIONAL
 --	INSERINDO DADOS: INSERT INTO..........................|D1F23| LINHA:
 --	COMANDO SELECT........................................|WF5S1| LINHA:
 --	ALIAS DE COLUNAS......................................|D8E9S| LINHA:
+--	DELETANDO COLUNAS.....................................|D55S0| LINHA:
 --	FILTRANDO DADOS COM WHERE E LIKE......................|S1032| LINHA:
 --	TABELA VERDADE........................................|S855A| LINHA:
 --	OR - OU / AND - E.....................................|D2G3J| LINHA:
@@ -287,6 +288,20 @@ SELECT * FROM CLIENTE;
 
 --tags: apelidos | renomear colunas
 |D8E9S| PAG:
+------------------------------------------------------------------------------
+
+/* DELETANDO COLUNAS */
+
+ALTER TABLE nome_da_tabela DROP COLUMN nome_da_coluna;
+
+
+/* DELETANDO MAIS DE UMA COLUNA */
+
+ALTER TABLE nome_da_tabela DROP COLUMN nome_da_coluna1, DROP COLUMN nome_da_coluna2;
+
+
+--tags: deletar colunas | deletando colunas | remover colunas | ecluir colunas
+|D55S0| PAG:
 ------------------------------------------------------------------------------
 
 /* FILTRANDO DADOS COM WHERE E LIKE */
