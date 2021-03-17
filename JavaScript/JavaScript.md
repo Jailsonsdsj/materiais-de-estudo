@@ -1,12 +1,8 @@
 # JavaScript 📒
 
-
-
 Introdução
 
 Resumo das aulas do curso [Web Moderno Completo](https://www.udemy.com/course/curso-web/) entre outras fontes.
-
-
 
 
 
@@ -18,13 +14,11 @@ Resumo das aulas do curso [Web Moderno Completo](https://www.udemy.com/course/cu
 
 
 
-
-
-## Tipos em JavaScritp
+## Fundamentos
 
 
 
-### Number
+### Tipos em JavaScript: number
 
 ~~~~javascript
 const peso1 = 1.0
@@ -86,9 +80,7 @@ Mais informações sobre funções de Number: https://developer.mozilla.org/pt-B
 
 
 
-### String
-
-
+### Tipos em JavaScript: String
 
 Exibindo as posições dos caracteres
 
@@ -184,7 +176,7 @@ Mais informações sobre funções de String: https://developer.mozilla.org/pt-B
 
 
 
-### Boolean
+### Tipos em JavaScript: Boolean
 
 Representados por true, false, 1 ou 0.
 
@@ -246,9 +238,7 @@ Mais informações sobre boolean: https://developer.mozilla.org/pt-BR/docs/Web/J
 
 
 
-### Array
-
-
+### Tipos em JavaScript: Array
 
 Os array são do tipo objeto em javascritp
 
@@ -287,7 +277,7 @@ Mais informações sobre Array: https://developer.mozilla.org/pt-BR/docs/Web/Jav
 
 
 
-### Objetct
+### Tipos em JavaScript: Objetct
 
 Em JavaScript, um objeto é considerado uma relação entre chave e valor.
 
@@ -321,9 +311,635 @@ console.log(prod2)
 
 Obs: não confundir com JSON.
 
-
-
 Mais informações sobre Object: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+
+
+### **Atribuição por referência**
+
+Quando o endereço de um objeto é passado de uma variável ou constante para outra.
+
+Exemplo:
+
+~~~~javascript
+const a = {nome: 'Teste'}
+const b = a
+
+~~~~
+
+No exemplo acima, b estará recendo a referência do objeto que estava contido em a.
+
+Neste sentido, ao alterar a constante b, o a também terá impacto, pois ambas constantes possuem o mesmo endereço:
+
+~~~~javascript
+b.name = 'opa'
+console.log(a)
+---
+"Opa"
+~~~~
+
+
+
+### **Atribuição por valor**
+
+Acontece quando a cópia é feita através de um valor primitivo (diferente do objeto demostrado acima).
+
+~~~~javascript
+let c = 3
+let d = c
+d++
+console.log(c)
+condole.log(d)
+---
+3
+4
+
+~~~~
+
+
+
+### Null & Undefield
+
+- Undefield: uma variável ou constante que não foi inicializada
+
+- Null: uma variável ou constante que não possui nenhum valor e que não aponta para nenhum endereço de memória. O null pode ser utilizado para quando desejar que uma variável deixe de apontar para algum endereço. Ou seja, é usado para "zerar" o valor de uma variável.
+
+
+
+Evitar utilizar undefield ao zerar uma variável, constante ou objeto.
+
+
+
+Comentário o Overflow
+
+> #### **Diferença semântica**
+>
+> (...) Existe uma diferença semântica entre `null` e `undefined`: o valor `null` é utilizado para indicar a ausência de um *objeto*, enquanto `undefined` indica a ausência de um valor qualquer. A especificação explicita isso quando define os valores [`undefined`](http://www.ecma-international.org/ecma-262/5.1/#sec-4.3.9) e [`null`](http://www.ecma-international.org/ecma-262/5.1/#sec-4.3.11):
+>
+> **valor undefined**: valor primitivo utilizado quando uma variável não teve valor atribuído.
+>
+> **valor null**: valor primitivo que representa a ausência intencional de um valor de objeto.
+>
+> O valor retornado pelo operador [typeof](http://www.ecma-international.org/ecma-262/5.1/#sec-11.4.3) é consistente com isso: ele retorna `"object"` para `null`, e `"undefined"` para `undefined`. O uso de `null` na especificação também obedece a isso. Por exemplo, todo objeto possui uma propriedade interna [[Prototype]], cujo valor deve ser um objeto ou `null` – nunca `undefined`. (...) APIs do DOM também fazem uso consistente disso.
+>
+> #### Diferenças sintáticas
+>
+> Existem ainda diferenças sintáticas entre `null` e `undefined`. Ambos são os únicos valores de seus respectivos Tipos (`Null` e `Undefined`). Porém, `null` é também um termo reservado e um literal da gramática (como `true`, `0`, `""` e `/.*/`), o [*NullLiteral*](http://www.ecma-international.org/ecma-262/5.1/#sec-7.8), enquanto `undefined` é exposto como uma [propriedade do objeto global](http://www.ecma-international.org/ecma-262/5.1/#sec-15.1.1.3), assim como `NaN` e `Infinity`.
+>
+> Além disso, `undefined` não é um termo reservado da linguagem – o que significa, por exemplo, que `var undefined = "?"` é uma construção válida. Portanto, é sempre possível criar uma variável local chamada `undefined` cujo valor não seja o primitivo de mesmo nome. Isso não é possível com `null`, `var null = "?"` gera um erro de sintaxe. Em implementações antigas da linguagem também era possível sobrescrever o valor global `undefined`, mas isso deixou de ser permitido no ECMAScript 5, onde a propriedade `undefined` do objeto global é definida como [[Writable]]:false, o que significa que seu valor não pode ser substituído.
+
+
+
+### Funções
+
+Função sem retorno
+
+~~~~javascript
+function imprimirSoma(a,b){
+    console.log(a+b)
+}
+
+imprimirSoma(2,3)
+imprimirSoma(2)
+imprimirSoma(2,3,9,12)
+~~~~
+
+
+
+Função com retorno
+
+~~~~javascript
+function soma(a,b = 0){ //zero representa o valor padrão de b, caso não receba parâmetros
+    return a+b
+}
+console.log(soma(5,3))
+console.log(soma(2))
+~~~~
+
+
+
+### Arrow Functions 
+
+Armazenando uma função em uma variável
+
+~~~~javascript
+const imprimirSoma = function(a,b){
+    console.log(a+b);
+}
+
+imprimirSoma(2,3);
+~~~~
+
+
+
+Armazenando uma função arrow em uma variável
+
+~~~~javascript
+const soma = (a,b) => {
+    return a+b;
+}
+
+console.log(soma(2,3));
+~~~~
+
+O símbolo "=>" representa uma forma resumida de declarar uma função (arrow function)
+
+
+
+Retorno implícito
+
+~~~~javascript
+const subtracao = (a,b) => a-b
+console.log(subtracao(2,3))
+~~~~
+
+As funções implícitas, isto é, declaradas sem o uso de blocos devem conter apenas uma linha de código e automaticamente retornam um valor.
+
+
+
+### VAR
+
+Uma variável declarada por VAR só possui dois escopos: o local e o global.
+
+Exceto esses dois escopos, o var não considera as estruturas de blocos, conforme exemplo abaixo:
+
+~~~~javascript
+{
+    {
+        {
+            var teste = "Olá mundo"
+        }
+    }
+}
+
+console.log(teste)
+~~~~
+
+
+
+- **Variável Local**: uma variável definida dentro de uma função. Essa variável só pode ser utilizada dentro da própria função
+
+- **Variável Global**: uma variável definida em qualquer lugar do código que não seja uma função. Pode ser utilizada em qualquer área do código. Evita-se utilizar variáveis globais para não correr o risco de sobrescrita
+
+
+
+### Let
+
+Uma variável declarada por Let considera o escopo de blocos
+
+~~~~javascript
+let numero = 1
+{
+    let numero = 2
+    console.log("Dentro = ",numero)
+}
+
+console.log("Fora = ", numero)
+--
+Dentro = 2
+Fora = 1
+~~~~
+
+
+
+Caso não tenha variável dentro do escopo, será considerada a de fora:
+
+~~~~javascript
+let numero = 1
+{
+    let numero2 = 2
+    console.log("Dentro = ",numero)
+}
+
+console.log("Fora = ", numero)
+---
+Dentro = 1
+Fora = 1
+~~~~
+
+Importante: use o let para variáveis em estruturas de repetições.
+
+
+
+### Função VS Objeto
+
+[inserir aqui o que é instância de objeto]
+
+~~~~javascript
+console.log(typeof Object)
+console.log(typeof new Object) //Instanciando um objeto
+---
+object
+function
+~~~~
+
+
+
+~~~~javascript
+const Cliente = function(){}
+console.log(typeof Cliente)
+console.log(typeof new Cliente)
+---
+object
+function
+~~~~
+
+O ES6 também permite declarar funções da seguinte forma:
+
+~~~~javascript
+class Produto {} 
+console.log(typeof Produto)
+console.log(typeof new Produto())
+~~~~
+
+
+
+### Par Chave/Valor
+
+~~~~javascript
+const saudacao = "Hello, World!"  // Conexto léxico 1
+
+function exec(){
+    const saudacao = 'Hi,Lorena!' //Contexto léxico 2
+    return saudacao
+}
+~~~~
+
+O retorno de saudacao será primeiramente da constante local e, caso esta não exista, será a segunda.
+
+
+
+Objetos são  grupos aninhados de pares nome/valor.
+
+~~~~javascript
+cinst cliente = {
+    nome: "Pedro",
+    idade: 32,
+    peso: 90,
+    endereco: {
+        logradouro: 'Rua 991'
+        numero: 123
+    }
+}
+
+console.log(saudacao)
+console.log(exec())
+console.log(cliente)
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
 
 
 
