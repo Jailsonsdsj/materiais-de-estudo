@@ -589,8 +589,15 @@ console.log(cliente)
 
 
 
-~~~~javascript
+### Notação Ponto
 
+A notação ponto é uma forma de declarar o atributo de um objeto
+
+~~~~javascript
+console.log(math.ceil(6.1))
+const any 1 = {}
+obj1.nome = 'bola' 
+obj1['nome'] = 'cadeira' //declarando o nome apenas como o ponto 
 ~~~~
 
 
