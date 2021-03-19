@@ -591,103 +591,289 @@ console.log(cliente)
 
 ### Notação Ponto
 
-A notação ponto é uma forma de declarar o atributo de um objeto
+A notação ponto é uma forma de declarar o atributo de um objeto através de um ponto
 
 ~~~~javascript
-console.log(math.ceil(6.1))
-const any 1 = {}
-obj1.nome = 'bola' 
-obj1['nome'] = 'cadeira' //declarando o nome apenas como o ponto 
+
+const obj1 = {}
+obj1.nome = 'bola'  //declarando o nome com notação ponto
+//obj1['nome'] = 'cadeira' //forma alternativa de declarar um atributo de um objeto
+console.log(obj1.nome)
+
+function Obj(nome){
+    this.nome = nome //o this indica que a varíavel nome é a do parâmetro da função, e não a do objeto.
+    //o this também deixa o atributo visível, isto é, publico para que outros objetos possam utiliar
+    this.exec = function(){
+        console.log("Exerc...")
+    }
+}
+
+const obj2 = new Obj('cadeira')//cadeira será atribuída ao objeto nome da funçao obj
+const obj3 = new Obj('Mesa')
+console.log(obj2.nome)
+console.log(obj3.nome)
+obj3.exec()
 ~~~~
 
 
 
-~~~~javascript
+### Operadores de atribuição
 
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
+| Nome                                                       | Operador encurtado | Significado   |
+| :--------------------------------------------------------- | :----------------- | :------------ |
+| Atribuição                                                 | x = y              | x = y         |
+| Atribuição de adição                                       | `x += y`           | `x = x + y`   |
+| Atribuição de subtração                                    | `x -= y`           | `x = x - y`   |
+| Atribuição de multiplicação                                | `x *= y`           | `x = x * y`   |
+| Atribuição de divisão                                      | `x /= y`           | `x = x / y`   |
+| Atribuição de resto                                        | `x %= y`           | `x = x % y`   |
+| Atribuição exponencial                                     | x **= y            | x = x ** y    |
+| Atribuição bit-a-bit por deslocamento á esquerda           | `x <<= y`          | `x = x << y`  |
+| Atribuição bit-a-bit por deslocamento á direita            | `x >>= y`          | `x = x >> y`  |
+| Atribuiçãode bit-a-bit deslocamento á direita não assinado | `x >>>= y`         | `x = x >>> y` |
+| Atribuição AND bit-a-bit                                   | `x &= y`           | `x = x & y`   |
+| Atribuição XOR bit-a-bit                                   | `x ^= y`           | `x = x ^ y`   |
+| Atribuição OR bit-a-bit                                    | `x |= y`           | `x = x | y`   |
 
 
 
 ~~~~javascript
+const a = 7
+let b = 3
 
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
+b += a // b = b+a
+b -= a // b = b-a
+b *= 4 // b = b*4
+b /= 2 // b = b/2
+b %= 2 // b = b%2 (b rececebe o resto da divisão por 2)
 
 ~~~~
 
 
 
+### Operador Destructuring
+
+Novo recurso do ES6
+
 ~~~~javascript
+const pessoa = {
+    nome: 'Ana',
+    idade: 5,
+    endereco: {
+        logradouro: 'Rua ABC',
+        numero: 1000
+    }
+}
+~~~~
+
+
+
+Acessando o atributo de um objeto através do operador
+
+~~~~javascript
+const {nome,idade} = pessoa //O nome e a idade serão extraídas do objeto pessoa
+console.log(nome, idade)
+~~~~
+
+
+
+Alterando o nome do atributo / variável
+
+~~~~javascript
+const {nome: n , idade: i} = pessoa
+console.log(n,i)
+~~~~
+
+
+
+Tentando extrair valores inexistentes
+
+~~~~javascript
+const {sobrenome, sexo = true} = pessoa //caso não haja a variável sexo, será retornado true
+console.log(sobrenome,sexo)
+~~~~
+
+
+
+Acessando atributos em bloco
+
+~~~~javascript
+const {endereco: {logradouro,numero,cep } } = pessoa
+console.log(logradouro, numero, cep)
+~~~~
+
+
+
+Criando arrays com o Destructuring
+
+~~~~javascript
+const [a] = [10]
+console.log(a)
+~~~~
+
+
+
+Múltiplos elementos em uma única atribuição
+
+~~~~javascript
+const [n1, ,n3, ,n5,n6=0] = [10,7,9,8]
+console.log(n1,n3,n5,n6)
 
 ~~~~
 
 
 
+Primeiro elemento ignorado e o segundo declarado um array
+
 ~~~~javascript
+const [, [, nota]] = [[,8,8], [9,6,8]]
+console.log(nota)
+~~~~
+
+
+
+### Operadores de comparação
+
+| Operador                       | Exemplos que retornam verdadeiro   |
+| :----------------------------- | :--------------------------------- |
+| Igual (`==`)                   | `3 == var1``"3" == var1``3 == '3'` |
+| Não igual (`!=`)               | `var1 != 4var2 != "3"`             |
+| Estritamente igual (`===`)     | `3 === var1`                       |
+| Estritamente não igual (`!==`) | `var1 !== "3"3 !== '3'`            |
+| Maior que (`>`)                | `var2 > var1"12" > 2`              |
+| Maior que ou igual (`>=`)      | `var2 >= var1var1 >= 3`            |
+| Menor que (`<`)                | `var1 < var2"12" < "2"`            |
+| Menor que ou igual (`<=`)      | `var1 <= var2var2 <= 5`            |
+
+
+
+### Operadores aritméticos
+
+| Operador                       | Descrição                                                    | Exemplo                                                      |
+| :----------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| Módulo (%)                     | Operador binário. Retorna o inteiro restante da divisão dos dois operandos. | 12 % 5 retorna 2.                                            |
+| Incremento (++)                | Operador unário. Adiciona um ao seu operando. Se usado como operador prefixado (`++x`), retorna o valor de seu operando após a adição. Se usado como operador pósfixado (`x++`), retorna o valor de seu operando antes da adição. | Se `x` é 3, então `++x` define `x` como 4 e retorna 4, enquanto `x++` retorna 3 e, somente então, define `x` como 4. |
+| Decremento (--)                | Operador unário. Subtrai um de seu operando. O valor de retorno é análogo àquele do operador de incremento. | Se `x` é 3, então `--x` define `x` como 2 e retorna 2, enquanto `x--` retorna 3 e, somente então, define `x` como 2. |
+| Negação (-)                    | Operador unário. Retorna a negação de seu operando.          | Se `x` é 3, então `-x` retorna -3.                           |
+| Adição (+)                     | Operador unário. Tenta converter o operando em um número, sempre que possível. | +"3" retorna 3.+true retorna 1.                              |
+| Operador de exponenciação (**) | Calcula a base elevada á potência do expoente, que é, base`expoente` | 2 ** 3 retorna 8.10 ** -1 retorna 0.1                        |
+
+Exemplo de operador de exponenciação:
+
+~~~~javascript
+//Forma antiga
+let exp = Math.pow(2,3) //O primeiro parãmetro é a base e o segundo o expoente.
+console.log(exp) 
+
+//ES7
+let exp = 2**3
+
+//Outro exemplo
+let base = 2
+base **=3 //Eleva o valor da base à terceira potência.
+~~~~
+
+
+
+### Operadores bit a bit
+
+| Operador                                       | Expressão | Descrição                                                    |
+| :--------------------------------------------- | :-------- | :----------------------------------------------------------- |
+| AND                                            | `a & b`   | Retorna um 1 para cada posição em que os bits da posição correspondente de ambos operandos sejam uns. |
+| OR                                             | `a | b`   | Retorna um 0 para cada posição em que os bits da posição correspondente de ambos os operandos sejam zeros. |
+| XOR                                            | `a ^ b`   | Retorna um 0 para cada posição em que os bits da posição correspondente são os mesmos.  [Retorna um 1 para cada posição em que os bits da posição correspondente sejam diferentes.] |
+| NOT                                            | `~ a`     | Inverte os bits do operando.                                 |
+| Deslocamento à esquerda                        | `a << b`  | Desloca `a` em representação binária `b` bits à esquerda, preenchendo com zeros à direita. |
+| Deslocamento à direita com propagação de sinal | `a >> b`  | Desloca `a` em representação binária `b` bits à direita, descartando bits excedentes. |
+| Deslocamento à direita com preenchimento zero  | `a >>> b` | Desloca `a` em representação binária `b` bits à direita, descartando bits excedentes e preenchendo com zeros à esquerda. |
+
+
+
+### Operadores lógico
+
+| Operador          | Utilização       | Descrição                                                    |
+| :---------------- | :--------------- | :----------------------------------------------------------- |
+| `AND lógico (&&)` | `expr1 && expr2` | (E lógico) - Retorna `expr1` caso possa ser convertido para falso; senão, retorna `expr2`. Assim, quando utilizado com valores booleanos, `&&` retorna verdadeiro caso ambos operandos sejam verdadeiros; caso contrário, retorna falso. |
+| `OU lógico (||)`  | `expr1 || expr2` | (OU lógico) - Retorna `expr1` caso possa ser convertido para verdadeiro; senão, retorna `expr2`. Assim, quando utilizado com valores booleanos, `||` retorna verdadeiro caso ambos os operandos sejam verdadeiro; se ambos forem falsos, retorna falso. |
+| `NOT lógico (!)`  | `!expr`          | (Negação lógica) Retorna falso caso o único operando possa ser convertido para verdadeiro; senão, retorna verdadeiro. |
+
+
+
+Tabela verdade AND
+
+~~~~javascript
+var a1 =  true && true;     // t && t retorna true
+var a2 =  true && false;    // t && f retorna false
+var a3 = false && true;     // f && t retorna false
+var a4 = false && (3 == 4); // f && f retorna false
+var a5 = "Gato" && "Cão";   // t && t retorna Cão
+var a6 = false && "Gato";   // f && t retorna false
+var a7 = "Gato" && false;   // t && f retorna false
 
 ~~~~
 
 
 
-~~~~javascript
+Tabela verdade OR
 
+~~~~javascript
+var o1 =  true || true;     // t || t retorna true
+var o2 = false || true;     // f || t retorna true
+var o3 =  true || false;    // t || f retorna true
+var o4 = false || (3 == 4); // f || f retorna false
+var o5 = "Gato" || "Cão";   // t || t retorna Gato
+var o6 = false || "Gato";   // f || t retorna Gato
+var o7 = "Gato" || false;   // t || f retorna Gato
 ~~~~
 
 
 
-~~~~javascript
+Tabela verdade NOT
 
+~~~~javascript
+var n1 = !true;   // !t retorna false
+var n2 = !false;  // !f retorna true
+var n3 = !"Gato"; // !t retorna false
 ~~~~
 
 
 
+Mais informações sobre operadores: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Expressions_and_operators
+
+
+
+Exemplo:
+
 ~~~~javascript
+function compras(trabalho1,trabalho2){
+    const comprarSorvete = trabalho1 || trabalho2
+    const comprarTv = trabalho1 && trabalho2
+// const comprarPc = !(trabalho1 ^ trabalho2) //bitwise XOR
+    const comprarPC = trabalho1 != trabalho2 
+    const manterSaudavel = !comprarSorvete //operador unitário
+
+    return {comprarSorvete, comprarTv, comprarPC, manterSaudavel}
+}
+
+console.log(compras(true,true))
+console.log(compras(true,false))
+console.log(compras(false,true))
+console.log(compras(false,false))
 
 ~~~~
 
+ 
 
+### Operador Ternário
+
+Estrutura condicional IF ELSE na forma resumida
 
 ~~~~javascript
-
+const resultado = nota => nota >= 7 ? 'Aprovado' : 'Reprovado'
+// Se a nota for maior ou igual a 7 retornará Aprovado. Caso contrário, reprovado
+console.log(resultado(7.1))
+console.log(resultado(4))
+console.log(resultado(9))
 ~~~~
 
 
