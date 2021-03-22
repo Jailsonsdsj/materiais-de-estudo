@@ -910,13 +910,7 @@ div {
 
 
 
-
-
 ## Exemplos práticos
-
-
-
-
 
 
 
