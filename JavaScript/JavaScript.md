@@ -8,7 +8,65 @@ Resumo das aulas do curso [Web Moderno Completo](https://www.udemy.com/course/cu
 
 ## Estrutura de dados
 
-[INSERIR RESUMO SOBRE OS TIPOS DE ESTRUTURAS DE DADOS]
+Estruturas de dados são objetos que armazenam dados de forma eficiente, oferecendo certos “serviços” para o usuário (ordenação eficiente dos dados, busca por meio de palavras chave etc).
+
+Uma estrutura de dados abstrai as características principais de uma atividade que envolve armazenamento de informações.
+
+
+
+### **Registro**
+
+- Nos permite armazenar dados de diferentes tipos (inteiro, real, caractere etc.)
+
+- Para acessar o registro, basta informar o nome . dado. Exemplo: para buscar um livro específico, teríamos livro.nome 
+
+
+
+### Listas ligadas (Tuple)
+
+- Índice imutável
+
+- Não é possível modificar um conteúdo sem substituir a variável que a representa
+
+
+
+### Listas duplamente ligadas (List)
+
+- Índice mutável
+
+- Possui vários métodos que alteram a sua estrutura
+
+
+
+### Pilhas
+
+- Permite acesso aos itens apenas uma vez
+
+- Só pode ser lido ou removido um por vez
+
+
+
+### Pilha LIFO ou UEPS
+
+- O primeiro elemento a ser retirado é o último que tiver sido inserido
+
+- Em uma pilha com dados 1, 2 e 3, o primeiro elemento que deve ser removido é o 3
+
+
+
+### Pilha FIFO ou PEPS
+
+- O primeiro elemento a ser retirado é o primeiro que foi inserido na lista
+
+- Em uma pilha com dados 1,2 e 3, o primeiro elemento que deve ser removido é o 1
+
+
+
+### Filas
+
+- Assim como a estrutura FIFO, o primeiro elemento a ser removido é o primeiro da fila
+
+- Em uma fila de 1,2 e 3 elementos, o primeiro elemento a ser removido é o 1
 
 
 
@@ -565,7 +623,7 @@ function exec(){
 }
 ~~~~
 
-O retorno de saudacao será primeiramente da constante local e, caso esta não exista, será a segunda.
+O retorno de saudação será primeiramente da constante local e, caso esta não exista, será a segunda.
 
 
 
@@ -878,89 +936,245 @@ console.log(resultado(9))
 
 
 
-~~~~javascript
+### Tratamento de erro (Try / Catch / Throw)
 
+A declaração `try` consiste  em um bloco `try`, que contém uma ou mais declarações, e ao menos uma cláusula `catch` ou uma cláusula `finally`,  ou ambas. Ou seja, há 3 formas de declarações `try` :
+
+1. `try...catch`
+2. `try...finally`
+3. `try...catch...finally`
+
+Exemplo:
+
+~~~~javascript
+function imprimirNomeMaiusculo(obj){
+    try{
+        console.log(obj.name.toUpperCase()) + "!" //caso ocorra esse erro, comando catch será executado
+    }catch(e){//Após capturar o erro com o catch, o throw irá retornar alguma linha de código
+        throw new Error('MENSAGEM DE ERRO')
+        //OU
+        throw {
+            nome: erro.name,
+            msg: erro.message,
+            date: new Date
+        }
+    }
+}
+
+const obj = {nome: 'Roberto'}
+imprimirNomeMaiusculo(obj)
+~~~~
+
+
+
+## Estruturas de Controle
+
+
+
+### If, else, elseif
+
+~~~~javascript
+if (x > 5) {
+	console.log("X é maior que 5")
+} else if (x > 50) {
+	console.log("X é maior que 50")
+} else {
+	("X é menor que 5 e 50")
+}
+~~~~
+
+
+
+### If... Else ES6
+
+~~~~javascript
+condition ? expr1 : expr2 
+~~~~
+
+Se `condition` é `true`, o operador retornará o valor de `expr1`; se não, ele retorna o valor de `exp2`
+
+~~~~javascript
+let elvisLives = Math.PI > 4 ? "Yep" : "Nope";
+~~~~
+
+Também são possíveis múltiplas avaliaçãoes ternárias (nota: o operador condicional é associativo a direita):
+
+~~~~javascript
+let firstCheck = false,
+    secondCheck = false,
+    access = firstCheck ? "Access denied" : secondCheck ? "Access denied" : "Access granted";
+
+console.log( access ); // logs "Access granted"
+~~~~
+
+A estrutura condicional pode ser traduzida da seguinte forma:
+
+~~~~javascript
+if (firstCheck){
+    acess="Access denied"
+}else if(secondCheck){
+    acess="Access dineid"
+}else{
+    acess="Access granted";
+}
+
+console.log(acess);
+~~~~
+
+
+
+### Switch Case
+
+~~~~javascript
+const expr = "Laranjas"
+
+switch (expr) {
+    case "Laranjas":
+      console.log("As laranjas custam $0.59 o quilo.");
+      break;
+    case "Maçãs":
+      console.log("Maçãs custam $0.32 o quilo.");
+      break;
+    case "Bananas":
+      console.log("Bananas custam $0.48 o quilo.");
+      break;
+    case "Cerejas":
+      console.log("Cerejas custam $3.00 o quilo.");
+      break;
+    case "Mangas":
+    case "Mamões":
+      console.log("Mangas e mamões custam $2.79 o quilo.");
+      break;
+    default:
+      console.log("Desculpe, estamos sem nenhuma " + expr + ".");
+  }
+  
+  
+~~~~
+
+Se você não utilizar o break, o script irá rodar a partir do caso onde o critério foi correspondido e irá rodar também o caso seguinte independentemente do critério ter sido correspondido ou não.
+
+
+
+### While
+
+~~~~javascript
+let n = 0;
+let x = 0;
+
+while (n < 3) {
+  n++;
+  x += n;
+}
+
+console.log(x)
+~~~~
+
+
+
+### Do While
+
+Exemplo com HTML
+
+~~~~html
+<div id="exemplo"></div>
 ~~~~
 
 
 
 ~~~~javascript
+let resultado = '';
+let i = 0;
+do {
+   i += 1;
+   resultado += i + ' ';
+} while (i < 5);
 
+document.getElementById('exemplo').innerHTML = resultado;
 ~~~~
 
 
+
+### For
+
+Sintaxe:
 
 ~~~~javascript
-
+for ([inicialização]; [condição]; [expressão final])
+   declaração
 ~~~~
 
-
+Exemplo:
 
 ~~~~javascript
-
+for (let i = 0; i < 9; i++) {
+   console.log(i);
+   // more statements
+}
 ~~~~
 
 
+
+### For In
+
+O laço for...in somente interage sobre propriedades enumeradas. É uma relação para enumerar chave e produto.
+
+
+
+Sintaxe:
 
 ~~~~javascript
-
+for (variavel in objeto) {
+    ...
+}
 ~~~~
 
-
+Exemplo:
 
 ~~~~javascript
+//Objeto
+var obj = {a:1, b:2, c:3};
 
+//Para chave (propriedade) in obj (objeto) faça
+for (let chave in obj) {
+  console.log("obj." + chave + " = " + obj[chave]);
+}
+
+//A saída (output) deverá ser:
+// "obj.a = 1"
+// "obj.b = 2"
+// "obj.c = 3"
 ~~~~
 
 
+
+### Continue
+
+Diferentemente do [`break`](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/break), o `continue` não termina a execução do laço completamente, em vez disso ele:
+
+- Volta à condição, em um laço do tipo [`while`](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/while).
+- Volta à expressão, atualizando-a, em um laço do tipo [`for`](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/for).
 
 ~~~~javascript
+var i = 0;
+var n = 0;
 
+while (i < 5) {
+  i++;
+
+  if (i === 3) { //quando o valor de i for igual a 3, ele encerará o terceiro laço e pulará para o 4. Logo, a variável n não será incrementada neste laço.
+    continue;
+  }
+
+  n += i;
+}
+
+console.log(n)
 ~~~~
 
 
 
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
+## Funções
 
 ~~~~javascript
 
