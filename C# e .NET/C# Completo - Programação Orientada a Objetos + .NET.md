@@ -197,8 +197,6 @@ Console.WriteLine(x2);
 
 
 
-### Operadores de atribuição
-
 ~~~~c#
 int a = 10;
 Console.WriteLine(a);
@@ -322,6 +320,52 @@ Console.WriteLine(resultado);
 
 
 
+### Operadores Comparativos
+
+| Operador | Significado    |
+| -------- | -------------- |
+| >        | Maior          |
+| <        | Menor          |
+| >=       | Maior ou igual |
+| <=       | Menor ou igual |
+| ==       | Igual          |
+| !=       | Diferente      |
+
+
+
+### Operadores Lógicos
+
+| Operador | Significado |
+| -------- | ----------- |
+| &&       | E           |
+| \|\|     | Ou          |
+| !        | Não         |
+
+Ordem de precedência: ! > && > ||
+
+~~~~c#
+2>3 || 4 != 5 -> True
+!(2>3)&&4!=5 -> True
+~~~~
+
+
+
+~~~~c#
+bool c1 = 2 > 3 || 4 != 5; // true
+bool c2 = !(2 > 3) && 4 != 5; // true
+Console.WriteLine(c1);
+Console.WriteLine(c2);
+Console.WriteLine("--------------");
+bool c3 = 10 < 5; // false
+bool c4 = c1 || c2 && c3; // true
+Console.WriteLine(c3);
+Console.WriteLine(c4);
+~~~~
+
+
+
+
+
 ### Entrada de Dados em C#
 
 ~~~~c#
@@ -334,7 +378,7 @@ string <variavel> = Console.ReadLine();
 
 
 
-Utilizando o Split
+**Utilizando o Split**
 
 ~~~~c#
 string texto = Console.ReadLine();
@@ -363,67 +407,250 @@ double altura = double.Parse(vet[3], CultureInfo.InvariantCulture);
 
 
 
-### Operadores Comparativos
+### Estrutura condicional (if-else)
 
 
+
+**Simples**
 
 ~~~~c#
+if ( condição ) {
+    comando 1
+    comando 2
+}
+~~~~
+
+
+
+**Composta**
+
+~~~~c#
+if ( condição ) {
+    comando 1
+    comando 2
+}
+else {
+    comando 3
+    comando 4
+}
+~~~~
+
+
+
+**Encadeamentos**
+
+~~~~c#
+if ( condição 1 ) {
+    comando 1
+    comando 2
+}
+else if ( condição 2 ) {
+    comando 3
+    comando 4
+}
+else if ( condição 3 ) {
+    comando 5
+    comando 6
+}
+else {
+    comando 7
+    comando 8
+}
+~~~~
+
+**Observação:** se o bloco de comandos possuir apenas um comando, as chaves são opcionais.
+
+
+
+Exemplo:
+
+~~~~c#
+class Program {
+        static void Main(string[] args) {
+            Console.WriteLine("Qual a hora atual?");
+            int hora = int.Parse(Console.ReadLine());
+            if (hora < 12) {
+                Console.WriteLine("Bom dia!");
+            }
+            else if (hora < 18) {
+                Console.WriteLine("Boa tarde!");
+            }
+            else {
+                Console.WriteLine("Boa noite!");
+            }
+        }
+    }
+~~~~
+
+
+
+### Escopo e inicialização
+
+- Escopo de uma variável: é a região do programa onde a variável é válida, ou seja, onde ela pode ser referenciada.
+- Uma variável não pode ser usada se não for iniciada.
+
+~~~~c#
+double preco = double.Parse(Console.ReadLine());
+if (preco > 100.0) {
+double desconto = preco * 0.1;
+}
+Console.WriteLine(desconto);
+~~~~
+
+
+
+### Funções (sintaxe)
+
+Representam um processamento que possui um significado
+
+- Math.Sqrt(double)
+- Console.WriteLine(string)
+
+
+
+Principais vantagens
+
+- Modularização
+
+- Delegação
+
+- Reaproveitamento
+
+  
+
+Dados de entrada e saída
+
+- Funções podem receber dados de entrada (parâmetros ou argumentos)
+- Funções podem ou não retornar uma saída
+
+
+
+**Em orientação a objetos, funções em classes recebem o nome de "métodos**
+
+
+
+Exemplo: Fazer um programa para ler três números inteiros e mostrar na tela o maior deles.
+
+~~~~c#
+using System;
+using System.Globalization; 
+namespace ConsoleApp1{
+    class Program{
+        static void Main(string[] args) {
+            Console.WriteLine("Digite três números:");
+            int n1 = int.Parse(Console.ReadLine());
+            int n2 = int.Parse(Console.ReadLine());
+            int n3 = int.Parse(Console.ReadLine());
+            double resultado = Maior(n1, n2, n3);
+            Console.WriteLine("Maior = " + resultado);
+        }
+        static int Maior(int a, int b, int c) {
+            int m;
+            if (a > b && a > c) {
+                m = a;
+            }
+            else if (b > c) {
+                m = b;
+            }
+            else {
+                m = c;
+            }
+            return m;
+        }
+    }
+}
 
 ~~~~
 
 
 
+### Debugging com Visual Studio
+
+Teclas
+
+- F9 - marcar/desmarcar breakpoint
+- F5 - iniciar/continuar o debug
+- F10 - executar um passo (pula função)
+- F11 - executar um passo (entra na função)
+- SHIFT+F11 - sair do método em execução
+- SHIFT+F5 - parar debug
+
+Janelas
+
+- Watch (expressões personalizadas)
+- Autos (expressões "interessantes" detectadas pelo Visual Studio)
+- Locals (variáveis locais)
+
+
+
+### Estrutura de repetição while
+
 ~~~~c#
+while ( condição ) {
+    comando 1
+    comando 2
+}
+~~~~
+
+Regra: 
+
+- V: executa e volta 
+- F: pula fora
+
+
+
+### Estrutura de repetição For
+
+~~~~c#
+for ( início ; condição ; incremento) {
+    comando 1
+    comando 2
+}
+~~~~
+
+Exemplo:
+
+~~~~c#
+using System;
+using System.Globalization; 
+namespace ConsoleApp1{
+    class Program{
+        static void Main(string[] args) {
+            Console.Write("Quantos números inteiros você vai digitar? ");
+            int N = int.Parse(Console.ReadLine());
+            int soma = 0;
+            for (int i = 1; i <= N; i++) {
+                Console.Write("Valor #{0}: ", i);
+                int valor = int.Parse(Console.ReadLine());
+                soma += valor;
+            }
+            Console.WriteLine("Soma = " + soma);
+        }
+    }
+}
 
 ~~~~
 
 
 
-~~~~c#
-
-~~~~
+## Classes, atributos, métodos, membros estáticos
 
 
 
-~~~~c#
+### Construtor
 
-~~~~
+É uma operação especial da classe, que executa no momento da instanciação do objeto
 
+Usos comuns:
 
+- Iniciar valores dos atributos
+- Permitir ou obrigar que o objeto receba dados / dependências no momento de sua instanciação (injeção de dependência)
 
-~~~~c#
+Se um construtor customizado não for especificado, a classe disponibiliza o construtor padrão:
 
-~~~~
+- Produto p = new Produto();
 
-
-
-~~~~c#
-
-~~~~
-
-
-
-~~~~c#
-
-~~~~
-
-
-
-~~~~c#
-
-~~~~
-
-
-
-~~~~c#
-
-~~~~
-
-
-
-~~~~c#
-
-~~~~
+É possível especificar mais de um construtor na mesma classe (sobrecarga)
 
 
 
