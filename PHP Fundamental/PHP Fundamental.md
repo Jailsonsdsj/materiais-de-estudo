@@ -20,8 +20,6 @@
 
 ## Comandos Iniciais
 
----
-
 
 
 ### **Tag PHP**
@@ -240,6 +238,8 @@ echo "É um valor nulo? ". is_null($_nome)."<br>";
 
 ### ISSET
 
+O isset verifica se uma variável foi declarada e/ou foi ou não configurada
+
 ~~~~php+HTML
 <?php
     $_nome = "Andre";
@@ -249,7 +249,7 @@ echo "É um valor nulo? ". is_null($_nome)."<br>";
 ?>
     <body>
         <?php
-            //o isset verifica se uma variável foi declarada ou se foi ou não configurada
+           
             echo isset($_email);
             //em casos de NULL, o resultado será o mesmo
             echo isset($_idade);
@@ -263,7 +263,7 @@ echo "É um valor nulo? ". is_null($_nome)."<br>";
 ### Criando um Array na prática
 
 ~~~~php+HTML
-Criando um Array na prática
+
 <?php 
     //declarando um array
     $_salada = array("Maçã","Banana","Melão","Pera","Uva");
@@ -339,9 +339,7 @@ Para mais funções do array,[Clique Aqui]()
 
 
 
-### Estrutura Condicionais
-
----
+## Estrutura Condicionais
 
 
 

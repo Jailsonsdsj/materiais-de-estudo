@@ -96,7 +96,7 @@ const media = total / (peso1 + peso2)
 
 
 console.log(media.toFixed(2)) //Vai exibir a média com duas casas decimais
-console.log(media,toString(2)) //Retornar o valor em binário
+console.log(media.toString(2)) //Retornar o valor em binário
 
 console.log(typeof media)
 console.log(typeof number)

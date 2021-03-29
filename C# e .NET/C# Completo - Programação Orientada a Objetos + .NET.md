@@ -363,6 +363,8 @@ double altura = double.Parse(vet[3], CultureInfo.InvariantCulture);
 
 
 
+### Operadores Comparativos
+
 
 
 ~~~~c#
