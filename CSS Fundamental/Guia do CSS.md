@@ -948,11 +948,15 @@ div {
 
 
 
-~~~~css
+### Background com linear gradient
 
+~~~~css
+background: linear-gradient(rgba(0,0,0,.50),rgba(0,0,0.50)100%), url('../img/capa.jpg');
 ~~~~
 
 
+
+### Atrasar animação ou efeito do CSS
 
 ~~~~css
 

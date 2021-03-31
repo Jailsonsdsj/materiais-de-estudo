@@ -1,8 +1,8 @@
-### GitHub - Principais comandos ![image-20210112075845586](C:\Users\PC\AppData\Roaming\Typora\typora-user-images\image-20210112075845586.png)
 
----
 
-#### **Estados**
+# GitHub - Principais comandos ![image-20210112075845586](C:\Users\PC\AppData\Roaming\Typora\typora-user-images\image-20210112075845586.png)
+
+### **Estados**
 
 - Modificado (modified)
 
@@ -12,7 +12,7 @@
 
 
 
-**Geral**
+### **Geral**
 
 ~~~~
 git help
@@ -20,7 +20,7 @@ git help
 
 
 
-**Iniciar um repositório (master) em uma determinada pasta** 
+### **Iniciar um repositório (master) em uma determinada pasta** 
 
 ~~~
 gitinit
@@ -28,7 +28,7 @@ gitinit
 
 
 
-**Criar um arquivo**
+### **Criar um arquivo**
 
 ~~~~
 touch README.md
@@ -36,7 +36,7 @@ touch README.md
 
 
 
-**Criar uma pasta** 
+### **Criar uma pasta** 
 
 ~~~~
 mkdir pasta
@@ -44,7 +44,7 @@ mkdir pasta
 
 
 
-**Listar os conteúdos dentro do repositório**
+### **Listar os conteúdos dentro do repositório**
 
 ~~~~
 ls
@@ -52,7 +52,7 @@ ls
 
 
 
-**Mover um arquivo para dentro da pasta**
+### **Mover um arquivo para dentro da pasta**
 
 ~~~~
 mv - arquivo ./pasta
@@ -62,7 +62,7 @@ mv - arquivo ./pasta
 
 
 
-**Informar em qual estado um arquivo se encontra**
+### **Informar em qual estado um arquivo se encontra**
 
 ~~~~
 gitstatus
@@ -70,7 +70,7 @@ gitstatus
 
 
 
-**Enviar o arquivo para staged**
+### **Enviar o arquivo para staged**
 
 ~~~~
 git add arquivo pasta
@@ -78,15 +78,11 @@ git add arquivo pasta
 
 
 
-**Enviar todos os arquivos do repositório para staged**
+### **Enviar todos os arquivos do repositório para staged**
 
 ~~~~
 git add *
 ~~~~
-
-
-
-**Enviar todos os arquivos do repositório para staged**
 
 ~~~~
 git add .
@@ -94,7 +90,7 @@ git add .
 
 
 
-**Comitar um arquivo com um comentário**
+### **Comitar um arquivo com um comentário**
 
 ~~~~
 git commit -m "comentário"
@@ -104,7 +100,7 @@ Observação: ao commitar um arquivo, não será possível alterar seu autor
 
 
 
-**Comitar vários arquivos**
+### **Comitar vários arquivos**
 
 ~~~~
 git commit arquivo1.txt arquivo2.txt "comentário"
@@ -112,7 +108,7 @@ git commit arquivo1.txt arquivo2.txt "comentário"
 
 
 
-**Remover arquivo do diretório**
+### **Remover arquivo do diretório**
 
 ~~~~
 git rm arquivo.txt
@@ -120,7 +116,7 @@ git rm arquivo.txt
 
 
 
-**Remover diretório**
+### **Remover diretório**
 
 ~~~~
 git rm -r diretório
@@ -128,7 +124,7 @@ git rm -r diretório
 
 
 
-**Exibir histório de logs**
+### **Exibir histório de logs**
 
 ~~~~
 git log
@@ -136,7 +132,7 @@ git log
 
 
 
-**Exibir histórico detalhado**
+### **Exibir histórico detalhado**
 
 ~~~~
 git log --stat
@@ -144,7 +140,7 @@ git log --stat
 
 
 
-**Verificar as configurações do GIT**
+### **Verificar as configurações do GIT**
 
 ~~~~
 --git config
@@ -152,7 +148,7 @@ git log --stat
 
 
 
-**Restaurando o e-mail do github**
+### **Restaurando o e-mail do github**
 
 ~~~~
 git config --global --unset user.email
@@ -166,7 +162,7 @@ Dica: alinhe as credencias com o github sempre que usar o git
 
 
 
-**Configurado os dados pessoais do GitHub**
+### **Configurado os dados pessoais do GitHub**
 
 ~~~~
 git config --global user.email "email"
@@ -176,9 +172,9 @@ git config --global user.email "email"
 git config --global user.nickname "jailsonsdsj"
 ~~~~
 
+### 
 
-
-**Apontando um repositório do Github para o GIT**
+### **Apontando um repositório do Github para o GIT**
 
 Ao criar um repositório no GitHub, basta copiar o link e inserir no terminal do git juntamente com o seguinte código:
 
@@ -188,7 +184,7 @@ git remote add origin <link>
 
 
 
-**Alterar a url de um repositório remoto**
+### **Alterar a url de um repositório remoto**
 
 ~~~~
 git remote set-url origin <link>
@@ -196,7 +192,7 @@ git remote set-url origin <link>
 
 
 
-**Listando os repositórios integrados**
+### **Listando os repositórios integrados**
 
 ~~~~
 git remote -v
@@ -204,7 +200,7 @@ git remote -v
 
 
 
-**Exibindo informações sobre os repositórios**
+### **Exibindo informações sobre os repositórios**
 
 ~~~~
 git remote show origin
@@ -212,7 +208,7 @@ git remote show origin
 
 
 
-**Renomear um repositório remoto**
+### **Renomear um repositório remoto**
 
 ~~~~
 git remote rename orogin novo_nome
@@ -220,15 +216,15 @@ git remote rename orogin novo_nome
 
 
 
-**Desvincular um repositório remoto**
+### **Desvincular um repositório remoto**
 
 ~~~~
-git rmeote rm nome_repositório
+git remote rm nome_repositório
 ~~~~
 
 
 
-**Empurrando o repositório local para o remoto**
+### **Empurrando o repositório local para o remoto**
 
 ~~~~
 git push origin master
@@ -236,7 +232,7 @@ git push origin master
 
 
 
-**Puxando o repositório remoto para o local**
+### **Puxando o repositório remoto para o local**
 
 ~~~~
 git pull origin master
@@ -246,7 +242,7 @@ Dica: realizar esse comando antes de qualquer modificação no código.
 
 
 
-**Apontar para um editor específico**
+### **Apontar para um editor específico**
 
 ~~~~
 git config --global core.editor vim
@@ -254,7 +250,7 @@ git config --global core.editor vim
 
 
 
-**Ignorar arquivos**
+### **Ignorar arquivos**
 
 Os nomes de arquivos/diretórios ou extensões de arquivos listados no arquivo .gitignore não serão adicionados em um repositório.
 
@@ -272,7 +268,7 @@ Existem dois arquivos .gitignore, são eles:
 
 
 
-**Adicionar um arquivo que esta listado no .gitignore (geral ou do repositório)**
+### **Adicionar um arquivo que esta listado no .gitignore (geral ou do repositório)**
 
 ~~~~
 git add -f arquivo_no_gitignore.txt
@@ -280,7 +276,7 @@ git add -f arquivo_no_gitignore.txt
 
 
 
-**Clonar um repositório**
+### **Clonar um repositório**
 
 ~~~~
 git clone <link>
@@ -290,13 +286,11 @@ git clone <link>
 
 
 
-#### Informações Extras
-
----
+# Informações Extras
 
 
 
-**Lidando com o erro Failed to push some refs to...**
+### **Lidando com o erro Failed to push some refs to...**
 
 O erro aconteceu ao tentar enviar o repositório local para o remoto. Para resolver, basta listar os repositórios integrados através do seguinte comando:
 
@@ -308,5 +302,38 @@ git show-ref
 
 ~~~~
 git push master main
+~~~~
+
+
+
+### GitHub Error Message - Permission denied (publickey)
+
+~~~~
+> git push -u origin master
+Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+~~~~
+
+GitHub isn't able to authenticate you. So, either you aren't setup with an SSH key, because you haven't [set one up on your machine](https://help.github.com/articles/generating-ssh-keys), or your key isn't associated with your GitHub account.
+
+You can also use the HTTPS URL instead of the SSH/git URL to avoid having to deal with SSH keys. This is [GitHub's recommended method](https://help.github.com/articles/set-up-git).
+
+Further, GitHub has a [help page specifically for that error message](https://help.github.com/articles/error-permission-denied-publickey), and explains in more detail everything you could check.
+
+
+
+References: [StackOverflow](https://stackoverflow.com/questions/12940626/github-error-message-permission-denied-publickey)
+
+
+
+### Gerenciar repositórios remotos
+
+Alternar URLs remotes de SSH para HTTPS
+
+~~~~
+$ git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
 ~~~~
 

@@ -124,6 +124,8 @@ console.log(0.1+0.7)
 
 #### Usando o Math
 
+Para exponenciação:
+
 ~~~~javascript
 const raio = 5.6
 const area = Math.PI * Math.pow(raio,2)
@@ -131,6 +133,16 @@ const area = Math.PI * Math.pow(raio,2)
 console.log(area)
 console.log(typeof Math)
 ~~~~
+
+Para raiz quadrada:
+
+~~~~javascript
+
+~~~~
+
+
+
+
 
 Mais informações sobre funções de Number: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Number
 
