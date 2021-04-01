@@ -1,5 +1,15 @@
 # PHP com AJAX
 
+Curso Desenvolvedor Web Completo, de André Forntnelle.
+
+Disponível em: [udemy](https://www.udemy.com/course/curso-desenvolvedor-web-completo/)
+
+Sessão: da 104 à 115
+
+
+
+## Introdução
+
 **AJAX** é o acrônimo para **JavaScript assíncrono + XML.** Não é exatamente uma tecnologia nova, mas um termo empregado em 2005 por Jesse James Garrett para descrever uma nova forma de utilizar em conjunto algumas tecnologias, incluindo [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) ou [XHTML](https://developer.mozilla.org/en-US/docs/Glossary/XHTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), [DOMl](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), [XML](https://developer.mozilla.org/en-US/docs/Web/XML), [XSLT](https://developer.mozilla.org/en-US/docs/Web/XSLT), e o mais importante: [objeto XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest).
 
 Quando essas tecnologias são combinadas no modelo AJAX, as aplicações web que a utilizam são capazes de fazer rapidamente atualizações incrementais para a interface do usuário sem recarregar a página inteira do navegador. Isso torna a aplicação mais rápida e sensível às ações do usuário.
@@ -430,69 +440,168 @@ Arquivo XML
 
 
 
-~~~~html
+### Carregar dados de um arquivo JSON
 
+Arquivo JSON
+
+~~~~json
+[{"produtoID":"1","nomeproduto":"Biscottis","precounitario":"20.00","tempoentrega":"15"},{"produtoID":"2","nomeproduto":"Organic Earl Grey","precounitario":"9.00","tempoentrega":"8"},{"produtoID":"3","nomeproduto":"Sugar","precounitario":"3.00","tempoentrega":"8"},{"produtoID":"4","nomeproduto":"Non-Diary Creamer","precounitario":"3.00"}]
+~~~~
+
+#### Carregando dados
+
+~~~~html
+ <script>
+            $.getJSON('_json/produtos.json',function(valor){
+                console.log(valor);
+            });
+ </script>
 ~~~~
 
 
 
-~~~~html
+#### Listado os dados
 
+~~~~html
+<script>
+            $.getJSON('_json/produtos.json',function(valor){
+                $.each(valor, function(i,lista){
+                    console.log(lista.nomeproduto);
+                });
+            });
+        </script>
 ~~~~
 
 
 
-~~~~html
+#### Mostrar dados em uma lista
 
+~~~~html
+<body>
+        <div id="listagem">
+            <!--Aqui entrará a listagem-->
+        </div>
+
+        <script src="jquery.js"></script>
+        <script>
+            $.getJSON('_json/produtos.json',function(valor){
+                let elemento;
+                elemento = "<ul>";
+                $.each(valor, function(i,lista){
+                    elemento += "<li>" + lista.nomeproduto + "</li>";
+                    elemento += "<li>" + lista.precounitario + "</li>";
+                    elemento += "<br>";
+                });
+                elemento += "<ul>";
+            
+                //jogando os dados na div
+                $('div#listagem').html(elemento);
+
+            });
+            
+            
+        </script>
+    </body>
+~~~~
+
+####  
+
+#### Aplicar estilo e aplicar um evento para carregar os dados
+
+~~~~html
+<script>
+
+            $('button#botao').click(function(){
+                $('div#listagem').css('display','block');
+                carregarDados();
+            });
+            //função para carregar os dados por meio de um botão
+            function carregarDados(){
+                $.getJSON('_json/produtos.json',function(valor){
+                    let elemento;
+                    elemento = "<ul>";
+                    $.each(valor, function(i,lista){
+                        elemento += "<li class='nome'>" + lista.nomeproduto + "</li>";
+                        elemento += "<li class='preco'>" + lista.precounitario + "</li>";
+                        elemento += "<br>";
+                    });
+                    elemento += "<ul>";
+                
+                    //jogando os dados na div
+                    $('div#listagem').html(elemento);
+
+                });
+            }
+            
+   </script>
 ~~~~
 
 
 
-~~~~html
+#### Transferindo os dados do banco para um arquivo JSON via PHP
 
+~~~~php
+<?php
+   //TRANSFERINDO AS INFORMAÇÕES DO BANCO PARA UM ARQUIVO JSON VIA PHP
+   $conecta = mysqli_connect("localhost","root","","andes");
+   $selecao= "SELECT nomeproduto, precounitario, imagempequena FROM produtos";
+   $produtos = mysqli_query($conecta,$selecao);
+
+   $retorno = array();
+
+   while($linha = mysqli_fetch_object($produtos)){
+     $retorno[] = $linha;
+    }
+
+    //inserindo o array em um arquivo JSON
+    echo json_encode($retorno);
+
+?>
+
+
+<?php
+    //fechar conexão
+    mysqli_close($conecta);
+?>
+~~~~
+
+Esse método permite visualizar as alterações do banco em tempo real
+
+
+
+#### Preparar o arquivo para consulta em outros domínios
+
+Basta inserir a seguinte linha de código no início do arquivo:
+
+~~~~php
+header('Acess-Control-Allow-Origin:*');
 ~~~~
 
 
 
-~~~~html
+#### Realizar uma consulta ao arquivo JSON via PHP
 
+Após estruturar o código de *Transferindo os dados do banco para um arquivo JSON via PHP*, basta chama-lo na função de array, no arquivo principal, semelhante ao que foi feito em *Aplicar estilo e aplicar um evento para carregar os dados*. Por último, basta chamar o arquivo php no qual extrai os dados do banco.
+
+~~~~javascript
+function carregarDados() {
+    			//o arquivo gerar_json.php contém todos os dados que foram extraídos do banco em formato JSON
+                $.getJSON('_banco/gerar_json.php', function(data) {
+                    var elemento;
+
+                    elemento = "<ul>";
+                    $.each(data, function(i, valor) {
+                        elemento += "<li class='nome'>" + valor.nomeproduto + "</li>"; 
+                        elemento += "<li class='preco'>" + valor.precounitario + "</li>"; 
+                        elemento += "<li class='imagem'><img src='" + valor.imagempequena + "'</li>"; 
+                    });
+                    elemento += "</ul>";
+
+                    $('div#listagem').html(elemento);
+                });
 ~~~~
 
-
-
-~~~~html
-
-~~~~
-
-
-
-~~~~html
-
-~~~~
-
-
-
-~~~~html
-
-~~~~
-
-
-
-~~~~html
-
-~~~~
-
-
-
-~~~~html
-
-~~~~
-
-
-
-~~~~html
-
-~~~~
+O código acima irá exibir, agora, não somente o nome e preço do produto, como também a imagem.
 
 
 

@@ -1,6 +1,6 @@
-# C# Programação Orientada a Objetos .NET 
+# 📌 C# Programação Orientada a Objetos .NET 
 
-
+🔗 Disponível em: [Udemy](https://www.udemy.com/course/programacao-orientada-a-objetos-csharp/)
 
 
 
@@ -650,43 +650,136 @@ Se um construtor customizado não for especificado, a classe disponibiliza o con
 
 - Produto p = new Produto();
 
+A partir do momento em que um construtor é declarado, o padrão deixará de ser aceito.
+
 É possível especificar mais de um construtor na mesma classe (sobrecarga)
 
 
 
-~~~~c#
+**Na prática:**
 
+A nomenclatura do construtor deve ser a mesma da classe
+
+~~~~c#
+//Classe produto
+
+namespace Course {
+    class Produto {
+        public string Nome;
+        public double Preco;
+        public int Quantidade;
+        
+        
+        public Produto(string nome, double preco, int quantidade) { //esses parâmetros obrigam a recepção dos dados
+                //  variável do construtor / variável do parâmetro
+                    Nome = nome;
+                    Preco = preco;
+                    Quantidade = quantidade;
+            
+            (...)
+        }
+    }
+}
+
+~~~~
+
+Após a criação do construtor na classe produto, fica obrigatória a passagem de parâmetros.
+
+Para isso, criaremos variáveis auxiliares nome, preco e quantidade para receberem os dados do usuário e servir de parâmetros.
+
+~~~~c#
+//Programa principal
+class Program {
+        static void Main(string[] args) {
+            Console.WriteLine("Entre os dados do produto:");
+
+            Console.Write("Nome: ");
+            string nome = Console.ReadLine();
+
+            Console.Write("Preço: ");
+            double preco = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+            Console.Write("Quantidade no estoque: ");
+            int quantidade = int.Parse(Console.ReadLine());
+
+            Produto p = new Produto(nome, preco, quantidade);
+
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("Dados do produto: " + p);
+            Console.WriteLine();
+            Console.Write("Digite o número de produtos a ser adicionado ao estoque: ");
+            int qte = int.Parse(Console.ReadLine());
+            p.AdicionarProdutos(qte);
+            Console.WriteLine();
+            Console.WriteLine("Dados atualizados: " + p);
+            Console.WriteLine();
+            Console.Write("Digite o número de produtos a ser removido do estoque: ");
+            qte = int.Parse(Console.ReadLine());
+            p.RemoverProdutos(qte);
+            Console.WriteLine();
+            Console.WriteLine("Dados atualizados: " + p);
+        
+        }
+    }
 ~~~~
 
 
 
-~~~~c#
+### Sobrecarga
 
+É um recurso que uma classe possui de oferecer mais de uma operação com o mesmo nome, porém com diferentes listas de parâmetros. 
+
+Por exemplo: uma vez adicionar nome e preço do produto e, na outra, adicionar nome, preço e data.
+
+Vamos criar um construtor opcional, o qual recebe apenas nome e preço do produto. A quantidade em estoque deste novo produto, por padrão, deverá então ser iniciada com o valor zero.
+
+Nota: é possível também incluir um construtor padrão (sem parâmetros).
+
+
+
+Criando um segundo construtor
+
+~~~~c#
+//Classe Produto
+
+public Produto(string nome, double preco) {
+            Nome = nome;
+            Preco = preco;
+            Quantidade = 0; //valor padrão. Linha dispensável, pois o valor padrão automaticamente será 0.
+        }
+~~~~
+
+Para utilizar o segundo construtor, basta utilizar o que tem dois argumentos
+
+~~~~c#
+Produto p = new Produto(nome, preco);
+~~~~
+
+Para utilizar um construtor "padrão", basta criar uma sobrecarga sem argumentos.
+
+~~~~c#
+public Produto(){
+    
+}
 ~~~~
 
 
 
-~~~~c#
+### Sintaxe alternativa para inicializar valores (construtor)
 
-~~~~
-
-
+Essa sintaxe funciona mesmo que a classe não tenha construtores.
 
 ~~~~c#
-
+Produto p4 = new Produto {
+                Nome = "TV",
+                Preco = 500.00,
+                Quantidade = 20
+            };
 ~~~~
 
+Caso a classe possua somente um construtor, com argumentos diferentes dos criados pela sintaxe alternativa, a instanciação não será aceita. Dessa forma, é obrigatório ter o construtor padrão ou sem argumentos.
 
 
-~~~~c#
-
-~~~~
-
-
-
-~~~~c#
-
-~~~~
 
 
 

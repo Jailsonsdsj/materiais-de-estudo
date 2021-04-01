@@ -1188,49 +1188,84 @@ console.log(n)
 
 ## Funções
 
-~~~~javascript
+Cidadão de primeira linha
 
+- Função em JS é First-Class Object
+
+- Higher-order function
+
+
+
+Criar de forma literal
+
+~~~~javascript
+function fun1(){}
 ~~~~
 
-
+Armazenar em uma variável
 
 ~~~~javascript
-
+const fun1 = function(){}
 ~~~~
 
-
+Armazenar em um array
 
 ~~~~javascript
-
+const array = [function(a,b){return a+b}, fun1, fun2]
+console.log(array[0](5,3))
 ~~~~
 
-
+Armazenar emum atributo de objeto
 
 ~~~~javascript
-
+const obj = {}
+obj.falar = function(){return 'Hello,World!'}
+console.log(obj.falar())
 ~~~~
 
-
+Passar uma função como parâmetro	
 
 ~~~~javascript
+function run(fun){
+    fun()
+}
 
+run(function(){console.log("Executando...")})
 ~~~~
 
-
+Uma função pode retornar/conter uma função	
 
 ~~~~javascript
+function soma(a,b){
+    return function(){
+        console.lot(a+b+c)
+    }
+}
+//chamando a função
+soma(2,3)(4)
 
+//outra forma
+const cincoMais = soma(2,3)
+cincoMais(4)
 ~~~~
 
-
-
-~~~~javascript
-
-~~~~
-
-
+Parâmetros e Retorno São Opcionais
 
 ~~~~javascript
+function area(largura,altura){
+    const area= largura*altura
+    if (area>20){
+        console.log(`Valor acima do permitido: ${area}m2. `)
+    }else{
+        return area
+    }
+}
+
+console.log(area(2,2)) //4
+console.log(area(2))//NaN
+console.log(area())//NaN
+console.log(area(2,3,17,22,44))//6
+console.log(area(5,5))//valor acima do permitido: 25m2
 
 ~~~~
 
