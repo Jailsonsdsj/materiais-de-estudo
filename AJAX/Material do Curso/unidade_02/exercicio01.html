@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Solicitacao</title>
+         <script>
+            function carregarDados(){
+                let requisicao;
+            
+                if (window.XMLHttpRequest){
+                    requisicao = new XMLHttpRequest();
+
+                }else{
+                    //Caso o navegador não suporte a varsão do XMLHttpRequest
+                    requisicao = new ActiveXObject("Microsoft.XMLHTTP"); 
+                }
+
+                requisicao.open('GET','dados.txt',true); //true é o valor default
+                
+                requisicao.onreadystatechange=function(){
+                    if(requisicao.status == 200){//caso a requisição seja bem sucedida
+                        if (requisicao.readyState == 3){
+                            console.log("Carregando");
+                        }
+                        if (requisicao.readyState == 4){
+                            //alterando pelo id
+                            let elemento = document.getElementById('dinamico');
+                            elemento.innerHTML = requisicao.responseText;
+
+                                //alterando pela tag
+                            let titulo = document.getElementsByTagName('h1');//atenção ao elementS
+                            titulo[0].innerHTML = requisicao.responseText;
+                        }
+                    }else{
+                        console.log("Erro na operação. \n Código do erro: " + requisicao.status);
+                    } 
+                }
+                requisicao.send();
+            }//fechamento da função carregarDados
+
+    </script>
+    </head>
+    <body>
+        
+        <button type="submit" onclick="carregarDados()" id="botao">Carregar Dados</button>
+        <h1></h1>
+        <div id="dinamico">
+       
+
+      
+
+        </div>
+
+    </body>
+</html>

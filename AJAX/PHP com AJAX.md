@@ -6,7 +6,7 @@ Disponível em: [udemy](https://www.udemy.com/course/curso-desenvolvedor-web-com
 
 Sessão: da 104 à 115
 
-
+IMPORTANTE: LINKAR OS ARQUIVOS DE ACORDO COM OS TÓPICOS
 
 ## Introdução
 
@@ -605,68 +605,298 @@ O código acima irá exibir, agora, não somente o nome e preço do produto, com
 
 
 
-~~~~html
+#### Usando função de CallBack
 
+Podemos preparar o arquivo Json para serem lidos em páginas remotas, dentro de um função.
+
+~~~~json
+função handle_data (data) {
+   // `data` agora é a representação do objeto dos dados JSON
+}
+
+
+---
+http: //some.tld/web/service? callback = handle_data:
+---
+handle_data ({"data_1": "olá mundo", "data_2": ["the", "sun", "is", "shining"]});
+~~~~
+
+Preparar o arquivo para callback
+
+~~~~php
+$callback = isset($_GET['callback']) ? $_GET['callback'] : false;
+~~~~
+
+Realizando o callback
+
+~~~~php
+// abrir conexao
+    $conecta = mysqli_connect("localhost","root","","andes");
+
+    $selecao = "SELECT nomeproduto, precounitario, imagempequena FROM produtos";
+    $produtos = mysqli_query($conecta,$selecao);
+
+    $retorno = array();
+    while($linha = mysqli_fetch_object($produtos)) {
+        $retorno[] = $linha;
+    }   
+    //realizando o callback
+    echo ($callback ? $callback . '(' : '').json_encode($retorno).($callback ? ')' : ' ') ;
+
+    echo json_encode($retorno);
+~~~~
+
+#### Realizar a consulta usando a função de CallBack sem jQuery
+
+No arquivo principal, basta criar um script com o **endereçamento do código anterior** juntamente com a chamada da função de retorno.
+
+~~~~html
+<script src="http://localhost/ajax/unidade_07/gerar_json.php?callback=retornarProdutos"></script>
+~~~~
+
+Por fim, basta fazer a função de retorno propriamente dita no arquivo principal.
+
+~~~~html
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PHP com AJAX</title>
+        <script>
+            function retornarProdutos(data){
+                console.log(data);
+            }
+        </script>
+    </head>
+
+    <body>
+    <script src="http://localhost/ajax/unidade_07/gerar_json.php?callback=retornarProdutos"></script>
+    </body>
+</html>
 ~~~~
 
 
 
-~~~~html
+### Inserir dados no banco via AJAX
 
+Note que neste formulário não há action nem method, pois ele será definido no código ajax
+
+~~~~html
+<form id="formulario_transportadora">
+    <...> </...>  
+        <div id="mensagem">
+            <p></p>
+        </div>
+    <...> </...>               
+</form>
+~~~~
+
+Adicionando a função $.ajax
+
+obs: lembre-se de carregar a biblioteca jQuery no seu projeto
+
+~~~~html
+<script src="jquery.js"></script>
+        <script>
+            $('#formulario_transportadora').submit(function(e){
+                e.preventDefault();//serve para que o action do form não seja ativado, caso exista.
+                //Identificando os dados do formulário e enviando para o insert
+                let formulario = $(this); //this representa os dados do formulário da própria página
+                let retorno = inserirFormuilario(formulario)         
+            });
+
+            function inserirFormuilario(dados){
+                $.ajax({
+                    type:"POST", //método de envio (get or post)
+                    data:dados.serialize(), //função pré definidia do ajax que captura a variável do parâmetro
+                    url:"inserir_transportadora.php", //página em que as informações serão enviadas. Caso a query estiver na mesma página, basta colocar o nome dela.
+                    async: false, //Tipo da requisição(síncrona ou assíncrona)
+                }).then(sucesso,falha); //chamada das funções de retorno.
+
+                function sucesso(data){
+                    console.log(data)
+                }
+                function falha(){
+                    console.log(falha);
+                }
+            }
+        </script>
+~~~~
+
+Na página inserir_transportadora.php
+
+~~~~php
+ <?php
+    $conecta = mysqli_connect("localhost","root","","andes");
+    if ( mysqli_connect_errno()  ) {
+        die("Conexao falhou: " . mysqli_connect_errno());
+    }
+
+    if(isset($_POST["nometransportadora"])) {
+        $nome       = utf8_decode($_POST["nometransportadora"]);
+        $endereco   = utf8_decode($_POST["endereco"]);
+        $cidade     = utf8_decode($_POST["cidade"]);
+        $estado     = $_POST["estados"];
+        
+        $inserir    = "INSERT INTO transportadoras ";
+        $inserir    .= "(nometransportadora,endereco,cidade,estadoID) ";
+        $inserir    .= "VALUES ";
+        $inserir    .= "('$nome','$endereco','$cidade', $estado)"; 
+        
+        $retorno = array(); //esse array servirá para informar a situação da inserção.
+
+        $operacao_insercao = mysqli_query($conecta,$inserir);
+        if($operacao_insercao){
+            $retorno['situacao'] = true;
+            $retorno['mensagem'] = "Transportadora inserida com sucesso";
+
+        }else{
+           $retorno['situacao'] = false;
+            $retorno['mensagem'] = "Falha no sistema, tente novemante mais tarde.";
+        }
+
+        echo json_encode($retorno);
+    }
+?>
 ~~~~
 
 
 
+### Alterar dados no banco via AJAX
+
+
+
 ~~~~html
+<form id="formulario_transportadora">
+    ...
+</form>
+
+//Lembre-se de inserir a biblioteca jQuery
+<script src="jquery.js"></script>
+        <script>
+            $('#formulario_transportadora').submit(function(e) {
+                e.preventDefault();
+                let formulario = $(this);
+                let retorno = alterarFormulario(formulario)
+            });
+            
+            function alterarFormulario(dados) {
+                $.ajax({
+                    type:"POST",
+                    data: dados.serialize(),
+                    url: "alterar_transportadora.php",
+                    async: false
+                }).done(function(data){
+                    $situacao = $.parseJSON(data)["sucesso"];
+                    $mensagem = $.parseJSON(data)["mensagem"];
+
+                    //Utilizado apenas para fazer alguma outra ação além de alterar os dados
+                    if($situacao){
+                        $('#mensagem p').html($mensagem);
+                    }else{
+                        $('#mensagem p').html($mensagem);
+                    }
+
+
+                }).fail(function(){
+                    $('#mensagem p').html("Erro no sistema, tente novamente mais tarde.");
+                }).always(function(){
+                    //independente do resultado, a caixa de mensagem deve ser exibida. Caso opte por não inserir a função alway, o mensagem.show deve ser inserido nas estruturas condicionais
+                    $('#mensagem').show();
+                });
+            }
+        </script>
 
 ~~~~
 
+Conferir arquivo "Alterar_transportadora.php" para mais informações.
 
+
+
+### Excluir dados no banco via AJAX
+
+No HTML:
 
 ~~~~html
-
+<div id="janela_transportadoras">
+                <?php
+                    while($linha = mysqli_fetch_assoc($consulta_tr)) {
+                ?>
+                <ul>
+                    <li><?php echo utf8_encode($linha["nometransportadora"]) ?></li>
+                    <li><?php echo utf8_encode($linha["cidade"]) ?></li>
+                    <li><a href="" class="excluir" title="<?php echo ($linha['transportadoraID']); ?>">Excluir</a></li>
+                </ul>
+                <?php
+                    }
+                ?>
+            </div>
 ~~~~
 
-
+No JavaScript:
 
 ~~~~html
+ <script src="jquery.js"></script>
+        <script>
+            $('#janela_transportadoras ul li a').click(function(e){
+                e.preventDefault();
+                
 
+                let id = $(this).attr("title");
+                let elemento = $(this).parent().parent() ; //responsável por ocultar a linha que foi removida do banco de dados. O paret (jQuery) é utilizado para andentrar entre os elementos do HTML até chegar no link <a>. Ao jogar o this na variável, o elemento encontrado - no caso, o <a> - será salvo.
+
+                $.ajax({
+                    type:"POST",
+                    data: "transportadoraID=" + id, //mesmo nome do campo do banco / não pode haver espaços
+                    url: "exclusao.php",
+                    async: false
+                }).done(function(data){
+                    $sucesso = $.parseJSON(data)["sucesso"];
+
+                    if ($sucesso){
+                        $(elemento).fadeOut();
+                    }else{
+                        console.log("Erro na exclusão");
+                    }
+
+                }).fail(function(){
+                    console.log("Erro no sistema");
+                });
+            });
+        </script>
 ~~~~
 
+Na query de exclusão
 
+~~~~php
+<?php
+    // Criar objeto de conexao
+    $conecta = mysqli_connect("localhost","root","","andes");
+    if ( mysqli_connect_errno()  ) {
+        die("Conexao falhou: " . mysqli_connect_errno());
+    }
+    
+    $retorno = array();
+    if( isset($_POST["transportadoraID"]) ) {
+        $tID = $_POST["transportadoraID"];
+        
+        $exclusao = "DELETE FROM transportadoras ";
+        $exclusao .= "WHERE transportadoraID = {$tID}";
+        $con_exclusao = mysqli_query($conecta,$exclusao);
+        if($con_exclusao) {
+            $retorno["sucesso"] = true;
+            $retorno["mensagem"] = "Transportadora excluida com sucesso.";
+        } else {
+            $retorno["sucesso"] = false;
+            $retorno["mensagem"] = "Falha no sistema, tente mais tarde.";
+        }
+    }
 
-~~~~html
+    // converter retorno em json
+    echo json_encode($retorno);
 
-~~~~
-
-
-
-~~~~html
-
-~~~~
-
-
-
-~~~~html
-
-~~~~
-
-
-
-~~~~html
-
-~~~~
-
-
-
-~~~~html
-
-~~~~
-
-
-
-~~~~html
-
+    // Fechar conexao
+    mysqli_close($conecta);
+?>
 ~~~~
 
 

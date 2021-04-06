@@ -1269,10 +1269,16 @@ console.log(area(5,5))//valor acima do permitido: 25m2
 
 ~~~~
 
+ 
 
+### Parâmetro Padrão
 
 ~~~~javascript
+function soma1(a=1,b=1,c=1){
+    return a + b + c
+}
 
+console.log(soma1());
 ~~~~
 
 
