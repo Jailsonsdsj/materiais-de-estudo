@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Curso jQuery Fundamental</title>
+        <style>
+			#janela { width:300px; height:300px; background-color:#069; margin-top:20px }
+		</style>
+        
+        <script src="jquery-3.2.1.min.js"></script>
+        <script>
+            //Função genérica
+			$(function(e){
+                $("#janela").hide();
+
+            });
+
+            //Aplicando a função a partir do click no butão
+            $('#mostrar').click(mostrarElemento);
+            $('#esconder').click(ocultarElemento);
+
+            function mostrarElemento(e){
+                $("#janela").show();
+            };
+
+            function ocultarElemento(e){
+                $("#janela").hide();
+            };
+
+            
+		</script>        
+    </head>
+
+    <body>
+        <input type="button" id="mostrar" 	value="Mostrar" />
+        <input type="button" id="esconder" 	value="Esconder" />
+        
+        <div id="janela"></div>
+    </body>
+
+</html>

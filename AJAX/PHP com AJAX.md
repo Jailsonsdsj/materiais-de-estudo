@@ -8,6 +8,8 @@ Sessão: da 104 à 115
 
 IMPORTANTE: LINKAR OS ARQUIVOS DE ACORDO COM OS TÓPICOS
 
+
+
 ## Introdução
 
 **AJAX** é o acrônimo para **JavaScript assíncrono + XML.** Não é exatamente uma tecnologia nova, mas um termo empregado em 2005 por Jesse James Garrett para descrever uma nova forma de utilizar em conjunto algumas tecnologias, incluindo [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) ou [XHTML](https://developer.mozilla.org/en-US/docs/Glossary/XHTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), [DOMl](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), [XML](https://developer.mozilla.org/en-US/docs/Web/XML), [XSLT](https://developer.mozilla.org/en-US/docs/Web/XSLT), e o mais importante: [objeto XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest).
@@ -788,8 +790,8 @@ Na página inserir_transportadora.php
                 }).done(function(data){
                     $situacao = $.parseJSON(data)["sucesso"];
                     $mensagem = $.parseJSON(data)["mensagem"];
-
                     //Utilizado apenas para fazer alguma outra ação além de alterar os dados
+                    
                     if($situacao){
                         $('#mensagem p').html($mensagem);
                     }else{
@@ -816,7 +818,7 @@ Conferir arquivo "Alterar_transportadora.php" para mais informações.
 
 No HTML:
 
-~~~~html
+~~~~php+HTML
 <div id="janela_transportadoras">
                 <?php
                     while($linha = mysqli_fetch_assoc($consulta_tr)) {
