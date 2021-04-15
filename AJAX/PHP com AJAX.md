@@ -336,6 +336,8 @@ Esse método é mais eficaz que o then.
 
 
 
+## XML
+
 ### Carregando dados de um arquivo XML
 
 Arquivo XML
@@ -442,6 +444,8 @@ Arquivo XML
 
 
 
+## JSON
+
 ### Carregar dados de um arquivo JSON
 
 Arquivo JSON
@@ -544,7 +548,6 @@ Arquivo JSON
 
 ~~~~php
 <?php
-   //TRANSFERINDO AS INFORMAÇÕES DO BANCO PARA UM ARQUIVO JSON VIA PHP
    $conecta = mysqli_connect("localhost","root","","andes");
    $selecao= "SELECT nomeproduto, precounitario, imagempequena FROM produtos";
    $produtos = mysqli_query($conecta,$selecao);
@@ -554,12 +557,9 @@ Arquivo JSON
    while($linha = mysqli_fetch_object($produtos)){
      $retorno[] = $linha;
     }
-
     //inserindo o array em um arquivo JSON
     echo json_encode($retorno);
-
 ?>
-
 
 <?php
     //fechar conexão
@@ -647,6 +647,8 @@ Realizando o callback
 
     echo json_encode($retorno);
 ~~~~
+
+
 
 #### Realizar a consulta usando a função de CallBack sem jQuery
 

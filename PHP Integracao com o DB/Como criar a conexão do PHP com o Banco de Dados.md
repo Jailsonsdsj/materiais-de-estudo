@@ -1442,7 +1442,7 @@ No arquivo upload.php:
 
 
 
-### Função para gerar nome único de um arquivo
+#### Função para gerar nome único de um arquivo
 
 
 
@@ -1475,7 +1475,7 @@ No arquivo upload.php:
 
 
 
-### Função para pegar a extensão de um arquivo
+#### Função para pegar a extensão de um arquivo
 
 ~~~~php
 <?php
@@ -1488,9 +1488,9 @@ No arquivo upload.php:
 
 
 
-### Adicionando os códigos ao arquivo de funções (arquivo definitivo)
+#### Adicionando os códigos ao arquivo de funções (arquivo definitivo)
 
-
+#### 
 
 ~~~php
 <?php

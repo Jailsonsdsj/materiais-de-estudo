@@ -1283,80 +1283,246 @@ console.log(soma1());
 
 
 
+### A palavra THIS
+
+- Refere-se ao dono da função ou do objeto em que está sendo utilizado.
+
+- Pode variar dependendo do lugar da função em que foi inserido
+
+- Não varia em arrows functions
+
 ~~~~javascript
+const pessoa = {
+    saudacao: 'Bom dia!',
+    falar(){
+        console.log(this.saudacao); //this referencia o objeto da função, ou seja, pessoa. É o mesmo que pessoa.saudacao
+    }
+}
+
+pessoa.falar(); //bom dia!
+const falar = pessoa.falar
+falar()//undefined
+ //conflito entre paradigmas de funcional e Orientação a objeto
+
+const falarDePessoa = pessoa.falar.bind(pessoa) // 
+falarDePessoa(); //Bom dia!
+~~~~
+
+O é um bind método responsável por "amarrar" um determinado objeto.
+
+
+
+#### Exemplo
+
+Neste caso, a função não irá exibir a idade, pois o this está se referindo a outro objeto
+
+~~~~javascript
+function Pessoa(){
+    this.idade= 0
+
+    setInterval(function(){ //Ativa outra função a partir de um intervalo de tempo
+        this.idade++
+        console.log(this.idade)
+    },1000)
+}
+
+new Pessoa
+~~~~
+
+Para solucionar o problema, faremos da seguinte maneira
+
+~~~~javascript
+function Pessoa(){
+    this.idade= 0
+
+    setInterval(function(){ 
+        this.idade++
+        console.log(this.idade)
+    },bind(this),1000); //A partir de agora, o This irá apontar para pessoa
+}
+
+new Pessoa
+~~~~
+
+#### Outra forma
+
+~~~~javascript
+function Pessoa(){
+    this.idade= 0
+
+    const self=this //Após "salvar" a posição do this numa constante, não será necessário utilizar o bind
+    setInterval(function(){ 
+        self.idade++
+        console.log(self.idade)
+    },1000); 
+}
+
+new Pessoa
+~~~~
+
+
+
+### Funções Arrow 
+
+~~~~javascript
+let dobro = function(a){
+    return 2*a
+}
+
+dobro = (a) => {
+    return 2*a
+}
+
+dobro = a => 2*a //usado apenas para funções de uma única linha
+
+~~~~
+
+Sem parâmetro
+
+~~~~javascript
+ola = () => "olá, mundo";
+ola = _ => "olá, mundo";
+~~~~
+
+
+
+### Funções Anônimas
+
+São funções sem nomes que, geralmente, são salvas em uma variável ou constante.
+
+~~~~javascript
+const soma = function (x,y){
+    return x+y
+}
+
+
+const imprimirResultado = function(a,b, operacao = soma){
+    console.log(operacao(a,b))
+}
+
+imprimirResultado(3,4)
+imprimirResultado(3,4, soma)
+
+//Passando uma função anônima para outra função anônima
+imprimirResultado(3,4, function(x,y){
+    return x-y
+});
+
+//Passando uma arrow function para uma função anônima
+imprimirResultado(3,4,(x,y) => x*y);
+~~~~
+
+
+
+### Funções CallBack
+
+*Pesquisar: padrão de projeto observer*
+
+Consiste em passar uma função para outra função e, caso algum evento ocorra, a função passada será chamada de volta.
+
+~~~~javascript
+const fabricantes = ["Mercedes","Audi","BMw"];
+
+
+//essa função será utilizada como callback, pois será chamada pelo forEach a cada índice que encontrar. 
+function imprimir(nome, indice){ 
+    console.log(`${indice + 1}.${nome}`);
+}
+
+fabricantes.forEach(imprimir) 
+
+fabricantes.forEach(function(fabricante){
+    console.log(fabricante);
+})
 
 ~~~~
 
 
 
+Exemplo sem callback
+
 ~~~~javascript
+const notas = [7.7,6.5,5.2,8.9,3.6,7.1,9.0]
+
+let notasBaixas = []
+for (let i in notas) {
+    if (notas[i] < 7){
+        notasBaixas.push(notas[i]);
+    }
+}
+
+console.log(notasBaixas);
+~~~~
+
+
+
+Exemplo com callback
+
+~~~~javascript
+const notas = [7.7,6.5,5.2,8.9,3.6,7.1,9.0]
+let notasBaixas = []
+notasBaixas = notas.filter(function(nota){
+    return nota < 7
+});
+
+console.log(notasBaixas)
 
 ~~~~
 
 
 
-~~~~javascript
+Exemplo com callback e arrow function
 
+~~~~javascript
+const notas = [7.7,6.5,5.2,8.9,3.6,7.1,9.0]
+const notasBaixas = notas.filter(nota => nota < 7);
+console.log(notasBaixas)
 ~~~~
 
 
 
-~~~~javascript
+Exemplo com callback e arrow function em uma constante
 
+~~~~javascript
+const notas = [7.7,6.5,5.2,8.9,3.6,7.1,9.0]
+
+const calcularNota = nota => nota < 7
+
+const notasBaixas = notas.filter(calcularNota);
+console.log(notasBaixas)
 ~~~~
 
 
 
-~~~~javascript
-
-~~~~
-
-
+### Funções Construtoras
 
 ~~~~javascript
+function Carro(velocidadeMaxima = 200, delta = 5){
+    //atributo privado
+    let velocidadeAtual = 0
 
-~~~~
+    //metodo publico
+    this.acelerar = function (){
+        if (vecolidadeAtual + delta <= velocidadeMaxima){
+            velocidadeAtual += delta
+        }else{
+            velocidadeAtual = velocidadeMaxima
+        }
+    }
 
+    //método público 
+    this.getVelocidadeAtual = function(){
+        return velocidadeAtual;
+    }
+}
 
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
+const uno = new carro
+uno.acelerar()
+console.log(uno.getVelocidadeAtual())
+s
+const ferrari =  new carro(350, 20)
+ferrari.acelerar()
+console.log(ferrari.getVelocidadeAtual);
 ~~~~
 
 
