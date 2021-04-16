@@ -1527,74 +1527,226 @@ console.log(ferrari.getVelocidadeAtual);
 
 
 
+### Closures
+
+É o escopo, criado quando uma função é declarada, que permite que a função acesse e manipule variáveis externas a ela. Em outras palavras, é uma função que se "lembra" do ambiente — ou escopo léxico — em que ela foi criada.
+
 ~~~~javascript
 
+const x = "Global";
+
+function fora(){
+    const x = "local" //
+    function dentro(){ //função aninhada (um closure) que terá a constante "local" como prioridade
+        return x
+     }
+    return dentro();
+}
+
+const minhaFunaco = fora()
+console.log(minhaFunaco);
+---
+Local
+~~~~
+
+Mais informações sobre Closures: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Closures
+
+
+
+### Função Factory
+
+É uma função que retornar um objeto
+
+Exemplo sem parâmetro
+
+~~~~javascript
+function criarProduto(){
+    return{
+        nome:"Macarrão",
+        preco: 7
+    }
+}
+
+console.log(criarProduto());
+~~~~
+
+Sempre que a função for chamada, será possível criar um novo produto
+
+
+
+Exemplo com parâmetro
+
+~~~~javascript
+function criarProduto(nome,preco = 0){
+    return{
+        nome: nome,
+        preco: preco
+    }
+}
+
+console.log(criarProduto("Arroz",10));
+---
+{nome: 'Arroz', preco: 10}
 ~~~~
 
 
 
-~~~~javascript
+Se os nomes dos atributos forem iguais aos dos parâmetros, não será necessário abribui-los:
 
+~~~~javascript
+function criarProduto(nome,preco = 0,desconto = 0){
+    return{
+        nome,
+        preco,
+        desconto
+    }
+}
+
+console.log(criarProduto("Notebook", 5.000,0.1));
+console.log(criarProduto("TV", 7.000,0.1));
+---
+{nome: 'Notebook', preco: 5, desconto: 0.1}
+{nome: 'TV', preco: 7, desconto: 0.1}
 ~~~~
 
 
 
-~~~~javascript
+#### Classe vs Função factory
 
+Criando objetos a partir de uma classe
+
+~~~~javascript
+class Pessoa{
+    constructor(nome){
+        this.nome = nome;
+    }
+
+    falar(){
+        console.log(`Meu nome é ${this.nome}`);
+    }
+}
+
+const p1 = new Pessoa("João")
+p1.falar();
 ~~~~
 
 
 
-~~~~javascript
+Criando objetos a partir de uma função construtora
 
+~~~~javascript
+function Pessoa(nome){
+    this.nome = nome;
+        
+
+    this.falar = function(){
+        console.log(`Meu nome é ${this.nome}`);
+    }
+}
+
+const p1 = new Pessoa("João")
+p1.falar();
 ~~~~
 
 
 
-~~~~javascript
+Criando objetos a partir de uma função factory
 
+~~~~javascript
+const criarPessoa = nome => {
+    return{
+        falar: () => console.log(`Meu nome é ${nome}`) //não é necessário o this
+    }
+}
+const p2 = criarPessoa("ana")
+p2.falar();
 ~~~~
 
 
 
-~~~~javascript
+### IIFE
 
+**IIFE** (Immediately Invoked Function Expression) é uma função em [JavaScript](https://developer.mozilla.org/en-US/docs/Glossary/JavaScript) que é executada assim que definida.
+
+É um [Design Pattern](https://developer.mozilla.org/en-US/docs/Glossary/Design_Pattern) também conhecido como [Self-Executing Anonymous Function](https://developer.mozilla.org/en-US/docs/Glossary/Self-Executing_Anonymous_Function) e contém duas partes principais. A primeira é a função anônima cujo escopo léxico é encapsulado entre parênteses. Isso previne o acesso externo às variáveis declaradas na IIFE, bem como evita que estas variáveis locais poluam o escopo global.
+
+A segunda parte corresponde à criação da expressão `()`, por meio da qual o interpretador JavaScript avaliará e executará a função.
+
+
+
+**Exemplo**:
+
+A função se torna uma expressão que é imediatamente executada. A variável definida dentro da expressão não pode ser acessada fora de seu escopo.
+
+~~~~javascript
+(function () {
+    var nome = "Felipe";
+})();
+// A variável nome não é acessível fora do escopo da expressão 
+nome // gerará o erro "Uncaught ReferenceError: nome is not defined"
+~~~~
+
+Atribuir uma IIFE a uma variável não armazenará a função em si, mas o **resultado da função.**
+
+~~~~javascript
+var result = (function () {
+    var nome = "Felipe";
+    return nome;
+})();
+// Imediatamente gera a saída: 
+result; // "Felipe"
 ~~~~
 
 
 
+### Callback and Apply
+
+São mais dois métodos diferente para executar uma função (tipo) em JavaScript
+
+
+
+Observe o código e os exemplois a seguir:
+
 ~~~~javascript
+function getPreco(imposto = 0, moeda = 'R$ '){
+    return `${moeda} ${this.preco * (1 - this.desc) * (1 + imposto)}`
+}
+
+const produto = {
+    nome: 'Notebook',
+    preco: 4589,
+    desc: 0.15,
+    getPreco
+}
+const carro = { 
+    preco: 49990, 
+    desc: 0.20
+}
+~~~~
+
+Método tradicional
+
+~~~~~javascript
+console.log(produto.getPreco());
+~~~~~
+
+Utilizando o método Call e Apply
+
+~~~~javascript
+
+
+console.log(getPreco.call(carro, 0.17, '$'))
 
 ~~~~
 
+No Call, o primeiro parâmetro a ser passado é o contexto (objeto) e os demais são os parâmetros propriamente dito.
 
 
-~~~~javascript
 
-~~~~
-
-
+Já no método Apply, os parâmetros são passados por meio de um Array
 
 ~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
+console.log(getPreco.apply(carro, [0.17],'$'));
 ~~~~
 
 

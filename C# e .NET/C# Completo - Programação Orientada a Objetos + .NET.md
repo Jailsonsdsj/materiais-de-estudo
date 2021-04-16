@@ -70,7 +70,7 @@ namespace ConsoleApp1 //nome do projeto. Não é obrigatório, mas por questão 
 
 
 
-## Lógica de Programação com C#
+## Capítulo 3: Lógica de Programação com C#
 
 
 
@@ -633,7 +633,49 @@ namespace ConsoleApp1{
 
 
 
-## Classes, atributos, métodos, membros estáticos
+## Capítulo 4: Classes, atributos, métodos, membros estáticos
+
+
+
+### Classe
+
+É um tipo estruturado que pode conter (membros): 
+
+- Atributos (dados / campos) 
+
+- Métodos (funções / operações)
+
+
+
+A classe também pode prover muitos outros recursos, tais como:
+
+- Construtores 
+
+- Sobrecarga 
+
+- Encapsulamento 
+
+- Herança 
+
+- Polimorfismo
+
+  
+
+Exemplos:
+
+- Entidades: Produto, Cliente, Triangulo
+
+- Serviços: ProdutoService, ClienteService, EmailService, StorageService
+
+- Controladores: ProdutoController, ClienteController
+
+- Utilitários: Calculadora, Compactador
+
+- Outros (views, repositórios, gerenciadores, etc.)
+
+
+
+## Capítulo 5: Construtores, palavra This, Encapsulamento 
 
 
 
@@ -646,9 +688,13 @@ Usos comuns:
 - Iniciar valores dos atributos
 - Permitir ou obrigar que o objeto receba dados / dependências no momento de sua instanciação (injeção de dependência)
 
+
+
 Se um construtor customizado não for especificado, a classe disponibiliza o construtor padrão:
 
 - Produto p = new Produto();
+
+
 
 A partir do momento em que um construtor é declarado, o padrão deixará de ser aceito.
 
@@ -781,31 +827,148 @@ Caso a classe possua somente um construtor, com argumentos diferentes dos criado
 
 
 
+### Palavra This
 
+É uma referência para o próprio objeto
+
+Usos comuns:
+
+- Diferenciar atributos de variáveis locais (Java)
+- Referenciar outro construtor em um construtor
+- Passar o próprio objeto como argumento na chamada de um método ou construtor
+
+
+
+#### Referenciar outro construtor em um construtor
 
 ~~~~c#
+using System.Globalization;
+namespace Course {
+    class Produto {
+        public string Nome;
+        public double Preco;
+        public int Quantidade;
 
+        //Construtor 1
+        public Produto() {
+            Quantidade = 0;
+        }
+
+        //Construtor 2
+        public Produto(string nome, double preco) : this() { //Reaproveitamento do contrutor 1 sem precisar repetir 
+            Nome = nome;
+            Preco = preco;
+        }
+        //Construtor 3
+        public Produto(string nome, double preco, int quantidade) : this(nome, preco) { //reaproveitamento do construtor 2
+            Quantidade = quantidade;
+        }
+        (...)
 ~~~~
 
 
 
-~~~~c#
+#### Passar o próprio objeto como argumento na chamada de um método ou construtor
 
+~~~~c#
+class ChessMatch {
+(...)
+PlaceNewPiece('e', 1, new King(board, Color.White, this)); //Neste caso, o this é o próprio objeto, chessMatch
+(...)
 ~~~~
 
 
 
-~~~~c#
+### Encapsulamento
 
+É um princípio que consiste em esconder detalhes de implementação de um componente, expondo apenas operações seguras e que o mantenha em um estado consistente.
+
+Regra de ouro: o objeto deve sempre estar em um estado consistente, e a própria classe deve garantir isso.
+
+
+
+#### Opção 1: implementação manual
+
+- Todo atributo é definido como private
+
+- Implementa-se métodos Get e Set para cada atributo, conforme regras de negócio
+
+- Nota: não é usual na plataforma C#
+
+  
+
+O método get é usado pra consultas enquanto o set para alterações.
+
+~~~~c#
+using System.Globalization;
+
+namespace Course {
+    class Produto {
+        private string _nome; // _ representa o padrão de atributo para métodos privados 
+        private double _preco; 
+        private int _quantidade;
+        public Produto() {
+        }
+        public Produto(string nome, double preco, int quantidade) {
+            _nome = nome;
+            _preco = preco;
+            _quantidade = quantidade;
+        }
+        public string GetNome() {
+            return _nome;
+        }
+        public void SetNome(string nome) {
+            if (nome != null && nome.Length > 1) {
+                _nome = nome;
+            }
+        }
+        public double GetPreco() {
+            return _preco;
+        }
+        
+        public int GetQuantidade() {
+            return _quantidade;
+        }
+        public double ValorTotalEmEstoque() {
+            return _preco * _quantidade;
+        }
+        public void AdicionarProdutos(int quantidade) {
+            _quantidade += quantidade;
+        }
+        public void RemoverProdutos(int quantidade) {
+            _quantidade -= quantidade;
+        }
+        public override string ToString() {
+            return _nome
+            + ", $ "
+            + _preco.ToString("F2", CultureInfo.InvariantCulture)
+            + ", "
+            + _quantidade
+            + " unidades, Total: $ "
+            + ValorTotalEmEstoque().ToString("F2", CultureInfo.InvariantCulture);
+        }
+    }
+}
 ~~~~
 
-
+No programa principal:
 
 ~~~~c#
+using System;
+namespace Course {
+    class Program {
+        static void Main(string[] args) {
+            Produto p = new Produto("TV", 500.00, 10);
+            p.SetNome("TV 4k");
 
+            Console.WriteLine(p.GetNome());
+            Console.WriteLine(p.GetPreco());
+        }
+    }
+}
 ~~~~
 
-
+Repare que, para exibir um objeto é necessário utilizar os capsulamentos criados
 
 ~~~~c#
 
