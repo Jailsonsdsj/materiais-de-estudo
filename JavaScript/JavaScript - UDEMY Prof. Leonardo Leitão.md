@@ -1005,11 +1005,15 @@ condition ? expr1 : expr2
 
 Se `condition` é `true`, o operador retornará o valor de `expr1`; se não, ele retorna o valor de `exp2`
 
+
+
 ~~~~javascript
 let elvisLives = Math.PI > 4 ? "Yep" : "Nope";
 ~~~~
 
-Também são possíveis múltiplas avaliaçãoes ternárias (nota: o operador condicional é associativo a direita):
+
+
+Também são possíveis múltiplas avaliações ternárias (nota: o operador condicional é associativo a direita):
 
 ~~~~javascript
 let firstCheck = false,
@@ -1018,6 +1022,8 @@ let firstCheck = false,
 
 console.log( access ); // logs "Access granted"
 ~~~~
+
+
 
 A estrutura condicional pode ser traduzida da seguinte forma:
 
@@ -1733,10 +1739,7 @@ console.log(produto.getPreco());
 Utilizando o método Call e Apply
 
 ~~~~javascript
-
-
 console.log(getPreco.call(carro, 0.17, '$'))
-
 ~~~~
 
 No Call, o primeiro parâmetro a ser passado é o contexto (objeto) e os demais são os parâmetros propriamente dito.
@@ -1751,6 +1754,198 @@ console.log(getPreco.apply(carro, [0.17],'$'));
 
 
 
+## Objetos
+
+
+
+Um objeto é uma coleção dinâmica de pares chave/valor
+
+~~~~javascript
+//Criando objeto
+const produto = new Object
+
+//Adicionando atributo
+produto.nome = 'Chocolate';
+produto.preco = 4.50
+
+//Adicionando atributo (método não tradicional)
+produto['marca'] = "Lacta";
+
+
+//Deletando atributo
+delete produto.preco
+delete produto['marca']
+
+//Another way
+const carro = {
+    modelo: 'A4',
+    valor: 89000,
+    proprietario: {//objeto dentro de um objeto
+        nome: "Cláudia",
+        idade: 29,
+        endereco: {
+            logradouro: 'Rua ABC',
+            numero: 25
+        }
+    }
+}
+
+//Acessando atributos por notação ponto
+carro.proprietario.endereco.numero = 25
+
+//Acessando por chaves
+carro['proprietario']['endereco']['logradouro'] = "Rua ABC"
+
+//Imprimindo objeto
+console.log(carro)
+console.log(carro.proprietario)
+console.log(carro.proprietario.endereco)
+
+
+
+~~~~
+
+
+
+### Criando objetos
+
+**Notação literal (não é JSON)**
+
+~~~~javascript
+const dado = {
+    ladoA: 6,
+    ladoB: 5,
+    Ladoc: 4,
+    ladoD: 3,
+    LadoE: 2,
+    LadoG: 1
+}
+~~~~
+
+
+
+**Object** **em** **JS**
+
+~~~~javascript
+const obj2 = new Object
+~~~~
+
+
+
+**Funções construtoras**
+
+~~~~javascript
+function Produto(nome,preco,desc){
+  //nome é público enquanto preço e descontos são privados, já que estão dentro de uma função
+    this.nome = nome
+    this.getPrecoComDesconto = () => {
+        return preco * (1 - desc)
+    }
+}
+const p1 = new Produto('Caneta', 7.99, 0.15)
+const p2 = new Produto('Notebook', 7000, 0.10)
+
+
+//Acesso o objeto com construtor
+console.log(p1.getPrecoComDesconto())
+console.log(p2.getPrecoComDesconto())
+~~~~
+
+Objetos em JS e Funções construtoras praticamente são as mesmas coisas
+
+
+
+**Função Factory**
+
+~~~~javascript
+function criarFuncionario(nome,salarioBase,faltas){
+    return{
+        nome,
+        salarioBase,
+        faltas,
+        getSalario(){
+            return (salarioBase / 30) * (30 - faltas)
+        }
+    }
+}
+const funcionario1 = criarFuncionario('Márcio', 7980, 4)
+console.log(funcionario1.getSalario())
+
+const funcionario2 = criarFuncionario('Ana', 11200, 1)
+console.log(funcionario2.getSalario())
+~~~~
+
+
+
+**Object.create**
+
+~~~~javascript
+const filha = Object.create(null)
+filha.nome="ana"
+console.log(filha)
+~~~~
+
+
+
+**JSON.parse**
+
+Transforma um arquivo JSON em um objeto
+
+~~~~javascript
+const fromJSON = JSON.parse('{"info": "Arquivo JSON"}')//geralmente é utilizado o endereçamento do arquivo JSON
+console.log(fromJSON)
+console.log(fromJSON.info)
+~~~~
+
+
+
+### Objetos const
+
+No exemplo a baixo, o objeto pessoa aponta para um endereço de memória x
+
+~~~~javascript
+const pessoa  = { nome: 'Joao' } 
+~~~~
+
+Não é possível adicionar um novo objeto à constante, pois é uma tentativa de apontamento para outro endereço de memória
+
+~~~~javascript
+pessoa = {nome : 'Pedro'}
+~~~~
+
+Porém, é possível alterar o atributo do objeto
+
+~~~~~~~~javascript
+pessoa.nome = 'Pedro'
+console.log(pessoa)
+~~~~
+
+
+
+#### Congelando o objeto
+
+Após congelar o objeto, não será possível alterar o objeto e todos os atributos passará a ser uma constante
+
+~~~~javascript
+Object.freeze(pessoa)
+~~~~
+
+No caso abaixo, o objeto já é atribuído com os atributos sendo constante
+
+~~~~javascript
+const pessoaConstante = Object.freeze({nome:"João"})
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
 ~~~~javascript
 
 ~~~~
@@ -1763,6 +1958,14 @@ console.log(getPreco.apply(carro, [0.17],'$'));
 
 
 
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
 ~~~~javascript
 
 ~~~~
@@ -1775,6 +1978,14 @@ console.log(getPreco.apply(carro, [0.17],'$'));
 
 
 
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
 ~~~~javascript
 
 ~~~~
@@ -1782,6 +1993,312 @@ console.log(getPreco.apply(carro, [0.17],'$'));
 
 
 ~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
+
+~~~~
+
+
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~~~~~javascript
 
 ~~~~
 
