@@ -1922,7 +1922,148 @@ console.log(pessoa)
 
 
 
-#### Congelando o objeto
+
+
+### Getters/Setters
+
+~~~~~~~~javascript
+const sequencia = {
+    _valor: 1,
+    get valor(){
+        return this._valor++
+    },
+    set valor(valor){
+        this._valor = valor
+    }
+}
+
+~~~~
+
+
+
+### Funções importantes de Objects
+
+~~~~javascript
+const pessoas = {
+    nome: 'Rebeca',
+    idade: 2,
+    peso: 13,
+    dataNascimento: '01/01/2019'
+}
+~~~~
+
+
+
+**Todas as chaves do objeto**
+
+~~~~javascript
+console.log(Object.keys(pessoas))
+~~~~
+
+
+
+**Todos os valores**
+
+~~~~~~~~javascript
+console.log(Object.values(pessoas))
+~~~~
+
+
+
+**Todos os pares de chaves e valores**
+
+~~~~javascript
+console.log(Object.entries(pessoas))
+~~~~
+
+~~~~javascript
+Object.entries(pessoas).forEach (([chave,valor]) => {
+    console.log(`${chave}: ${valor}`)
+})
+~~~~
+
+
+
+**Definindo a propriedade dos atributos de um objeto**
+
+~~~~~~~~javascript
+Object.defineProperty(pessoas, 'dataNascimento',{//objeto , 'atributo'
+    // definindo propriedades
+    enumerable: true, //permissão para ser listada
+    writable: false, //permissão para ser sobreescrita
+    value: '01/01/2019' //definição padrão
+})
+~~~~
+
+A partir de agora a data de nascimento passará a ter uma data padrão e não poderá ser alterada
+
+
+
+**Object.assign**
+
+Concatena atributos de diferentes objetos para um único objeto
+
+~~~~javascript
+const dest = {a: 1}
+const o2 = {b: 2}
+const o3 = { c: 3, a:4}
+const obj = Object.assign(dest,o2,o3)
+console.log(obj)
+~~~~
+
+
+
+### Herança
+
+[Sessão adiada]
+
+~~~~javascript
+
+~~~~
+
+
+
+### Evitando Modificações
+
+
+
+**Object.preventextensions**
+
+Previne que a quantidade de atributos do objeto seja estendida
+
+~~~~~~~~javascript
+const objeto = Object.preventExtensions({
+    nome: 'Qualquer', preco: 1.99, tag: 'promoção'
+})
+~~~~
+
+Ou:
+
+~~~~javascript
+Object.preventExtensions(objeto)
+~~~~
+
+
+
+**Object.seal**
+
+Só será possível modificar os atributos existentes. Não será possível adicionar nem excluir
+
+~~~~javascript
+const objeto = Object.seal({
+    nome: 'Qualquer', preco: 1.99, tag: 'promoção'
+})
+~~~~
+
+ou:
+
+~~~~~~~~javascript
+Object.seal(objeto)
+~~~~
+
+
+
+**Congelando o objeto**
 
 Após congelar o objeto, não será possível alterar o objeto e todos os atributos passará a ser uma constante
 
@@ -1938,248 +2079,354 @@ const pessoaConstante = Object.freeze({nome:"João"})
 
 
 
-~~~~~~~~javascript
-
-~~~~
 
 
+### JSON vs Object
 
-
+**Passando o objeto para JSON**
 
 ~~~~javascript
-
+const objt = { a:1, b:2, c:3, soma(){return a+b+c}}
+console.log(JSON.stringify(objt))
 ~~~~
 
-
+ou
 
 ~~~~javascript
-
+const objt = JSON.stringify({ a:1, b:2, c:3, soma(){return a+b+c}})
 ~~~~
 
 
 
-~~~~~~~~javascript
-
-~~~~
-
-
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
+**Passando o JSON para objeto**
 
 ~~~~~~~~javascript
-
+console.log(JSON.parse('{"info": "Arquivo JSON"}'))
 ~~~~
 
 
 
+### Classe
 
+#### Criando uma classe
+
+Primeiramente deve declarar sua classe para só então acessa-la. As classes também podem possuir nomes ou não.
 
 ~~~~javascript
+// sem nome
+let Retangulo = class {
+  constructor(altura, largura) {
+    this.altura = altura;
+    this.largura = largura;
+  }
+};
 
+// nomeada
+let Retangulo = class Retangulo {
+  constructor(altura, largura) {
+    this.altura = altura;
+    this.largura = largura;
+  }
+};
+
+const p = new Retangulo();
 ~~~~
 
 
+
+#### Corpo de uma classe e definições de métodos
+
+
+
+**Métodos Protótipos**
+
+A palavra-chave `static` define um método estático de uma classe. Métodos estáticos são chamados sem a instanciação da sua classe e não podem ser chamados quando a classe é instanciada. Métodos estáticos são geralmente usados para criar funções de utilidades por uma aplicação.
 
 ~~~~javascript
+class Retangulo {
+    constructor(altura, largura) {
+      this.altura = altura; this.largura = largura;
+    }
+  	//Getter
+    get area() {
+        return this.calculaArea()
+    }
 
+    calculaArea() {
+        return this.altura * this.largura;
+    }
+}
+
+const quadrado = new Retangulo(10, 10);
+
+console.log(quadrado.area);
 ~~~~
 
 
+
+**Métodos estáticos**
 
 ~~~~~~~~javascript
+class Ponto {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
 
+    static distancia(a, b) {
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+
+        return Math.hypot(dx, dy);
+    }
+}
+
+const p1 = new Ponto(5, 5);
+const p2 = new Ponto(10, 10);
+
+p1.distancia; //undefined
+p2.distancia; //undefined
+
+console.log(Ponto.distancia(p1, p2));
 ~~~~
 
 
 
-
+#### Classes e Heranças por protótipos
 
 ~~~~javascript
+class Avo{
+    constructor(sobrenome){
+        this.sobrenome = sobrenome;
+    }
+}
 
+
+class Pai extends Avo{
+    constructor(sobrenome,profissao ='Professor'){
+        super(sobrenome)
+        this.profissao = profissao
+    }
+}
+
+class Filho extends Pai{
+    constructor(){
+        super('Silva')
+    }
+}
+
+const filho = new Filho
+console.log(filho)
 ~~~~
 
 
+
+### Array
+
+#### Funções de Array
+
+
+
+Criando um Array
 
 ~~~~javascript
+var frutas = ['Maçã', 'Banana'];
 
+console.log(frutas.length);
+// 2
 ~~~~
 
 
+
+Acessar um item (index) do Array
 
 ~~~~~~~~javascript
+var primeiro = frutas[0];
+// Maçã
 
+var ultimo = frutas[frutas.length - 1];
+// Banana
 ~~~~
 
 
 
-
+Iterar um Array
 
 ~~~~javascript
-
+frutas.forEach(function (item, indice, array) {
+  console.log(item, indice);
+});
+// Maçã 0
+// Banana 1
 ~~~~
 
 
+
+Adicionar um item ao final do Array
 
 ~~~~javascript
+var adicionar = frutas.push('Laranja');
+// ['Maçã', 'Banana', 'Laranja']
 
 ~~~~
 
 
+
+Remover um item do final do Array
 
 ~~~~~~~~javascript
-
+var ultimo = frutas.pop(); // remove Laranja (do final)
+// ['Maçã', 'Banana'];
 ~~~~
 
 
 
-
+Remover do início do Array
 
 ~~~~javascript
-
+var primeiro = frutas.shift(); // remove Maçã do início
+// ['Banana'];
 ~~~~
 
 
+
+Adicionar ao início do Array
 
 ~~~~javascript
-
+var adicionar = frutas.unshift('Morango') // adiciona ao início
+// ['Morango', 'Banana'];
 ~~~~
 
 
+
+Procurar o índice de um item na Array
 
 ~~~~~~~~javascript
+frutas.push('Manga');
+// ['Morango', 'Banana', 'Manga']
+
+var pos = frutas.indexOf('Banana');
+// 1
 
 ~~~~
 
 
 
-
+Remover um item pela posição do índice
 
 ~~~~javascript
+var removedItem = frutas.splice(pos, 1); // é assim que se remove um item
+// ['Morango', 'Manga']
 
 ~~~~
 
 
+
+Remover itens a partir de uma posição de índice
 
 ~~~~javascript
+var vegetais = ['Repolho', 'Nabo', 'Rabanete', 'Cenoura'];
+console.log(vegetais);
+// ['Repolho', 'Nabo', 'Rabanete', 'Cenoura']
+
+var pos = 1, n = 2;
+
+var itensRemovidos = vegetais.splice(pos, n);
+// Isso é como se faz para remover itens, n define o número de itens a se remover,
+// a partir da posição (pos) em direção ao fim da array.
+
+console.log(vegetais);
+// ['Repolho', 'Cenoura'] (o array original é alterado)
+
+console.log(itensRemovidos);
+// ['Nabo', 'Rabanete']
 
 ~~~~
 
 
+
+Copiar um Array
 
 ~~~~~~~~javascript
+var copiar = frutas.slice(); // é assim que se copia
+// ['Morango', 'Manga']
 
 ~~~~
 
 
 
-
+Quando configurar uma propriedade num array Javascript em que a propriedade é um índice valido do array e este índice está fora do atual limite do array, o array irá crescer para um tamanho grande o suficiente para acomodar o elemento neste índice, e a engine irá atualizar a propriedade *length* do array de acordo com isto:
 
 ~~~~javascript
+frutas[5] = 'manga';
+console.log(frutas[5]); // 'manga'
+console.log(Object.keys(frutas)); // ['0', '1', '2', '5']
+console.log(frutas.length); // 6
 
 ~~~~
 
 
+
+#### ForEach
+
+Exemplo 1
 
 ~~~~javascript
+const aprovados = ['Júnior','Melo','Paulo','Ana','Rafaela','Valéria']
 
+aprovados.forEach(function(nome,indice){
+    console.log(`${indice} - ${nome}`)
+})
 ~~~~
 
 
+
+Exemplo 2
 
 ~~~~~~~~javascript
-
+aprovados.forEach(nome => console.log(nome))
 ~~~~
 
 
 
-
+Exemplo 3
 
 ~~~~javascript
-
+const exibirAprovados = aprovado => console.log(aprovado)
+aprovados.forEach(exibirAprovados)
 ~~~~
 
 
+
+#### Map
+
+Transfere os elementos de um array para o outro.
+
+Exemplo 1
 
 ~~~~javascript
+const nums = [1,2,3,4,5]
+
+//Gerando o dobro dos elementos
+let resultado = nums.map(function(e){
+    return e * 2
+})
+
+console.log(resultado)
 
 ~~~~
 
 
+
+Outros Exemplos
 
 ~~~~~~~~javascript
+const soma10 = e => e + 10
+const triplo = e => e * 3
+const paraDinheiro = e => `R$ ${parseFloat(e).toFixed(2).replace('.',',')}`
 
-~~~~
-
-
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~~~~~javascript
-
-~~~~
-
-
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~~~~~javascript
-
-~~~~
-
-
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~~~~~javascript
-
+resultado = nums.map(soma10).map(triplo).map(paraDinheiro)
+console.log(resultado)
 ~~~~
 
 
