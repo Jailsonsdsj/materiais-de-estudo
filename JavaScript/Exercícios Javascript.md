@@ -98,15 +98,23 @@ console.log(compoundInterest(100,2,0.02))
 07) Uma das vantagens da programação é a automatização de tarefas que não gostamos de realizar. Dito isto, elabore uma função cujo objetivo é resolver a fórmula de Bhaskara. Para isso, sua função deve receber três parâmetros, “ax2”, “bx” e “c”, de tal modo que na equação: 3x² - 5x + 12 os valores seriam respectivamente: 3, -5, 12. Como retorno deve ser passado um vetor que tem 2 valores um para cada possível resultado, mesmo que os resultados sejam iguais. Caso o delta seja negativo, retorne, ao invés do vetor, um string com a frase: “Delta é negativo”.
 
 ~~~~~javascript
-
 const bhaskara = (a,b,c) => {
+    resultado = []
     let del = (b**2)-4*a*c
-    let x1 = (-b + Math.sqrt(del))/(2*a)
-    let x2 = (-b - Math.sqrt(del))/(2*a)
-    return (`X1 = ${x1.toFixed(2)}\nX2 = ${x2.toFixed(2)}`)
+    if (del > 0){
+        let x1 = (-b + Math.sqrt(del))/(2*a)
+        let x2 = (-b - Math.sqrt(del))/(2*a)
+        resultado.push(`X1 = ${x1.toFixed(2)}`)
+        resultado.push(`X2 = ${x2.toFixed(2)}`)
+    }else{
+        resultado.push("Valor inválido. O Delta precisa ser um valor positivo")
+    }
+    return resultado
 }
 
 console.log(bhaskara(1,12,-13))
+console.log(bhaskara(3,-5,12))
+
 ~~~~~
 
 

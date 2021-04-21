@@ -2227,7 +2227,7 @@ console.log(filho)
 
 
 
-Criando um Array
+**Criando um Array**
 
 ~~~~javascript
 var frutas = ['Maçã', 'Banana'];
@@ -2238,7 +2238,7 @@ console.log(frutas.length);
 
 
 
-Acessar um item (index) do Array
+**Acessar um item (index) do Array**
 
 ~~~~~~~~javascript
 var primeiro = frutas[0];
@@ -2250,7 +2250,7 @@ var ultimo = frutas[frutas.length - 1];
 
 
 
-Iterar um Array
+**Iterar um Array**
 
 ~~~~javascript
 frutas.forEach(function (item, indice, array) {
@@ -2262,7 +2262,7 @@ frutas.forEach(function (item, indice, array) {
 
 
 
-Adicionar um item ao final do Array
+**Adicionar um item ao final do Array**
 
 ~~~~javascript
 var adicionar = frutas.push('Laranja');
@@ -2272,7 +2272,7 @@ var adicionar = frutas.push('Laranja');
 
 
 
-Remover um item do final do Array
+**Remover um item do final do Array**
 
 ~~~~~~~~javascript
 var ultimo = frutas.pop(); // remove Laranja (do final)
@@ -2281,7 +2281,7 @@ var ultimo = frutas.pop(); // remove Laranja (do final)
 
 
 
-Remover do início do Array
+**Remover do início do Array**
 
 ~~~~javascript
 var primeiro = frutas.shift(); // remove Maçã do início
@@ -2290,7 +2290,7 @@ var primeiro = frutas.shift(); // remove Maçã do início
 
 
 
-Adicionar ao início do Array
+**Adicionar ao início do Array**
 
 ~~~~javascript
 var adicionar = frutas.unshift('Morango') // adiciona ao início
@@ -2299,7 +2299,7 @@ var adicionar = frutas.unshift('Morango') // adiciona ao início
 
 
 
-Procurar o índice de um item na Array
+**Procurar o índice de um item na** **Array**
 
 ~~~~~~~~javascript
 frutas.push('Manga');
@@ -2312,7 +2312,7 @@ var pos = frutas.indexOf('Banana');
 
 
 
-Remover um item pela posição do índice
+**Remover um item pela posição do índice**
 
 ~~~~javascript
 var removedItem = frutas.splice(pos, 1); // é assim que se remove um item
@@ -2322,7 +2322,7 @@ var removedItem = frutas.splice(pos, 1); // é assim que se remove um item
 
 
 
-Remover itens a partir de uma posição de índice
+**Remover itens a partir de uma posição de índice**
 
 ~~~~javascript
 var vegetais = ['Repolho', 'Nabo', 'Rabanete', 'Cenoura'];
@@ -2345,7 +2345,7 @@ console.log(itensRemovidos);
 
 
 
-Copiar um Array
+**Copiar um Array**
 
 ~~~~~~~~javascript
 var copiar = frutas.slice(); // é assim que se copia
