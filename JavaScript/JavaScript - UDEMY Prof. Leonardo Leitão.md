@@ -2431,56 +2431,163 @@ console.log(resultado)
 
 
 
+**Exemplo**
 
+Retorne apenas o preço do produto de um arquivo JSON
 
 ~~~~javascript
+const carrinho  = [ 
+    '{"nome":"Borracha", "Preco":3.45}',
+    '{"nome":"caderno", "Preco":12.99}',
+    '{"nome":"Caneta", "Preco":2.00}',
+    '{"nome":"Borracha", "Preco":1.00}',
+    '{"nome":"Lápis de Cor", "Preco":4.50}',
+    '{"nome":"Piloto", "Preco":3.20}',
+]
+
+/Função para converter texto para objeto
+const paraObjeto = json => JSON.parse(json)
+
+//Função para retornar apenas o preço
+const apenasPreco = produto => produto.preco
+
+
+//Aplicando as funções ao JSON
+const resultado = carrinho.map(paraObjeto).map(apenasPreco)
+console.log(resultado)
 
 ~~~~
 
 
 
-~~~~javascript
+Entendendo o funcionamento do Map
 
+~~~~javascript
+Array.prototype.map2 = function(callback){
+    const newArray = []
+    for (let i=0; i < this.length; i++){
+        newArray.push(callback(this[i], i,this))
+    }
+    return newArray
+}
 ~~~~
 
 
+
+#### Filter
+
+Serve para filtrar um array 
+
+**Exemplo**
 
 ~~~~~~~~javascript
+const produtos = [
+    { nome: 'Notebook', preco: 2499, fragil: true },
+    { nome: 'iPad Pro', preco: 4199, fragil: true },
+    { nome: 'Copo de Vidro', preco: 4, fragil: true },
+    { nome: 'TV', preco: 5000, fragil: true },
+    { nome: 'Cadeira', preco: 400, fragil: false },
+    { nome: 'Prato de plástico', preco: 2499, fragil: false },
+]
 
+
+//Função para retornar apenas valores maior ou igual a 500
+const caro = produto => produto.preco >=500
+
+//Função para retornar apenas os produtos frágeis
+const fragil  = produto => produto.fragil
+
+//Aplicando as funções ao array
+const resultado = produtos.filter(caro).filter(fragil)
+console.log(resultado)
 ~~~~
 
 
 
-
+Entendendo o funcionamento do Filter
 
 ~~~~javascript
-
+Array.prototype.filter2 = function(callback){
+    const newArraty = []
+    for (let i = 0; i < this.length; i++){
+        if(callback(this[i], i, this)){
+            newArraty.push(this[i])
+        }
+    }
+}
 ~~~~
 
 
+
+#### Reduce
+
+O método `**reduce()**` executa uma função **reducer** (fornecida por você) para cada elemento do array, resultando num único valor de retorno.
+
+
+
+**Exemplo**
 
 ~~~~javascript
+const array1 = [1, 2, 3, 4];
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+// 1 + 2 + 3 + 4
+console.log(array1.reduce(reducer));
+// expected output: 10
+
+// 5 + 1 + 2 + 3 + 4
+console.log(array1.reduce(reducer, 5));
+// expected output: 15
 
 ~~~~
 
 
+
+**Somar todos os valores de um array:**
 
 ~~~~~~~~javascript
-
+let total = [0, 1, 2, 3].reduce(function(acumulador, valorAtual) {
+   return acumulador + valorAtual;
+ }, 0)
+// retorna 6
 ~~~~
 
 
 
+**Soma de valores de um objeto de um array**
 
+Para resumir os valores contidos em um array, você **deve** fornecer um valorInicial, para que cada item passe por sua função.
 
 ~~~~javascript
+var valorInicial = 0;
+var soma = [{x: 1}, {x: 2}, {x: 3}].reduce(function (acumulador, valorAtual) {
+    return acumulador + valorAtual.x;
+}, valorInicial)
 
+console.log(soma) // retorna 
 ~~~~
 
 
 
-~~~~javascript
+**Exemplo**
 
+~~~~javascript
+const alunos = [ 
+    { nome: 'João', nota: 7.3, bolsista: false},
+    { nome: 'Maria', nota: 4.5, bolsista: false},
+    { nome: 'Pedro', nota: 10.0, bolsista: false},
+    { nome: 'Roberto', nota: 8.0, bolsista: false},
+    { nome: 'Ana', nota: 7.0, bolsista: false},
+    { nome: 'Ricardo', nota: 6.0, bolsista: false},
+]
+console.log(alunos.map(a => a.nota))
+
+const resultado = alunos.map(a => a.nota). reduce(function(acumulador, atual){
+    console.log(acumulador, atual)
+    return acumulador + atual
+},0)
+
+console.log(resultado)
 ~~~~
 
 

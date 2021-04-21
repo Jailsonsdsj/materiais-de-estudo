@@ -99,6 +99,14 @@ console.log(compoundInterest(100,2,0.02))
 
 ~~~~~javascript
 
+const bhaskara = (a,b,c) => {
+    let del = (b**2)-4*a*c
+    let x1 = (-b + Math.sqrt(del))/(2*a)
+    let x2 = (-b - Math.sqrt(del))/(2*a)
+    return (`X1 = ${x1.toFixed(2)}\nX2 = ${x2.toFixed(2)}`)
+}
+
+console.log(bhaskara(1,12,-13))
 ~~~~~
 
 
@@ -135,11 +143,7 @@ console.log(compoundInterest(100,2,0.02))
 
 
 
-~~~~~javascript
-
-~~~~~
-
-
+11) As regras para o cálculo dos anos bissextos são as seguintes: De 4 em 4 anos é ano bissexto; De 100 em 100 anos não é ano bissexto; De 400 em 400 anos é ano bissexto; Prevalecem as últimas regras sobre as primeiras. Partindo daí elabore uma função que recebe um ano e calcula se ele é ano bissexto, imprimindo no console a mensagem e retornando true ou false
 
 ~~~~~javascript
 
@@ -147,11 +151,7 @@ console.log(compoundInterest(100,2,0.02))
 
 
 
-~~~~~javascript
-
-~~~~~
-
-
+12) Faça um algoritmo que calcule o fatorial de um número.
 
 ~~~~~javascript
 
@@ -159,15 +159,37 @@ console.log(compoundInterest(100,2,0.02))
 
 
 
+13) Crie um programa que exibe se um dia é dia útil, fim de semana ou dia inválido dado o número referente ao dia. Considere que domingo é o dia 1 e sábado é o dia 7. Utilize a estrutura Switch.
+
+~~~~~javascript
+
+~~~~~
+
+
+
+14) Crie uma estrutura condicional switch que receba uma string com o nome de uma fruta e que possua três casos: Caso maçã, retorne no console: “Não vendemos esta fruta aqui”. Caso kiwi, retorne: “Estamos com escassez de kiwis”. Caso melancia, retorne: “Aqui está, são 3 reais o quilo”. Teste com estas três opções .Crie também um default, que retornará uma mensagem de erro no console
+
 ~~~~~javascript
 
 ~~~~~
 
 
 
+15) Um homem decidiu ir à uma revenda comprar um carro. Ele deseja comprar um carro hatch, e a revenda possui, além de carros hatch, sedans, motocicletas e caminhonetes. Utilizando uma estrutura switch, caso o comprador queira o hatch, retorne: “Compra efetuada com sucesso”. Nas outras opções, retorne: “Tem certeza que não prefere este modelo?”. Caso seja especificado um modelo que não está disponível, retorne no console: “Não trabalhamos com este tipo de automóvel aqui”.
+
 ~~~~~javascript
 
 ~~~~~
+
+
+
+16) Utilizando a estrutura do Switch faça um programa que simule uma calculadora básicaO programa recebe como parâmetros dois valores numéricos e uma string referente à operação e a realize com os valores numéricos na ordem que foram inseridos. Por exemplo: calculadora (2, ‘+’, 3). A função efetuará a soma de 2 e 3. Dica: Os sinais das operações são: ‘+’. ‘-’, ‘*’ e ‘/’. Crie um caso default para operações inválidas.
+
+~~~~~javascript
+
+~~~~~
+
+
 
 
 
