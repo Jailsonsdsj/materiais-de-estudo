@@ -119,42 +119,102 @@ console.log(bhaskara(3,-5,12))
 
 
 
-08) Pedro joga N jogos de basquete por temporada. Para saber como está ele está progredindo, ele mantém registro de todos os as pontuações feitas por jogo. Após cada jogo ele anota no novo valor e confere se o mesmo é maior ou menor que seu melhor e pior desempenho. Dada uma lista string = “pontuação1 pontuação2 pontuação3 etc..”, escreva uma função que ao recebê-la irá comparar os valores um a um e irá retornar um vetor com o número de vezes que ele bateu seu recorde de maior número de pontos e quando fez seu pior jogo. (Número do pior jogo). Obs.: O primeiro jogo não conta como novo recorde do melhor. Exemplo: String: “10 20 20 8 25 3 0 30 1” Retorno: [3, 7] (Significa que ele bateu três vezes seu recorde de melhor pontuação e a pior pontuação aconteceu no sétimo jogo.)
+08) Pedro joga N jogos de basquete por temporada. Para saber como está ele está progredindo, ele mantém registro de todos os as pontuações feitas por jogo. Após cada jogo ele anota no novo valor e confere se o mesmo é maior ou menor que seu melhor e pior desempenho. Dada uma lista string = “pontuação1 pontuação2 pontuação3 etc..”, escreva uma função que ao recebê-la irá comparar os valores um a um e irá retornar um vetor com o número de vezes que ele bateu seu recorde de maior número de pontos e quando fez seu pior jogo. (Número do pior jogo). Obs.: O primeiro jogo não conta como novo recorde do melhor. 
+
+Exemplo: String: “10 20 20 8 25 3 0 30 1” Retorno: [3, 7] (Significa que ele bateu três vezes seu recorde de melhor pontuação e a pior pontuação aconteceu no sétimo jogo.)
 
 ~~~~~javascript
+
+let dados = "10 20 20 8 25 3 0 30 1"
+
+const calcularProgresso = a => {
+    let recorde = -1;
+    let vezes = 1;
+    let numeros = a.split(" ").map(function(e){
+        return parseInt(e)
+    })
+
+    let maior = numeros[0]
+    let menor = numeros[0]
+
+    for (let i= 1; i < numeros.length; i++){
+        if (numeros[i] > maior){
+            recorde++
+        }else if(numeros[i] < menor){
+            menor = numeros[i]
+            vezes = i+1          
+        }  
+    }
+
+    return [recorde,vezes]
+}
+
+console.log(calcularProgresso(dados))
 
 ~~~~~
 
 
-
-08) Pedro joga N jogos de basquete por temporada. Para saber como está ele está progredindo, ele mantém registro de todos os as pontuações feitas por jogo. Após cada jogo ele anota no novo valor e confere se o mesmo é maior ou menor que seu melhor e pior desempenho. Dada uma lista string = “pontuação1 pontuação2 pontuação3 etc..”, escreva uma função que ao recebê-la irá comparar os valores um a um e irá retornar um vetor com o número de vezes que ele bateu seu recorde de maior número de pontos e quando fez seu pior jogo. (Número do pior jogo). Obs.: O primeiro jogo não conta como novo recorde do melhor. Exemplo: String: “10 20 20 8 25 3 0 30 1” Retorno: [3, 7] (Significa que ele bateu três vezes seu recorde de melhor pontuação e a pior pontuação aconteceu no sétimo jogo.)
-
-~~~~~javascript
-
-~~~~~
 
 
 
 09) Construa uma função para um sistema de notas de uma instituição que possui a seguinte política de classificação: Todo aluno recebe uma nota de 0 a 100. Alunos com nota abaixo de 40 são reprovados. As notas possuem a seguinte regra de arredondamento: Se a diferença entre a nota e o próximo múltiplo de 5 for menor que 3, arredondar a nota para esse próximo múltiplo de 5. Se a nota for abaixo de 38, não é feito nenhum arredondamento pois esta nota resulta na reprovação do aluno. Por exemplo, a nota 84 será arredondada para 85, mas a nota 29 não será arredondada por ser abaixo de 40 e não ser possível arredondamento eficiente, ou seja, que evite a reprovação do aluno. No caso de a nota ser 38, o arredondamento é possível pois atingirá 40 e o aluno será aprovado.
 
 ~~~~~javascript
+function calcularNota(nota){
+  let novaNota = arredondar(nota)
+  let situacao =  novaNota >= 40 ?  "Aprovado" : "Reprovado"
+    return situacao
+}
+
+function arredondar (nota){
+    if (nota % 5 > 2) {
+        return nota + ( 5 - (nota%5))
+    }else{
+        return nota
+    }
+}
+
+console.log(calcularNota(100))
+console.log(calcularNota(38))
+console.log(calcularNota(20))
+~~~~~
+
+
+
+10) Crie uma função que verifica se um número inteiro passado como parâmetro é divisível por 3 e retorne true ou false.
+
+~~~~~javascript
+function verificarDivisor(numero){
+   return numero % 3 == 0 ? true : false
+
+}
+
+console.log(verificarDivisor(9126))
+console.log(verificarDivisor(12))
+console.log(verificarDivisor(3))
+console.log(verificarDivisor(5))
+console.log(verificarDivisor(9))
+
 
 ~~~~~
 
 
 
-10) Crie uma função que verifica se um número inteiro passado como parêmetro é divisível por 3 e retorne true ou false.
+11) As regras para o cálculo dos anos bissextos são as seguintes: De 4 em 4 anos é ano bissexto; De 100 em 100 anos não é ano bissexto; De 400 em 400 anos é ano bissexto; Prevalecem as últimas regras sobre as primeiras. Partindo daí, elabore uma função que recebe um ano e calcula se ele é ano bissexto, imprimindo no console a mensagem e retornando true ou false
 
 ~~~~~javascript
+function anoBissexto(ano){
+    if (ano%4 == 0 && ano%100 != 0){
+        return true
+    }else if(ano%4 != 0 && ano%4 != 0) {
+        return false
+    }else if(ano%4 != 0 && ano%400 == 0){
+        return true
+    }
+}
 
-~~~~~
-
-
-
-11) As regras para o cálculo dos anos bissextos são as seguintes: De 4 em 4 anos é ano bissexto; De 100 em 100 anos não é ano bissexto; De 400 em 400 anos é ano bissexto; Prevalecem as últimas regras sobre as primeiras. Partindo daí elabore uma função que recebe um ano e calcula se ele é ano bissexto, imprimindo no console a mensagem e retornando true ou false
-
-~~~~~javascript
-
+console.log(anoBissexto(2021))
+console.log(anoBissexto(2016))
 ~~~~~
 
 
@@ -162,7 +222,15 @@ console.log(bhaskara(3,-5,12))
 12) Faça um algoritmo que calcule o fatorial de um número.
 
 ~~~~~javascript
+function fatorial (numero) {
+    if(numero == 0){
+        return 1
+    } else {
+        return numero * fatorial(numero - 1)
+    }
+}
 
+console.log(fatorial(5))
 ~~~~~
 
 
@@ -170,7 +238,41 @@ console.log(bhaskara(3,-5,12))
 13) Crie um programa que exibe se um dia é dia útil, fim de semana ou dia inválido dado o número referente ao dia. Considere que domingo é o dia 1 e sábado é o dia 7. Utilize a estrutura Switch.
 
 ~~~~~javascript
+function verificarDia(dia){
+    switch (dia){
+        case 1:
+            return "Domingo"
+        break;
+        case 2:
+            return "Segunda"
+        break;
+        case 3:
+            return "Terça"
+        break;
+        case 4:
+            return "Quarta"
+        break;
+        case 5:
+            return "Quinta"
+        break;
+        case 6:
+            return "Sexta"
+        break;
+        case 7:
+            return "Sábado"
+        break;
+        default:
+            return "Dia inválido"
+        
+    }
+}
 
+console.log(verificarDia(1))
+console.log(verificarDia(2))
+console.log(verificarDia(3))
+console.log(verificarDia(4))
+console.log(verificarDia(5))
+console.log(verificarDia(6))
 ~~~~~
 
 
@@ -191,7 +293,7 @@ console.log(bhaskara(3,-5,12))
 
 
 
-16) Utilizando a estrutura do Switch faça um programa que simule uma calculadora básicaO programa recebe como parâmetros dois valores numéricos e uma string referente à operação e a realize com os valores numéricos na ordem que foram inseridos. Por exemplo: calculadora (2, ‘+’, 3). A função efetuará a soma de 2 e 3. Dica: Os sinais das operações são: ‘+’. ‘-’, ‘*’ e ‘/’. Crie um caso default para operações inválidas.
+16) Utilizando a estrutura do Switch faça um programa que simule uma calculadora básica. O programa recebe como parâmetros dois valores numéricos e uma string referente à operação e a realize com os valores numéricos na ordem que foram inseridos. Por exemplo: calculadora (2, ‘+’, 3). A função efetuará a soma de 2 e 3. Dica: Os sinais das operações são: ‘+’. ‘-’, ‘*’ e ‘/’. Crie um caso default para operações inválidas.
 
 ~~~~~javascript
 
@@ -199,7 +301,23 @@ console.log(bhaskara(3,-5,12))
 
 
 
+17) Um funcionário irá receber um aumento de acordo com o seu plano de trabalho, de acordo com a tabela abaixo:
 
+| Plano | Aumento |
+| ----- | ------- |
+| A     | 10%     |
+| B     | 15%     |
+| C     | 20%     |
+
+Faça uma função que leia o plano de trabalho e o salário atual de um funcionário e calcula e imprime o seu novo salário. Use a estrutura switch e faça um caso default que indique que o plano é inválido
+
+~~~~javascript
+
+~~~~
+
+
+
+18) Faça um programa que leia um número entre 0 e 10, e escreva este número por extenso. Use o comando switch. Crie um case default que escreva ‘Número fora do intervalo.’
 
 ~~~~~javascript
 

@@ -2400,7 +2400,7 @@ aprovados.forEach(exibirAprovados)
 
 #### Map
 
-Transfere os elementos de um array para o outro.
+Função para percorrer o array. 
 
 Exemplo 1
 
@@ -2523,6 +2523,10 @@ Array.prototype.filter2 = function(callback){
 
 O método `**reduce()**` executa uma função **reducer** (fornecida por você) para cada elemento do array, resultando num único valor de retorno.
 
+São necessários dois elementos, um para servir de índice e outro para o elemento atual do array. 
+
+Pode ser utilizado, juntamente com o map, para substituir a estrutura de repetição FOR e deixar o código mais reduzido
+
 
 
 **Exemplo**
@@ -2556,7 +2560,7 @@ let total = [0, 1, 2, 3].reduce(function(acumulador, valorAtual) {
 
 **Soma de valores de um objeto de um array**
 
-Para resumir os valores contidos em um array, você **deve** fornecer um valorInicial, para que cada item passe por sua função.
+Para resumir os valores contidos em um array, você **deve** fornecer um valo Inicial, para que cada item passe por sua função.
 
 ~~~~javascript
 var valorInicial = 0;
@@ -2573,13 +2577,19 @@ console.log(soma) // retorna
 
 ~~~~javascript
 const alunos = [ 
-    { nome: 'João', nota: 7.3, bolsista: false},
+    { nome: 'João', nota: 7.3, bolsista: true},
     { nome: 'Maria', nota: 4.5, bolsista: false},
-    { nome: 'Pedro', nota: 10.0, bolsista: false},
+    { nome: 'Pedro', nota: 10.0, bolsista: true},
     { nome: 'Roberto', nota: 8.0, bolsista: false},
     { nome: 'Ana', nota: 7.0, bolsista: false},
-    { nome: 'Ricardo', nota: 6.0, bolsista: false},
+    { nome: 'Ricardo', nota: 6.0, bolsista: true},
 ]
+
+~~~~
+
+
+
+~~~~javascript
 console.log(alunos.map(a => a.nota))
 
 const resultado = alunos.map(a => a.nota). reduce(function(acumulador, atual){
@@ -2592,48 +2602,148 @@ console.log(resultado)
 
 
 
-~~~~~~~~javascript
-
-~~~~
-
-
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
+Exemplo 2: Todos os alunos são bolsistas?
 
 ~~~~~~~~javascript
+const bolsistas = (resultado, bolsista) => resultado && bolsista
 
+//O map irá percorrer os elementos 'bolsistas' do array, e irá retornar apenas os que forem verdadeiros com a função reduce bolsista
+console.log(alunos.map(a=>a.bolsista).reduce(bolsistas))
 ~~~~
 
 
 
-
+Exemplo 3: Existe, pelo menos, um aluno bolsista?
 
 ~~~~javascript
+const algumBolsita = (resultado, bolsista) => resultado || bolsista
 
+console.log(alunos.map(a => a.bolsista).reduce(algumBolsista))
 ~~~~
 
 
+
+Entendendo o funcionamento do Reduce
 
 ~~~~javascript
+Array.prototype.reduce2 = function(callback){
+    let acumulador = this[0]
+    for (let i = 1; i < this.length; i++){
+        acumulador = callack(acumulador,this[i], this)
+    }
 
+    return acumulador
+}
+
+const soma = (total, valor) => valor + total
+const nums = [1,2,3,4,5,6,7,8,9,10]
+console.log(nums.reduce2(soma))
 ~~~~
 
 
+
+#### Imperativo Vs Declarativo
+
+
+
+**Imperativo**
+
+Em uma abordagem imperativa, o método em que um algoritmo é feito é mais importante que o resultado dele
 
 ~~~~~~~~javascript
+let total1 = 0
+for (let i = 0; i < alunos.length; i++){
+    total1 += alunos[i].nota
+}
+console.log(total1 / alunos.length)
+~~~~
 
+
+
+**Declarativo**
+
+Em uma abordagem declarativa, o foco está atingir o resultado esperado do algoritmo, ao invés de como ele foi construído.
+
+~~~~javascript
+const getNota = aluno => aluno.nota
+const soma = (total, atual) => total + atual 
+const total2 = alunos.map(getNota).reduce(soma)
+console.log(total2 / aluno.length)
+~~~~
+
+
+
+#### Concat
+
+Função que concatena dois arrays em um resultante
+
+~~~~javascript
+const mulheres = ['Bruna','Alice','Cláudia']
+const homens = ['Pedro', 'Daniel', 'Ricardo']
+const todos = mulheres.concat(homens)
+console.log(todos)
+~~~~
+
+
+
+
+
+#### FlatMap
+
+O método **`flatMap()`** primeiro mapeia cada elemento usando uma função de mapeamento e, em seguida, nivela o resultado em um novo array. É idêntico a um `map` seguido por um `flat` de profundidade 1, mas **`flatMap`** é bastante útil e mescla ambos em um método um pouco mais eficiente
+
+
+
+Exemplo: Extraindo as notas de todas as turmas
+
+~~~~~~~~javascript
+const escola = [{
+    nome: 'Turma M1',
+    alunos: [{
+        nome: 'Ana Cristina',
+        nota: 9.7
+    },{
+        nome: 'Cláudio Bezerra',
+        nota: 10.0
+    }],
+
+    nome: 'Turma M2',
+    alunos: [{
+        nome: 'Flávio Alcantra',
+        nota: 7.5
+    },{
+        nome: 'Daniel Tavares',
+        nota: 6.5
+    }],
+
+    nome: 'Truma T1',
+    alunos: [{
+        nome: 'Vinicius de Castro',
+        nota: 8.0
+    },{
+        nome: 'Verônica Santos',
+        nota: 10.00
+    }]
+  
+}]
+
+
+//Extraíndo a nota de cada aluno
+const getNotaDoAluno = aluno => aluno.nota
+
+//Extraíndo todas as notas da turma
+const getNotasDaTurma = turma => turma.alunos.map(getNotaDoAluno)
+
+//Neste caso, será gerado um array dentro de um array. Ou seja,as notas ainda serão divididas por turmas
+const notas1 = escola.map(getNotasDaTurma)
+
+// Para retornar apenas as notas, independente da turma, basta utulizar a função flatmap
+Array.prototype.flatMap = function(callback){
+    return Array.prototype.concat.apply([],this.map(callback))
+}
+
+const notas2 = escola.flatMap(getNotasDaTurma)
+console.log(notas2)
 ~~~~
 
 
