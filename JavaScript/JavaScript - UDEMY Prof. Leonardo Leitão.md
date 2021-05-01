@@ -2748,21 +2748,400 @@ console.log(notas2)
 
 
 
+# Node
 
+O Node executa códigos JavaScript tanto backend/servidor quanto no frontend/interface.
+
+
+
+## **Sistema de Módulos**
+
+Em Node, cada arquivo representa um módulo. Isto é, apenas uma parte do código geral.
+
+A partir desse conceito, é possível importar e exportar códigos de um arquivo para o outro.
+
+
+
+### Formas de importar e exportar módulo
+
+**Exemplos 1**
+
+Nome do arquivo: "moduloA"
 
 ~~~~javascript
+this.ola = "Olá, mundo"
+~~~~
 
+~~~~javascript
+exports.bemVindo = "Bem Vindo ao Node"
+~~~~
+
+~~~~javascript
+module.exports.ateLogo = 'Até logo'
 ~~~~
 
 
 
-~~~~javascript
+**Exemplo 2 (modo clássico)**
 
+Nome do arquivo: "moduloB"
+
+~~~~javascript
+module.exports = {
+    bomDia: 'Bom dia',
+    boaNoite(){
+        return "Boa Noite"
+    }
+}
 ~~~~
 
+Agora, os objetos criados estarão disponíveis para exportação
 
+
+
+Importando os módulos em um novo arquivo
 
 ~~~~~~~~javascript
+const moduloA = require('./moduloA')
+const moduloB = require('./moduloB')
+
+console.log(moduloA.ola)
+console.log(moduloA.bemVindo)
+console.log(moduloA.ateLogo)
+console.log(moduloB.bomDia)
+~~~~
+
+
+
+### Usando Módulos de Terceiros
+
+~~~~javascript
+npm //método responsável por baixar módulos, bibliotecas e afins
+~~~~
+
+
+
+No terminal do Node
+
+~~~~javascript
+npm i lodash
+~~~~
+
+
+
+**Exemplo 1** **- Instalando um módulo a partir de uma pasta**
+
+~~~~javascript
+const _ = require('lodash') //A partir daí, o próprio node irá procurar os arquivos dentro da pasta de módulos
+
+setInterval(() => console.log(_.random(1,1000)),2000)
+~~~~
+
+
+
+**Exemplo 2 - Instalando uma biblioteca de forma global**
+
+No terminal (no caso do windows, sem o sudo)
+
+~~~~javascript
+sudo npm i -g nodemon
+~~~~
+
+
+
+~~~~javascript
 
 ~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+~~~~javascript
+
+~~~~
+
+
+
+
 
