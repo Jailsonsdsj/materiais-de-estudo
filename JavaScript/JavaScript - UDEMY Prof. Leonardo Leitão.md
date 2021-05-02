@@ -6,7 +6,7 @@ Resumo das aulas do curso [Web Moderno Completo](https://www.udemy.com/course/cu
 
 
 
-## Estrutura de dados
+## 📌Estrutura de dados
 
 Estruturas de dados são objetos que armazenam dados de forma eficiente, oferecendo certos “serviços” para o usuário (ordenação eficiente dos dados, busca por meio de palavras chave etc).
 
@@ -72,7 +72,7 @@ Uma estrutura de dados abstrai as características principais de uma atividade q
 
 
 
-## Fundamentos
+## 📌Fundamentos
 
 
 
@@ -104,7 +104,7 @@ console.log(typeof number)
 
 
 
-#### Alguns cuidados
+**Alguns cuidados**
 
 ~~~~javascript
 console.log(7/0)
@@ -122,7 +122,7 @@ console.log(0.1+0.7)
 
 
 
-#### Usando o Math
+**Usando o Math**
 
 Para exponenciação:
 
@@ -385,7 +385,7 @@ Mais informações sobre Object: https://developer.mozilla.org/pt-BR/docs/Web/Ja
 
 
 
-### **Atribuição por referência**
+#### **Atribuição por referência**
 
 Quando o endereço de um objeto é passado de uma variável ou constante para outra.
 
@@ -410,7 +410,7 @@ console.log(a)
 
 
 
-### **Atribuição por valor**
+#### **Atribuição por valor**
 
 Acontece quando a cópia é feita através de um valor primitivo (diferente do objeto demostrado acima).
 
@@ -457,6 +457,70 @@ Comentário o Overflow
 > Existem ainda diferenças sintáticas entre `null` e `undefined`. Ambos são os únicos valores de seus respectivos Tipos (`Null` e `Undefined`). Porém, `null` é também um termo reservado e um literal da gramática (como `true`, `0`, `""` e `/.*/`), o [*NullLiteral*](http://www.ecma-international.org/ecma-262/5.1/#sec-7.8), enquanto `undefined` é exposto como uma [propriedade do objeto global](http://www.ecma-international.org/ecma-262/5.1/#sec-15.1.1.3), assim como `NaN` e `Infinity`.
 >
 > Além disso, `undefined` não é um termo reservado da linguagem – o que significa, por exemplo, que `var undefined = "?"` é uma construção válida. Portanto, é sempre possível criar uma variável local chamada `undefined` cujo valor não seja o primitivo de mesmo nome. Isso não é possível com `null`, `var null = "?"` gera um erro de sintaxe. Em implementações antigas da linguagem também era possível sobrescrever o valor global `undefined`, mas isso deixou de ser permitido no ECMAScript 5, onde a propriedade `undefined` do objeto global é definida como [[Writable]]:false, o que significa que seu valor não pode ser substituído.
+
+
+
+### VAR
+
+Uma variável declarada por VAR só possui dois escopos: o local e o global.
+
+Exceto esses dois escopos, o var não considera as estruturas de blocos, conforme exemplo abaixo:
+
+~~~~javascript
+{
+    {
+        {
+            var teste = "Olá mundo"
+        }
+    }
+}
+
+console.log(teste)
+~~~~
+
+
+
+- **Variável Local**: uma variável definida dentro de uma função. Essa variável só pode ser utilizada dentro da própria função
+
+- **Variável Global**: uma variável definida em qualquer lugar do código que não seja uma função. Pode ser utilizada em qualquer área do código. Evita-se utilizar variáveis globais para não correr o risco de sobrescrita
+
+
+
+### Let
+
+Uma variável declarada por Let considera o escopo de blocos
+
+~~~~javascript
+let numero = 1
+{
+    let numero = 2
+    console.log("Dentro = ",numero)
+}
+
+console.log("Fora = ", numero)
+--
+Dentro = 2
+Fora = 1
+~~~~
+
+
+
+Caso não tenha variável dentro do escopo, será considerada a de fora:
+
+~~~~javascript
+let numero = 1
+{
+    let numero2 = 2
+    console.log("Dentro = ",numero)
+}
+
+console.log("Fora = ", numero)
+---
+Dentro = 1
+Fora = 1
+~~~~
+
+Importante: use o let para variáveis em estruturas de repetições.
 
 
 
@@ -526,68 +590,6 @@ console.log(subtracao(2,3))
 As funções implícitas, isto é, declaradas sem o uso de blocos devem conter apenas uma linha de código e automaticamente retornam um valor.
 
 
-
-### VAR
-
-Uma variável declarada por VAR só possui dois escopos: o local e o global.
-
-Exceto esses dois escopos, o var não considera as estruturas de blocos, conforme exemplo abaixo:
-
-~~~~javascript
-{
-    {
-        {
-            var teste = "Olá mundo"
-        }
-    }
-}
-
-console.log(teste)
-~~~~
-
-
-
-- **Variável Local**: uma variável definida dentro de uma função. Essa variável só pode ser utilizada dentro da própria função
-
-- **Variável Global**: uma variável definida em qualquer lugar do código que não seja uma função. Pode ser utilizada em qualquer área do código. Evita-se utilizar variáveis globais para não correr o risco de sobrescrita
-
-
-
-### Let
-
-Uma variável declarada por Let considera o escopo de blocos
-
-~~~~javascript
-let numero = 1
-{
-    let numero = 2
-    console.log("Dentro = ",numero)
-}
-
-console.log("Fora = ", numero)
---
-Dentro = 2
-Fora = 1
-~~~~
-
-
-
-Caso não tenha variável dentro do escopo, será considerada a de fora:
-
-~~~~javascript
-let numero = 1
-{
-    let numero2 = 2
-    console.log("Dentro = ",numero)
-}
-
-console.log("Fora = ", numero)
----
-Dentro = 1
-Fora = 1
-~~~~
-
-Importante: use o let para variáveis em estruturas de repetições.
 
 
 
@@ -979,7 +981,7 @@ imprimirNomeMaiusculo(obj)
 
 
 
-## Estruturas de Controle
+## 📌Estruturas de Controle
 
 
 
@@ -1192,7 +1194,9 @@ console.log(n)
 
 
 
-## Funções
+
+
+## 📌Funções
 
 Cidadão de primeira linha
 
@@ -1208,11 +1212,15 @@ Criar de forma literal
 function fun1(){}
 ~~~~
 
+
+
 Armazenar em uma variável
 
 ~~~~javascript
 const fun1 = function(){}
 ~~~~
+
+
 
 Armazenar em um array
 
@@ -1221,6 +1229,8 @@ const array = [function(a,b){return a+b}, fun1, fun2]
 console.log(array[0](5,3))
 ~~~~
 
+
+
 Armazenar emum atributo de objeto
 
 ~~~~javascript
@@ -1228,6 +1238,8 @@ const obj = {}
 obj.falar = function(){return 'Hello,World!'}
 console.log(obj.falar())
 ~~~~
+
+
 
 Passar uma função como parâmetro	
 
@@ -1238,6 +1250,8 @@ function run(fun){
 
 run(function(){console.log("Executando...")})
 ~~~~
+
+
 
 Uma função pode retornar/conter uma função	
 
@@ -1254,6 +1268,8 @@ soma(2,3)(4)
 const cincoMais = soma(2,3)
 cincoMais(4)
 ~~~~
+
+
 
 Parâmetros e Retorno São Opcionais
 
@@ -1335,6 +1351,8 @@ function Pessoa(){
 new Pessoa
 ~~~~
 
+
+
 Para solucionar o problema, faremos da seguinte maneira
 
 ~~~~javascript
@@ -1349,6 +1367,8 @@ function Pessoa(){
 
 new Pessoa
 ~~~~
+
+
 
 #### Outra forma
 
@@ -1462,7 +1482,7 @@ console.log(notasBaixas);
 
 
 
-Exemplo com callback
+#### Exemplo com callback
 
 ~~~~javascript
 const notas = [7.7,6.5,5.2,8.9,3.6,7.1,9.0]
@@ -1477,7 +1497,7 @@ console.log(notasBaixas)
 
 
 
-Exemplo com callback e arrow function
+#### Exemplo com callback e arrow function
 
 ~~~~javascript
 const notas = [7.7,6.5,5.2,8.9,3.6,7.1,9.0]
@@ -1487,7 +1507,7 @@ console.log(notasBaixas)
 
 
 
-Exemplo com callback e arrow function em uma constante
+#### Exemplo com callback e arrow function em uma constante
 
 ~~~~javascript
 const notas = [7.7,6.5,5.2,8.9,3.6,7.1,9.0]
@@ -1535,7 +1555,7 @@ console.log(ferrari.getVelocidadeAtual);
 
 ### Closures
 
-É o escopo, criado quando uma função é declarada, que permite que a função acesse e manipule variáveis externas a ela. Em outras palavras, é uma função que se "lembra" do ambiente — ou escopo léxico — em que ela foi criada.
+É o escopo criado quando uma função é declarada que permite que a função acesse e manipule variáveis externas a ela. Em outras palavras, é uma função que se "lembra" do ambiente — ou escopo léxico — em que ela foi criada.
 
 ~~~~javascript
 
@@ -1709,9 +1729,7 @@ result; // "Felipe"
 
 São mais dois métodos diferente para executar uma função (tipo) em JavaScript
 
-
-
-Observe o código e os exemplois a seguir:
+Observe o código e os exemplos a seguir:
 
 ~~~~javascript
 function getPreco(imposto = 0, moeda = 'R$ '){
@@ -1754,9 +1772,7 @@ console.log(getPreco.apply(carro, [0.17],'$'));
 
 
 
-## Objetos
-
-
+## 📌Objetos
 
 Um objeto é uma coleção dinâmica de pares chave/valor
 
@@ -2106,9 +2122,9 @@ console.log(JSON.parse('{"info": "Arquivo JSON"}'))
 
 
 
-### Classe
+## 📌Classe
 
-#### Criando uma classe
+### Criando uma classe
 
 Primeiramente deve declarar sua classe para só então acessa-la. As classes também podem possuir nomes ou não.
 
@@ -2134,7 +2150,7 @@ const p = new Retangulo();
 
 
 
-#### Corpo de uma classe e definições de métodos
+### Corpo de uma classe e definições de métodos
 
 
 
@@ -2192,7 +2208,7 @@ console.log(Ponto.distancia(p1, p2));
 
 
 
-#### Classes e Heranças por protótipos
+### Classes e Heranças por protótipos
 
 ~~~~javascript
 class Avo{
@@ -2221,11 +2237,9 @@ console.log(filho)
 
 
 
-### Array
+## 📌Array
 
-#### Funções de Array
-
-
+### Funções de Array
 
 **Criando um Array**
 
@@ -2367,7 +2381,7 @@ console.log(frutas.length); // 6
 
 
 
-#### ForEach
+### ForEach
 
 Exemplo 1
 
@@ -2398,7 +2412,7 @@ aprovados.forEach(exibirAprovados)
 
 
 
-#### Map
+### Map
 
 Função para percorrer o array. 
 
@@ -2474,7 +2488,7 @@ Array.prototype.map2 = function(callback){
 
 
 
-#### Filter
+### Filter
 
 Serve para filtrar um array 
 
@@ -2519,7 +2533,7 @@ Array.prototype.filter2 = function(callback){
 
 
 
-#### Reduce
+### Reduce
 
 O método `**reduce()**` executa uma função **reducer** (fornecida por você) para cada elemento do array, resultando num único valor de retorno.
 
@@ -2642,7 +2656,7 @@ console.log(nums.reduce2(soma))
 
 
 
-#### Imperativo Vs Declarativo
+### Imperativo Vs Declarativo
 
 
 
@@ -2673,7 +2687,7 @@ console.log(total2 / aluno.length)
 
 
 
-#### Concat
+### Concat
 
 Função que concatena dois arrays em um resultante
 
@@ -2688,7 +2702,7 @@ console.log(todos)
 
 
 
-#### FlatMap
+### FlatMap
 
 O método **`flatMap()`** primeiro mapeia cada elemento usando uma função de mapeamento e, em seguida, nivela o resultado em um novo array. É idêntico a um `map` seguido por um `flat` de profundidade 1, mas **`flatMap`** é bastante útil e mescla ambos em um método um pouco mais eficiente
 
@@ -2748,7 +2762,7 @@ console.log(notas2)
 
 
 
-# Node
+# Node➰
 
 O Node executa códigos JavaScript tanto backend/servidor quanto no frontend/interface.
 
@@ -2813,7 +2827,7 @@ console.log(moduloB.bomDia)
 
 
 
-### Usando Módulos de Terceiros
+#### Usando Módulos de Terceiros
 
 ~~~~javascript
 npm //método responsável por baixar módulos, bibliotecas e afins
@@ -2831,6 +2845,8 @@ npm i lodash
 
 **Exemplo 1** **- Instalando um módulo a partir de uma pasta**
 
+Utilizaremos a função random que está contida no lodash
+
 ~~~~javascript
 const _ = require('lodash') //A partir daí, o próprio node irá procurar os arquivos dentro da pasta de módulos
 
@@ -2839,7 +2855,9 @@ setInterval(() => console.log(_.random(1,1000)),2000)
 
 
 
-**Exemplo 2 - Instalando uma biblioteca de forma global**
+**Exemplo 2 - Instalando do módulo nodemon de forma global**
+
+O nodemon é um utilitário que irá monitorar todas as alterações nos arquivos de sua aplicação e reiniciar automaticamente o servidor quando for necessário.
 
 No terminal (no caso do windows, sem o sudo)
 
@@ -2847,17 +2865,32 @@ No terminal (no caso do windows, sem o sudo)
 sudo npm i -g nodemon
 ~~~~
 
+Após isso, o comando nodemon estará disponível.
 
+
+
+#### Sistemas de Módulo Require
+
+**Exemplos**
 
 ~~~~javascript
-
+const moduloA = require("../../moduloA") //os ..
+console.log(moduloA.ola)
 ~~~~
 
 
 
-~~~~javascript
+[INSERIR CONTINUAÇÃO DO CONTEÚDO]
 
-~~~~
+
+
+
+
+# Integrando HTML,CSS e JS 🌌
+
+
+
+
 
 
 

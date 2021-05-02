@@ -216,8 +216,6 @@ Por fim, chamar o código do arquivo "conexão.php" para o código principal:
 
 
 
-## Unidade 04
-
 
 
 ### Criando uma listagem de produtos
