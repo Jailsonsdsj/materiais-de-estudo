@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Acessando Atributos #02</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+    <div>
+        <label for="compras">Compras</label>
+        <ul id="compras" destino='escritório' data-urgencia="5">
+            <li>Café</li>
+            <li>Água</li>
+            <li>Copo Descartável</li>
+        </ul>
+    </div>
+    <script>
+        const lista = document.querySelector('#compras')
+        //Acessando as propriedades do elemento ul
+
+        //Elementos filhos
+        console.log("childNodes",lista.childNodes) 
+
+        //valor de um elemento
+        console.log('destino',lista.destino) //Como 'destino' não é uma propriedade reconhecida, será retornado undefield
+
+        //valor de um elemento
+        console.log('getAttribute',lista.getAttribute('destino'))
+        
+        //atribuindo um atributo
+        lista.setAttribute('destino','empresa')
+
+        //removendo um atributo
+        lista.removeAttribute('destino')
+       
+
+
+    </script>
+</body>
+
+</html>

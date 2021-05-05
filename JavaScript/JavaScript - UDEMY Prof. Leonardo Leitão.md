@@ -2890,114 +2890,279 @@ console.log(moduloA.ola)
 
 
 
+### DOM
 
+O DOM (Document Object Model) representa o mesmo documento para que possa ser manipulado. O DOM é uma representação orientada a objetos da página da web, que pode ser modificada com uma linguagem de script como JavaScript.
+
+<a href="https://imgur.com/cTKAZe3"><img src="https://i.imgur.com/cTKAZe3.png" title="source: imgur.com" /></a>
+
+
+
+### Selecionando elementos com do documentElements
+
+
+
+**Por ID**
+
+~~~~javascript
+document.getElementById('id')
+
+//Adicionando uma classe
+document.getElementById('id').classList.add('destague')
+
+//Removendo uma classe
+document.getElementById('id').classList.remove('destague')
+~~~~
+
+
+
+**Selecionando mais de um elemento**
+
+~~~~javascript
+const divs = document.getelementsByTagName('div')
+Array.from(divs).forEach(e => e.classList.remove('destaque'))
+~~~~
+
+Todos os elementos div serão selecionados, jogados em um array e terão a classe destaque removida
+
+
+
+**Outra forma de transformar os elementos em um array**
+
+~~~~javascript
+const divsArray = [...divs]
+divsArray.forEach(e => e.classList.add('destaque'))
+~~~~
+
+
+
+**Selecionando por classe**
+
+~~~~javascript
+const ultimosElementos = document.getElementsByClassName('ultimo')
+for (let e of ultimosElementos){
+    e.classList.remove('destaque')
+}
+~~~~
+
+
+
+### Selecionando elementos com o querySelector
+
+O querySelector espera um seletor por CSS
+
+~~~~javascript
+document.querySelector("#id") //observe que neste caso utilizaremos o # ou .
+~~~~
+
+
+
+**Exemplo:**
+
+~~~~javascript
+document.querySelector("#primeiro").classList.add('destaque')
+~~~~
+
+~~~~javascript
+const selecionar = selector =>
+	document.querySelectorAll(selector).forEach(e => e.classList.add('destaque'))
+
+selecionar('div')
+selecionar('.terceiro.ultimo')
+selecionar(':not(#primeiro)')
+~~~~
+
+O querySelectorAll seleciona todos os elementos e retorna no formato nodelist. Algumas funções como o forEach estão disponíveis. Para outras, será necessário utilizar um array.
 
 
 
 ~~~~javascript
+const deselecionar = seletor = > 
+      document.querySelectorAll(selector).forEach(e => e.classList.remove('destaque'))
+
+deselecionar('*')
 
 ~~~~
 
 
 
-~~~~javascript
+### Selecionando forms com o document.forms
 
+~~~~javascript
+console.log(documnet.forms)
+console.log(document.forms[0])
+console.log(document.getElementsByName('pesquisa'))//Nome do formulário
+console.log(document.pesquisa)
+
+document.pesquisa.q.value = 'linux' //Altera o valor do input a partir do name
+document.pesquisa.hl.
 ~~~~
 
 
 
-~~~~javascript
+### Acessando Atributos
 
+~~~~javascript
+const img = document.querySelector('img') //Seleciona o elemento
+const img = document.querySelector('.img') //Seleciona uma classe
+const img = document.querySelector('#img') //Seleciona um ID
+const img = document.querySelector('[img]') //Seleciona uma propriedade
 ~~~~
 
 
 
-~~~~javascript
+Exemplo 1: acessando o src da imagem
 
+~~~~javascript
+//Método 1
+console.log('getAttribute', img.getAttribute('src'))
+//Método 2
+console.log('src', img.src)
 ~~~~
 
 
 
-~~~~javascript
+Exemplo 2: alterando o valor de um link
 
+~~~~javascript
+//Método 1
+const link = document.querySelector('a')
+link.firstChild.nodeValue = "Novo Texto"
+//Método 2
+const link = document.querySelector('a')
+link.innerHtml = "Texto 2"
 ~~~~
 
 
 
-~~~~javascript
+Exemplo 3: acessando as propriedades de um elemento
 
+~~~~html
+<body class='conteudo exercicio'>
+    <div>
+        <label for="compras">Compras</label>
+        <ul id="compras" destino='escritório' data-urgencia="5">
+            <li>Café</li>
+            <li>Água</li>
+            <li>Copo Descartável</li>
+        </ul>
+    </div>
+    <script>
+        const lista = document.querySelector('#compras')
+        //Acessando as propriedades do elemento ul
+
+        //Elementos filhos
+        console.log("childNodes",lista.childNodes) 
+
+        //valor de um elemento
+        console.log('destino',lista.destino) //Como 'destino' não é uma propriedade reconhecida, será retornado undefield
+
+        //valor de um elemento
+        console.log('getAttribute',lista.getAttribute('destino'))
+        
+        //atribuindo um atributo
+        lista.setAttribute('destino','empresa')
+
+        //removendo um atributo
+        lista.removeAttribute('destino')
+
+    </script>
+</body>
 ~~~~
 
 
 
-~~~~javascript
+Exemplo 4: acessando somente leitura
 
+~~~~html
+<body class='conteudo exercicio'>
+    <div>
+        <ul id="compras" destino='escritório' data-urgencia="5">
+            <li>Café</li>
+            <li>Água</li>
+            <li>Copo Descartável</li>
+        </ul>
+    </div>
+    <script>
+        //Somente leitura
+        console.log(lista.attributes)
+        console.log(lista.attributes[0])
+        console.log(lista.attributes[1])
+        console.log(lista.attributes.id)
+        console.log(lista.attributes.destino)
+        console.log(lista.attributes['data-urgencia'])
+        
+    </script>
+</body>
 ~~~~
 
 
 
-~~~~javascript
 
+
+### Acessando Classes
+
+~~~~javascript
+<body class='conteudo exercicio'>
+    <div>
+        Classes
+    </div>
+    <script>
+        //obtendo a lista de classes do elemento div
+        const classes = document.querySelector('div').classList
+        //adicionando classe
+        classes.add('destaque')
+        //removendo classe
+        classs.remove('destaque')
+        //verificando se uma classe está inserida no elemento
+        console.log(classes.contains('destaque'))
+        //quantidade de classes
+        console.log(classes.length)
+        
+
+    </script>
+</body>
 ~~~~
 
 
 
-~~~~javascript
-
-~~~~
+### Modificando o HTML
 
 
 
 ~~~~javascript
+<body class='conteudo exercicio'>
+    <script>
+       const body = document.querySelector('body')
 
-~~~~
+        //Criando uma div
+       const div1 = document.createElement('div')
+       //adicionando classe na div
+       div1.classList.add('destaque')
+       //adicionando texto na div
+       div1.innerHTML = 'Primeiro'
 
+       const div2 = document.createElement('div')
+       div2.setAttribute('wm-atributo','valor')
+       div2.innerHTML = 'Segundo'
 
+       const p = document.createElement('p')
+       p.innerHTML = 'Terceiro'
 
-~~~~javascript
+       const div3 = document.createElement('div')
+       //enviando a div 3 para o último elemento do p
+       div3.appendChild(p)
 
-~~~~
+        //enviando a div criada para o body do HTML
+       body.appendChild(div1)
+       body.appendChild(div2)
+       body.appendChild(div3)
 
+        //clonando um elemento
+        const div4 = div3.cloneNode(true)
+        body.appendChild(div4)
 
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
+  </script>
 ~~~~
 
 

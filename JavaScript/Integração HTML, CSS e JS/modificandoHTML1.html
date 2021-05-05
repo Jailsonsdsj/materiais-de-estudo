@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Modificando HTML #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+    <script>
+       const body = document.querySelector('body')
+
+        //Criando uma div
+       const div1 = document.createElement('div')
+       //adicionando classe na div
+       div1.classList.add('destaque')
+       //adicionando texto na div
+       div1.innerHTML = 'Primeiro'
+
+       const div2 = document.createElement('div')
+       div2.setAttribute('wm-atributo','valor')
+       div2.innerHTML = 'Segundo'
+
+       const p = document.createElement('p')
+       p.innerHTML = 'Terceiro'
+
+       const div3 = document.createElement('div')
+       //enviando a div 3 para o último elemento do p
+       div3.appendChild(p)
+
+        //enviando a div criada para o body do HTML
+       body.appendChild(div1)
+       body.appendChild(div2)
+       body.appendChild(div3)
+
+        //clonando um elemento
+        const div4 = div3.cloneNode(true)
+        body.appendChild(div4)
+
+    </script>
+</body>
+
+</html>
