@@ -9,7 +9,26 @@
 
 <body class="conteudo exercicio">
     <div>Elemento</div>
+
     <script>
-        // ...
+        const item = document.querySelector('div')
+        //definindo a posição da div em absolute
+        item.style.position = 'absolute'
+        //Adicionando uma função para arrastar a div com o mouse
+        item.onmousemove = e => {
+            // e -> o evento (parâmetro)
+            // item -> div responsável por disparar o evento
+            const item = e.target
+            item.style.cursor = 'move'
+            
+            if (e.buttons){              
+                // target.style.top -> div cujo position é top
+                // e.clientY = cursor do mouse no eixo Y que será subtraído pela metade da altura
+                item.style.top = `${e.clientY - (item.clientHeight / 2)}px`
+                // e.clientX = cursor do mouse no eixo X que será subtraído pela metade da largura
+                item.style.left = `${e.clientX - (item.clientWidth / 2)}px`
+            }
+        }
+
     </script>
 </body>

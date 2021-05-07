@@ -3168,31 +3168,116 @@ Exemplo 4: acessando somente leitura
 
 
 ~~~~javascript
+<body class='conteudo exercicio'>
+    <div>
+        <p>Texto Inicial</p>
+    </div>
+    <script>
+        //Substituíndo os elementos de dentro div
+       const div = documnet.querySelector('div')
+       div.innerHTML = 'Texto Alterado'
+      
+      //substituíndo o prório elemento
+      div.outerHTML = "Texto Alterado"
 
+      //Inserindo um elemento antes do refenciado
+      div.insertAdjacentHTML('beforebegin','<p> Texto </p>')
+
+      //Inserindo um elemento depois do início 
+      div.insertAdjacentHTML('afterbegin','<p> Texto </p>')
+
+      //Inserindo um elemento antes do fim 
+      div.insertAdjacentHTML('beforeend','<p> Texto </p>')
+
+      //Inserindo um elemento depois do fim 
+      div.insertAdjacentHTML('afterend','<p> Texto </p>')
+
+    </script>
+</body>
+~~~~
+
+Obtendo apenas do texto de um elemento
+
+~~~~javascript
+console.log(div.innerText)
 ~~~~
 
 
 
-~~~~javascript
+### Eventos
 
+Criando um evento de click
+
+~~~~javascript
+<div>
+        <a href="https://google.com.br" onclick="navegarEm5s(event)">Google</a>
+    </div>
+    <script>
+       function navegarEm5s(e){
+           e.preventDefault()//previne que o comportamento pradão do site ocorra. Sem essa condição, o comportamento do tempo não será aceito.
+            console.log("Saindo em 5 segundos...")
+            
+            setTimeout(() =>{
+                const link = e.target //o target do link (e) recebido por parâmetro será salvo numa variável
+                window.location.href = link.href // substituíndo o link do endereçamento
+            },5000)//Estabelecendo o tempo de execução da função
+       }
+    </script>
+~~~~
+
+Criando um evento com atributo personalizado
+
+~~~~javascript
+<div>
+        <a esperar-carregamento href="https://google.com.br" >Google</a>
+    </div>
+    <script>
+        
+       function navegarEm5s(e){
+           e.preventDefault()
+            console.log("Saindo em 5 segundos...")
+            
+            setTimeout(() =>{
+                const link = e.target 
+                window.location.href = link.href 
+            },5000)
+
+        const a = document.querySelector('[esperar-carregamento]')
+        a.onclick = navegarEm5s
+       }
+    </script>
 ~~~~
 
 
 
-~~~~javascript
-
-~~~~
-
-
+Exemplo: Mover uma div com o mouse
 
 ~~~~javascript
+<body class="conteudo exercicio">
+    <div>Elemento</div>
 
-~~~~
+    <script>
+        const item = document.querySelector('div')
+        //definindo a posição da div em absolute
+        item.style.position = 'absolute'
+        //Adicionando uma função para arrastar a div com o mouse
+        item.onmousemove = e => {
+            // e -> o evento (parâmetro)
+            // item -> div responsável por disparar o evento
+            const item = e.target
+            item.style.cursor = 'move'
+            
+            if (e.buttons){              
+                // target.style.top -> div cujo position é top
+                // e.clientY = cursor do mouse no eixo Y que será subtraído pela metade da altura
+                item.style.top = `${e.clientY - (item.clientHeight / 2)}px`
+                // e.clientX = cursor do mouse no eixo X que será subtraído pela metade da largura
+                item.style.left = `${e.clientX - (item.clientWidth / 2)}px`
+            }
+        }
 
-
-
-~~~~javascript
-
+    </script>
+</body>
 ~~~~
 
 

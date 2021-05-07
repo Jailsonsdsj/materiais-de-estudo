@@ -12,7 +12,26 @@
         <p>Texto Inicial</p>
     </div>
     <script>
-        // ...
+        //Substituíndo os elementos de dentro div
+       const div = documnet.querySelector('div')
+       div.innerHTML = 'Texto Alterado'
+      
+      //substituíndo o prório elemento
+      div.outerHTML = "Texto Alterado"
+
+      //Inserindo um elemento antes do refenciado
+      div.insertAdjacentHTML('beforebegin','<p> Texto </p>')
+
+      //Inserindo um elemento depois do início 
+      div.insertAdjacentHTML('afterbegin','<p> Texto </p>')
+
+      //Inserindo um elemento antes do fim 
+      div.insertAdjacentHTML('beforeend','<p> Texto </p>')
+
+      //Inserindo um elemento depois do fim 
+      div.insertAdjacentHTML('afterend','<p> Texto </p>')
+
+        
     </script>
 </body>
 
