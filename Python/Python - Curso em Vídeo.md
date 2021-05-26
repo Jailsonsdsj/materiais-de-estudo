@@ -1,8 +1,14 @@
 # Python - Curso em Vídeo 🐍
 
+Criado por: Jailson Júnior
+
+GitHub | Linkedin
 
 
-Uma associação de todos os conhecimentos adquiridos na linguagem Python 3 através do curso em vídeo, produzido por Gustavo Guanabara, e as demais fontes de referências existentes na internet.
+
+Uma associação de todos os conhecimentos adquiridos na linguagem Python 3 através do curso em vídeo, produzido por Gustavo Guanabara, e demais fontes de referências.
+
+
 
 
 
@@ -14,7 +20,9 @@ Uma associação de todos os conhecimentos adquiridos na linguagem Python 3 atra
 
 Escrever mensagem na tela 
 
-Print(‘a mensagem que você quer exibir’)
+~~~~python
+print("A mensagem que deseja exibir")
+~~~~
 
 Toda mensagem deve estar entre aspas. As aspas podem ser simples ou duplas.
 
@@ -38,7 +46,7 @@ print(f'O {nome} tem {idade} anos.')#python 3.6+
 Toda variável é um objeto no python.
 
 ~~~~python
-nome=’júnior’
+nome="júnior"
 idade=20
 peso=83
 print (nome, idade, peso)
@@ -47,9 +55,9 @@ print (nome, idade, peso)
 Inserindo dados nas variáveis com o input:
 
 ~~~~python
-nome=input(‘Qual é o seu nome?’)
-idade=input(‘Qual é a sua idade?’)
-peso=input(‘Qual é o seu peso?’)
+nome=input("Qual é o seu nome?")
+idade=input("Qual é a sua idade?")
+peso=input("Qual é o seu peso?")
 ~~~~
 
 
@@ -60,10 +68,10 @@ peso=input(‘Qual é o seu peso?’)
 Int: 7 ; -4 ; 0  ; 9875
 Float: 4.5 ; 0.076 ; -15.223 ; 7.0
 Bool: True ; False
-Str: “Olá, mundo” ; “7.5”
+Str: "Olá, mundo” ; "7.5”
 
-Print(“A soma vale”, s)
-Print(“A soma vale {}”, .format(s))
+Print("A soma vale”, s)
+Print("A soma vale {}”, .format(s))
 ~~~~
 
 
@@ -112,10 +120,6 @@ Ordem de Precedência
 
 
 
-**INSERIR MAIS INFORMAÇÕES SOBRE O MÓDULO OU RESTO DA DIVISÃO INTEIRA DE UM NÚMERO**
-
-
-
 **Exemplo**
 
 ~~~~python
@@ -138,15 +142,15 @@ print("Divisão inteira {} e pontência {}".format(di.p))
 
 
 
-**Quebra de linhas**
+### **Quebra de linhas**
 
 \n quebra a linha
 
-End=”” não quebra a linha entre um print e outro
+End="" não quebra a linha entre um print e outro
 
 
 
-**Módulos**
+### **Módulos**
 
 Os módulos são bibliotecas, com funções pré-definidas, que podem ser exportadas da comunidade para o seu algoritmo.
 
@@ -251,11 +255,11 @@ print(frase.upper().count('o')) #Conta a quantidade de 'o' apenas nos caracteres
 ### **Funções Condicionais**
 
 ~~~~python
-tempo=int(input(“Quantos anos tem o seu carro?”)
+tempo=int(input("Quantos anos tem o seu carro?"))
 if tempo <=3:
-	print(“O seu carro é novo”)
+	print("O seu carro é novo")
 else:
-	print(“O seu carro é velho”)
+	print("O seu carro é velho")
 ~~~~
 
 
@@ -263,14 +267,14 @@ else:
 ### **Forma Reduzida do If Else**
 
 ~~~~python
-tempo=int(input(“Quantos anos tem o seu carro?”))
-print(“Carro novo” if tempo <=3 else “Carro velho”)
+tempo=int(input("Quantos anos tem o seu carro?"))
+print("Carro novo" if tempo <=3 else "Carro velho")
 
 ~~~~
 
 
 
-Exemplos:
+**Exemplos:**
 
 ~~~~python
 nome=str(input('Qual é o seu nome?'))
@@ -1263,7 +1267,7 @@ print(f'No programa principal, a varíavel n vale {n}')
 
 
 
-Ao declarar “Global a” no algoritmo abaixo, a variável local deixará de ser usada e o algoritmo irá considerar a variável Global
+Ao declarar "Global a" no algoritmo abaixo, a variável local deixará de ser usada e o algoritmo irá considerar a variável Global
 
 <a href="https://imgur.com/237jDes"><img src="https://i.imgur.com/237jDes.png" title="source: imgur.com" /></a>
 
