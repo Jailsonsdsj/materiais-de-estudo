@@ -310,7 +310,7 @@ Mais informações sobre boolean: https://developer.mozilla.org/pt-BR/docs/Web/J
 
 ### Tipos em JavaScript: Array
 
-Os array são do tipo objeto em javascritp
+Os array são do tipo objeto em javascript
 
 ~~~~javascript
 const valores = [7.7,8.9,6.3,9,2]
@@ -390,6 +390,8 @@ Mais informações sobre Object: https://developer.mozilla.org/pt-BR/docs/Web/Ja
 Quando o endereço de um objeto é passado de uma variável ou constante para outra.
 
 Exemplo:
+
+
 
 ~~~~javascript
 const a = {nome: 'Teste'}
@@ -1941,6 +1943,8 @@ console.log(pessoa)
 
 
 ### Getters/Setters
+
+
 
 ~~~~~~~~javascript
 const sequencia = {
