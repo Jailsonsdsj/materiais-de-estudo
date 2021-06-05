@@ -52,7 +52,7 @@ Por exemplo, o pseudo-elemento [`::first-line`](https://developer.mozilla.org/pt
 
 Existem dois tipos de nomenclaturas utilizado pela maioria dos desenvolvedores: o dash-case e o camelCase. 
 
-Enquanto o dash-case utiliza um travessão para separar as palavras, o camelCase utiliza a segunda inicial da palavra maiúscula e sem espaço.
+Enquanto o dash-case utiliza um travessão (-) para separar as palavras, o camelCase utiliza a segunda inicial da palavra maiúscula e sem espaço.
 
 
 
@@ -62,7 +62,7 @@ Enquanto o dash-case utiliza um travessão para separar as palavras, o camelCase
 
 #### CSS Interno
 
-CSS interno é colocado na seção` <head> `de uma determinada página. As classes e IDs podem ser usados para se referir ao código CSS, mas eles só estão ativos nessa página específica. 
+CSS interno é, geralmente, colocado na seção` <head> `de uma determinada página. As classes e IDs podem ser usados para se referir ao código CSS, mas eles só estão ativos nessa página específica. 
 
 
 
@@ -122,7 +122,7 @@ head{
 
 #### CSS In Line
 
-O CSS inline é usado para uma tag HTML específica. O atributo <style> é usado para formatar uma tag HTML específica. Usar CSS desta forma não é recomendado, pois cada tag HTML precisa ser denominada individualmente.
+O CSS inline é usado para uma tag HTML específica. O atributo <style> é usado para formatar uma tag HTML específica. Esse tipo de CSS deve ser aplicado apenas em casos específicos, pois cada tag HTML precisa ser denominada individualmente.
 
 ~~~~css
 <!DOCTYPE html>
@@ -142,7 +142,7 @@ O CSS inline é usado para uma tag HTML específica. O atributo <style> é usado
 
 A ordem de prioridade das formas aplicadas dependem do processamento. Se o CSS interno estiver antes da chamada do CSS externo, obviamente o CSS interno será predominante na página.
 
-Já o CSS In Line tem preferência sobre todas as outras formas de estilo, contudo não é uma boa prática.
+Já o CSS In Line tem preferência sobre todas as outras formas de estilo, contudo, como dito anteriormente, não é uma boa prática.
 
 
 
@@ -179,8 +179,6 @@ Fonte: https://www.hostinger.com.br/tutoriais/diferenca-entre-estilos-css/
 
 
 ### Exemplo Prático
-
-
 
 #### Adjacent sibling
 
@@ -289,7 +287,7 @@ Exemplo prático:
         }
 ~~~~
 
-No caso acima, o elemento elencado com a classe terá prioridade em relação aos demais.
+No caso acima, o elemento p elencado com a classe terá prioridade em relação aos demais.
 
 Em casos de mais de um !important para o mesmo elemento, o último inserido é o que será considerado.
 
@@ -360,12 +358,10 @@ Para evitar, basta algumas das seguintes propriedades:
 
 ### Propriedade Display
 
-
-
 | Propriedade  | Descrição                                                    |
 | ------------ | ------------------------------------------------------------ |
 | block        | Cada elemento será posicionado em uma única linha            |
-| inline       | Todos os elementos serão posicionados na mesma linha. width e height não são considerados. Necessário utilizar o pading para alterar os tamanhos. |
+| inline       | Todos os elementos serão posicionados na mesma linha. width e height não são considerados. Necessário utilizar o padding para alterar os tamanhos. |
 | inline-block | Todos os elementos também serão posicionados na mesma linha, porém width e height serão considerados. |
 
 
@@ -744,13 +740,13 @@ justify-content: center;
 <a href="https://imgur.com/5vO8TBw"><img src="https://i.imgur.com/5vO8TBw.png" title="source: imgur.com" /></a>
 
 ~~~~css
-justify-content: space-between;
+justify-content: space-around;
 ~~~~
 
 <a href="https://imgur.com/fznkXWZ"><img src="https://i.imgur.com/fznkXWZ.png" title="source: imgur.com" /></a>
 
 ~~~~css
-justify-content: space-around;
+justify-content: space-between;
 ~~~~
 
 <a href="https://imgur.com/UWCuZ2B"><img src="https://i.imgur.com/UWCuZ2B.png" title="source: imgur.com" /></a>
@@ -959,10 +955,12 @@ background: linear-gradient(rgba(0,0,0,.50),rgba(0,0,0.50)100%), url('../img/cap
 ### Atrasar animação ou efeito do CSS
 
 ~~~~css
-
+transition: 0.5s ease all;
 ~~~~
 
 
+
+### Variáveis em CSS
 
 ~~~~css
 
