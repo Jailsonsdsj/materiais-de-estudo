@@ -1933,11 +1933,6 @@ pessoa = {nome : 'Pedro'}
 
 Porém, é possível alterar o atributo do objeto
 
-~~~~~~~~javascript
-pessoa.nome = 'Pedro'
-console.log(pessoa)
-~~~~
-
 
 
 ### Getters/Setters
@@ -2949,7 +2944,7 @@ O nodemon é um utilitário que irá monitorar todas as alterações nos arquivo
 
 No terminal (no caso do windows, sem o sudo)
 
-~~~~javascript
+~~~~
 sudo npm i -g nodemon
 ~~~~
 
@@ -3397,152 +3392,5 @@ Exemplo: Mover uma div com o mouse
     </script>
 </body>
 ~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
-~~~~javascript
-
-~~~~
-
-
-
 
 
