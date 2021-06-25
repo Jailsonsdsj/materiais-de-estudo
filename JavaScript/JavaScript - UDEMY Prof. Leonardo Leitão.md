@@ -1942,7 +1942,7 @@ console.log(pessoa)
 
 ### Getters/Setters
 
-~~~~~~~~javascript
+~~~~javascript
 const sequencia = {
     _valor: 1,
     get valor(){
@@ -1985,7 +1985,7 @@ console.log(Object.keys(pessoas))
 
 **Todos os valores**
 
-~~~~~~~~javascript
+~~~~javascript
 console.log(Object.values(pessoas))
 ~~~~
 
@@ -2007,7 +2007,7 @@ Object.entries(pessoas).forEach (([chave,valor]) => {
 
 **Definindo a propriedade dos atributos de um objeto**
 
-~~~~~~~~javascript
+~~~~javascript
 Object.defineProperty(pessoas, 'dataNascimento',{//objeto , 'atributo'
     // definindo propriedades
     enumerable: true, //permissão para ser listada
@@ -2052,7 +2052,7 @@ console.log(obj)
 
 Previne que a quantidade de atributos do objeto seja estendida
 
-~~~~~~~~javascript
+~~~~javascript
 const objeto = Object.preventExtensions({
     nome: 'Qualquer', preco: 1.99, tag: 'promoção'
 })
@@ -2078,7 +2078,7 @@ const objeto = Object.seal({
 
 ou:
 
-~~~~~~~~javascript
+~~~~javascript
 Object.seal(objeto)
 ~~~~
 
@@ -2121,7 +2121,7 @@ const objt = JSON.stringify({ a:1, b:2, c:3, soma(){return a+b+c}})
 
 **Passando o JSON para objeto**
 
-~~~~~~~~javascript
+~~~~javascript
 console.log(JSON.parse('{"info": "Arquivo JSON"}'))
 ~~~~
 
@@ -2187,7 +2187,7 @@ console.log(quadrado.area);
 
 **Métodos estáticos**
 
-~~~~~~~~javascript
+~~~~javascript
 class Ponto {
     constructor(x, y) {
         this.x = x;
@@ -2259,7 +2259,7 @@ console.log(frutas.length);
 
 **Acessar um item (index) do Array**
 
-~~~~~~~~javascript
+~~~~javascript
 var primeiro = frutas[0];
 // Maçã
 
@@ -2293,7 +2293,7 @@ var adicionar = frutas.push('Laranja');
 
 **Remover um item do final do Array**
 
-~~~~~~~~javascript
+~~~~javascript
 var ultimo = frutas.pop(); // remove Laranja (do final)
 // ['Maçã', 'Banana'];
 ~~~~
@@ -2320,7 +2320,7 @@ var adicionar = frutas.unshift('Morango') // adiciona ao início
 
 **Procurar o índice de um item na** **Array**
 
-~~~~~~~~javascript
+~~~~javascript
 frutas.push('Manga');
 // ['Morango', 'Banana', 'Manga']
 
@@ -2366,7 +2366,7 @@ console.log(itensRemovidos);
 
 **Copiar um Array**
 
-~~~~~~~~javascript
+~~~~javascript
 var copiar = frutas.slice(); // é assim que se copia
 // ['Morango', 'Manga']
 
@@ -2402,7 +2402,7 @@ aprovados.forEach(function(nome,indice){
 
 Exemplo 2
 
-~~~~~~~~javascript
+~~~~javascript
 aprovados.forEach(nome => console.log(nome))
 ~~~~
 
@@ -2439,7 +2439,7 @@ console.log(resultado)
 
 Outros Exemplos
 
-~~~~~~~~javascript
+~~~~javascript
 const soma10 = e => e + 10
 const triplo = e => e * 3
 const paraDinheiro = e => `R$ ${parseFloat(e).toFixed(2).replace('.',',')}`
@@ -2499,7 +2499,7 @@ Serve para filtrar um array
 
 **Exemplo**
 
-~~~~~~~~javascript
+~~~~javascript
 const produtos = [
     { nome: 'Notebook', preco: 2499, fragil: true },
     { nome: 'iPad Pro', preco: 4199, fragil: true },
@@ -2568,7 +2568,7 @@ console.log(array1.reduce(reducer, 5));
 
 **Somar todos os valores de um array:**
 
-~~~~~~~~javascript
+~~~~javascript
 let total = [0, 1, 2, 3].reduce(function(acumulador, valorAtual) {
    return acumulador + valorAtual;
  }, 0)
@@ -2623,7 +2623,7 @@ console.log(resultado)
 
 Exemplo 2: Todos os alunos são bolsistas?
 
-~~~~~~~~javascript
+~~~~javascript
 const bolsistas = (resultado, bolsista) => resultado && bolsista
 
 //O map irá percorrer os elementos 'bolsistas' do array, e irá retornar apenas os que forem verdadeiros com a função reduce bolsista
@@ -2669,7 +2669,7 @@ console.log(nums.reduce2(soma))
 
 Em uma abordagem imperativa, o método em que um algoritmo é feito é mais importante que o resultado dele
 
-~~~~~~~~javascript
+~~~~javascript
 let total1 = 0
 for (let i = 0; i < alunos.length; i++){
     total1 += alunos[i].nota
@@ -2715,7 +2715,7 @@ O método **`flatMap()`** primeiro mapeia cada elemento usando uma função de m
 
 Exemplo: Extraindo as notas de todas as turmas
 
-~~~~~~~~javascript
+~~~~javascript
 const escola = [{
     nome: 'Turma M1',
     alunos: [{
@@ -2908,7 +2908,7 @@ Agora, os objetos criados estarão disponíveis para exportação
 
 Importando os módulos em um novo arquivo
 
-~~~~~~~~javascript
+~~~~javascript
 const moduloA = require('./moduloA')
 const moduloB = require('./moduloB')
 
