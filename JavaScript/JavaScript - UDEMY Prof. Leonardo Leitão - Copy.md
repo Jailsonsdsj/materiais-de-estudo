@@ -1938,3 +1938,1045 @@ pessoa.nome = 'Pedro'
 console.log(pessoa)
 ~~~
 
+
+
+
+
+### Funções importantes de objects
+
+
+
+~~~~javascript
+const pessoas = {
+    nome: 'Rebeca',
+    idade: 2,
+    peso: 13,
+    dataNascimento: '01/01/2019'
+}
+~~~~
+
+
+
+**Todas as chaves do objeto**
+
+~~~~javascript
+console.log(Object.keys(pessoas))
+~~~~
+
+
+
+**Todos os valores**
+
+~~~~~~~~javascript
+console.log(Object.values(pessoas))
+~~~~
+
+
+
+**Todos os pares de chaves e valores**
+
+~~~~javascript
+console.log(Object.entries(pessoas))
+~~~~
+
+~~~~javascript
+Object.entries(pessoas).forEach (([chave,valor]) => {
+    console.log(`${chave}: ${valor}`)
+})
+~~~~
+
+
+
+**Definindo a propriedade dos atributos de um objeto**
+
+~~~~~~~~javascript
+Object.defineProperty(pessoas, 'dataNascimento',{//objeto , 'atributo'
+    // definindo propriedades
+    enumerable: true, //permissão para ser listada
+    writable: false, //permissão para ser sobreescrita
+    value: '01/01/2019' //definição padrão
+})
+~~~~
+
+A partir de agora a data de nascimento passará a ter uma data padrão e não poderá ser alterada
+
+
+
+**Object.assign**
+
+Concatena atributos de diferentes objetos para um único objeto
+
+~~~~javascript
+const dest = {a: 1}
+const o2 = {b: 2}
+const o3 = { c: 3, a:4}
+const obj = Object.assign(dest,o2,o3)
+console.log(obj)
+~~~~
+
+
+
+### Herança
+
+[Sessão adiada]
+
+~~~~javascript
+
+~~~~
+
+
+
+### Evitando Modificações
+
+
+
+**Object.preventextensions**
+
+Previne que a quantidade de atributos do objeto seja estendida
+
+~~~~~~~~javascript
+const objeto = Object.preventExtensions({
+    nome: 'Qualquer', preco: 1.99, tag: 'promoção'
+})
+~~~~
+
+Ou:
+
+~~~~javascript
+Object.preventExtensions(objeto)
+~~~~
+
+
+
+**Object.seal**
+
+Só será possível modificar os atributos existentes. Não será possível adicionar nem excluir
+
+~~~~javascript
+const objeto = Object.seal({
+    nome: 'Qualquer', preco: 1.99, tag: 'promoção'
+})
+~~~~
+
+ou:
+
+~~~~~~~~javascript
+Object.seal(objeto)
+~~~~
+
+
+
+**Congelando o objeto**
+
+Após congelar o objeto, não será possível alterar o objeto e todos os atributos passará a ser uma constante
+
+~~~~javascript
+Object.freeze(pessoa)
+~~~~
+
+No caso abaixo, o objeto já é atribuído com os atributos sendo constante
+
+~~~~javascript
+const pessoaConstante = Object.freeze({nome:"João"})
+~~~~
+
+
+
+
+
+### JSON vs Object
+
+**Passando o objeto para JSON**
+
+~~~~javascript
+const objt = { a:1, b:2, c:3, soma(){return a+b+c}}
+console.log(JSON.stringify(objt))
+~~~~
+
+ou
+
+~~~~javascript
+const objt = JSON.stringify({ a:1, b:2, c:3, soma(){return a+b+c}})
+~~~~
+
+
+
+**Passando o JSON para objeto**
+
+~~~~~~~~javascript
+console.log(JSON.parse('{"info": "Arquivo JSON"}'))
+~~~~
+
+
+
+## 📌Classe
+
+### Criando uma classe
+
+Primeiramente deve declarar sua classe para só então acessa-la. As classes também podem possuir nomes ou não.
+
+~~~~javascript
+// sem nome
+let Retangulo = class {
+  constructor(altura, largura) {
+    this.altura = altura;
+    this.largura = largura;
+  }
+};
+
+// nomeada
+let Retangulo = class Retangulo {
+  constructor(altura, largura) {
+    this.altura = altura;
+    this.largura = largura;
+  }
+};
+
+const p = new Retangulo();
+~~~~
+
+
+
+### Corpo de uma classe e definições de métodos
+
+
+
+**Métodos Protótipos**
+
+A palavra-chave `static` define um método estático de uma classe. Métodos estáticos são chamados sem a instanciação da sua classe e não podem ser chamados quando a classe é instanciada. Métodos estáticos são geralmente usados para criar funções de utilidades por uma aplicação.
+
+~~~~javascript
+class Retangulo {
+    constructor(altura, largura) {
+      this.altura = altura; this.largura = largura;
+    }
+  	//Getter
+    get area() {
+        return this.calculaArea()
+    }
+
+    calculaArea() {
+        return this.altura * this.largura;
+    }
+}
+
+const quadrado = new Retangulo(10, 10);
+
+console.log(quadrado.area);
+~~~~
+
+
+
+**Métodos estáticos**
+
+~~~~~~~~javascript
+class Ponto {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    static distancia(a, b) {
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+
+        return Math.hypot(dx, dy);
+    }
+}
+
+const p1 = new Ponto(5, 5);
+const p2 = new Ponto(10, 10);
+
+p1.distancia; //undefined
+p2.distancia; //undefined
+
+console.log(Ponto.distancia(p1, p2));
+~~~~
+
+
+
+### Classes e Heranças por protótipos
+
+~~~~javascript
+class Avo{
+    constructor(sobrenome){
+        this.sobrenome = sobrenome;
+    }
+}
+
+
+class Pai extends Avo{
+    constructor(sobrenome,profissao ='Professor'){
+        super(sobrenome)
+        this.profissao = profissao
+    }
+}
+
+class Filho extends Pai{
+    constructor(){
+        super('Silva')
+    }
+}
+
+const filho = new Filho
+console.log(filho)
+~~~~
+
+
+
+## 📌Array
+
+### Funções de Array
+
+**Criando um Array**
+
+~~~~javascript
+var frutas = ['Maçã', 'Banana'];
+
+console.log(frutas.length);
+// 2
+~~~~
+
+
+
+**Acessar um item (index) do Array**
+
+~~~~~~~~javascript
+var primeiro = frutas[0];
+// Maçã
+
+var ultimo = frutas[frutas.length - 1];
+// Banana
+~~~~
+
+
+
+**Iterar um Array**
+
+~~~~javascript
+frutas.forEach(function (item, indice, array) {
+  console.log(item, indice);
+});
+// Maçã 0
+// Banana 1
+~~~~
+
+
+
+**Adicionar um item ao final do Array**
+
+~~~~javascript
+var adicionar = frutas.push('Laranja');
+// ['Maçã', 'Banana', 'Laranja']
+
+~~~~
+
+
+
+**Remover um item do final do Array**
+
+~~~~~~~~javascript
+var ultimo = frutas.pop(); // remove Laranja (do final)// ['Maçã', 'Banana'];
+~~~~
+
+
+
+**Remover do início do Array**
+
+~~~~javascript
+var primeiro = frutas.shift(); // remove Maçã do início// ['Banana'];
+~~~~
+
+
+
+**Adicionar ao início do Array**
+
+~~~~javascript
+var adicionar = frutas.unshift('Morango') // adiciona ao início// ['Morango', 'Banana'];
+~~~~
+
+
+
+**Procurar o índice de um item na** **Array**
+
+~~~~~~~~javascript
+frutas.push('Manga');// ['Morango', 'Banana', 'Manga']var pos = frutas.indexOf('Banana');// 1
+~~~~
+
+
+
+**Remover um item pela posição do índice**
+
+~~~~javascript
+var removedItem = frutas.splice(pos, 1); // é assim que se remove um item// ['Morango', 'Manga']
+~~~~
+
+
+
+**Remover itens a partir de uma posição de índice**
+
+~~~~javascript
+var vegetais = ['Repolho', 'Nabo', 'Rabanete', 'Cenoura'];console.log(vegetais);// ['Repolho', 'Nabo', 'Rabanete', 'Cenoura']var pos = 1, n = 2;var itensRemovidos = vegetais.splice(pos, n);// Isso é como se faz para remover itens, n define o número de itens a se remover,// a partir da posição (pos) em direção ao fim da array.console.log(vegetais);// ['Repolho', 'Cenoura'] (o array original é alterado)console.log(itensRemovidos);// ['Nabo', 'Rabanete']
+~~~~
+
+
+
+**Copiar um Array**
+
+~~~~~~~~javascript
+var copiar = frutas.slice(); // é assim que se copia// ['Morango', 'Manga']
+~~~~
+
+
+
+Quando configurar uma propriedade num array Javascript em que a propriedade é um índice valido do array e este índice está fora do atual limite do array, o array irá crescer para um tamanho grande o suficiente para acomodar o elemento neste índice, e a engine irá atualizar a propriedade *length* do array de acordo com isto:
+
+~~~~javascript
+frutas[5] = 'manga';console.log(frutas[5]); // 'manga'console.log(Object.keys(frutas)); // ['0', '1', '2', '5']console.log(frutas.length); // 6
+~~~~
+
+
+
+### ForEach
+
+Exemplo 1
+
+~~~~javascript
+const aprovados = ['Júnior','Melo','Paulo','Ana','Rafaela','Valéria']aprovados.forEach(function(nome,indice){    console.log(`${indice} - ${nome}`)})
+~~~~
+
+
+
+Exemplo 2
+
+~~~~~~~~javascript
+aprovados.forEach(nome => console.log(nome))
+~~~~
+
+
+
+Exemplo 3
+
+~~~~javascript
+const exibirAprovados = aprovado => console.log(aprovado)aprovados.forEach(exibirAprovados)
+~~~~
+
+
+
+### Map
+
+Função para percorrer o array. 
+
+Exemplo 1
+
+~~~~javascript
+const nums = [1,2,3,4,5]//Gerando o dobro dos elementoslet resultado = nums.map(function(e){    return e * 2})console.log(resultado)
+~~~~
+
+
+
+Outros Exemplos
+
+~~~~~~~~javascript
+const soma10 = e => e + 10const triplo = e => e * 3const paraDinheiro = e => `R$ ${parseFloat(e).toFixed(2).replace('.',',')}`resultado = nums.map(soma10).map(triplo).map(paraDinheiro)console.log(resultado)
+~~~~
+
+
+
+**Exemplo**
+
+Retorne apenas o preço do produto de um arquivo JSON
+
+~~~~javascript
+const carrinho  = [     '{"nome":"Borracha", "Preco":3.45}',    '{"nome":"caderno", "Preco":12.99}',    '{"nome":"Caneta", "Preco":2.00}',    '{"nome":"Borracha", "Preco":1.00}',    '{"nome":"Lápis de Cor", "Preco":4.50}',    '{"nome":"Piloto", "Preco":3.20}',]/Função para converter texto para objetoconst paraObjeto = json => JSON.parse(json)//Função para retornar apenas o preçoconst apenasPreco = produto => produto.preco//Aplicando as funções ao JSONconst resultado = carrinho.map(paraObjeto).map(apenasPreco)console.log(resultado)
+~~~~
+
+
+
+Entendendo o funcionamento do Map
+
+~~~~javascript
+Array.prototype.map2 = function(callback){    const newArray = []    for (let i=0; i < this.length; i++){        newArray.push(callback(this[i], i,this))    }    return newArray}
+~~~~
+
+
+
+### Filter
+
+Serve para filtrar um array 
+
+**Exemplo**
+
+~~~~~~~~javascript
+const produtos = [    { nome: 'Notebook', preco: 2499, fragil: true },    { nome: 'iPad Pro', preco: 4199, fragil: true },    { nome: 'Copo de Vidro', preco: 4, fragil: true },    { nome: 'TV', preco: 5000, fragil: true },    { nome: 'Cadeira', preco: 400, fragil: false },    { nome: 'Prato de plástico', preco: 2499, fragil: false },]//Função para retornar apenas valores maior ou igual a 500const caro = produto => produto.preco >=500//Função para retornar apenas os produtos frágeisconst fragil  = produto => produto.fragil//Aplicando as funções ao arrayconst resultado = produtos.filter(caro).filter(fragil)console.log(resultado)
+~~~~
+
+
+
+Entendendo o funcionamento do Filter
+
+~~~~javascript
+Array.prototype.filter2 = function(callback){    const newArraty = []    for (let i = 0; i < this.length; i++){        if(callback(this[i], i, this)){            newArraty.push(this[i])        }    }}
+~~~~
+
+
+
+### Reduce
+
+O método `**reduce()**` executa uma função **reducer** (fornecida por você) para cada elemento do array, resultando num único valor de retorno.
+
+São necessários dois elementos, um para servir de índice e outro para o elemento atual do array. 
+
+Pode ser utilizado, juntamente com o map, para substituir a estrutura de repetição FOR e deixar o código mais reduzido
+
+
+
+**Exemplo**
+
+~~~~javascript
+const array1 = [1, 2, 3, 4];const reducer = (accumulator, currentValue) => accumulator + currentValue;// 1 + 2 + 3 + 4console.log(array1.reduce(reducer));// expected output: 10// 5 + 1 + 2 + 3 + 4console.log(array1.reduce(reducer, 5));// expected output: 15
+~~~~
+
+
+
+**Somar todos os valores de um array:**
+
+~~~~~~~~javascript
+let total = [0, 1, 2, 3].reduce(function(acumulador, valorAtual) {   return acumulador + valorAtual; }, 0)// retorna 6
+~~~~
+
+
+
+**Soma de valores de um objeto de um array**
+
+Para resumir os valores contidos em um array, você **deve** fornecer um valo Inicial, para que cada item passe por sua função.
+
+~~~~javascript
+var valorInicial = 0;var soma = [{x: 1}, {x: 2}, {x: 3}].reduce(function (acumulador, valorAtual) {    return acumulador + valorAtual.x;}, valorInicial)console.log(soma) // retorna 
+~~~~
+
+
+
+**Exemplo**
+
+~~~~javascript
+const alunos = [     { nome: 'João', nota: 7.3, bolsista: true},    { nome: 'Maria', nota: 4.5, bolsista: false},    { nome: 'Pedro', nota: 10.0, bolsista: true},    { nome: 'Roberto', nota: 8.0, bolsista: false},    { nome: 'Ana', nota: 7.0, bolsista: false},    { nome: 'Ricardo', nota: 6.0, bolsista: true},]
+~~~~
+
+
+
+~~~~javascript
+console.log(alunos.map(a => a.nota))const resultado = alunos.map(a => a.nota). reduce(function(acumulador, atual){    console.log(acumulador, atual)    return acumulador + atual},0)console.log(resultado)
+~~~~
+
+
+
+Exemplo 2: Todos os alunos são bolsistas?
+
+~~~~~~~~javascript
+const bolsistas = (resultado, bolsista) => resultado && bolsista//O map irá percorrer os elementos 'bolsistas' do array, e irá retornar apenas os que forem verdadeiros com a função reduce bolsistaconsole.log(alunos.map(a=>a.bolsista).reduce(bolsistas))
+~~~~
+
+
+
+Exemplo 3: Existe, pelo menos, um aluno bolsista?
+
+~~~~javascript
+const algumBolsita = (resultado, bolsista) => resultado || bolsistaconsole.log(alunos.map(a => a.bolsista).reduce(algumBolsista))
+~~~~
+
+
+
+Entendendo o funcionamento do Reduce
+
+~~~~javascript
+Array.prototype.reduce2 = function(callback){    let acumulador = this[0]    for (let i = 1; i < this.length; i++){        acumulador = callack(acumulador,this[i], this)    }    return acumulador}const soma = (total, valor) => valor + totalconst nums = [1,2,3,4,5,6,7,8,9,10]console.log(nums.reduce2(soma))
+~~~~
+
+
+
+### Imperativo Vs Declarativo
+
+
+
+**Imperativo**
+
+Em uma abordagem imperativa, o método em que um algoritmo é feito é mais importante que o resultado dele
+
+~~~~~~~~javascript
+let total1 = 0for (let i = 0; i < alunos.length; i++){    total1 += alunos[i].nota}console.log(total1 / alunos.length)
+~~~~
+
+
+
+**Declarativo**
+
+Em uma abordagem declarativa, o foco está atingir o resultado esperado do algoritmo, ao invés de como ele foi construído.
+
+~~~~javascript
+const getNota = aluno => aluno.notaconst soma = (total, atual) => total + atual const total2 = alunos.map(getNota).reduce(soma)console.log(total2 / aluno.length)
+~~~~
+
+
+
+### Concat
+
+Função que concatena dois arrays em um resultante
+
+~~~~javascript
+const mulheres = ['Bruna','Alice','Cláudia']const homens = ['Pedro', 'Daniel', 'Ricardo']const todos = mulheres.concat(homens)console.log(todos)
+~~~~
+
+
+
+
+
+### FlatMap
+
+O método **`flatMap()`** primeiro mapeia cada elemento usando uma função de mapeamento e, em seguida, nivela o resultado em um novo array. É idêntico a um `map` seguido por um `flat` de profundidade 1, mas **`flatMap`** é bastante útil e mescla ambos em um método um pouco mais eficiente
+
+
+
+Exemplo: Extraindo as notas de todas as turmas
+
+~~~~~~~~javascript
+const escola = [{    nome: 'Turma M1',    alunos: [{        nome: 'Ana Cristina',        nota: 9.7    },{        nome: 'Cláudio Bezerra',        nota: 10.0    }],    nome: 'Turma M2',    alunos: [{        nome: 'Flávio Alcantra',        nota: 7.5    },{        nome: 'Daniel Tavares',        nota: 6.5    }],    nome: 'Truma T1',    alunos: [{        nome: 'Vinicius de Castro',        nota: 8.0    },{        nome: 'Verônica Santos',        nota: 10.00    }]  }]//Extraíndo a nota de cada alunoconst getNotaDoAluno = aluno => aluno.nota//Extraíndo todas as notas da turmaconst getNotasDaTurma = turma => turma.alunos.map(getNotaDoAluno)//Neste caso, será gerado um array dentro de um array. Ou seja,as notas ainda serão divididas por turmasconst notas1 = escola.map(getNotasDaTurma)// Para retornar apenas as notas, independente da turma, basta utulizar a função flatmapArray.prototype.flatMap = function(callback){    return Array.prototype.concat.apply([],this.map(callback))}const notas2 = escola.flatMap(getNotasDaTurma)console.log(notas2)
+~~~~
+
+
+
+## 📌Métodos além do curso
+
+
+
+### Timeouts e intervalos
+
+#### **setTimeout**
+
+Executa um bloco específico uma vez depois de um determinado tempo
+
+~~~~javascript
+// With a named functionlet myGreeting = setTimeout(function sayHi() {  alert('Hello, Mr. Universe!');}, 2000) //the function will run after 2 secounds// With a function defined separatelyfunction sayHi() {  alert('Hello Mr. Universe!');}let myGreeting = setTimeout(sayHi, 2000);
+~~~~
+
+
+
+Passando parâmetros para a função setTimeout()
+
+~~~~javascript
+function sayHi(who) {  alert(`Hello ${who}!`);}let myGreeting = setTimeout(sayHi, 2000, 'Mr. Universe');
+~~~~
+
+
+
+Cancelando timeouts
+
+~~~~javascript
+clearTimeout(myGreeting);
+~~~~
+
+
+
+#### setInterval
+
+Executa um bloco específico repetidamente com um intervalo fixo entre cada chamada.
+
+~~~~javascript
+function displayTime() {        let date = new Date();        let time = date.toLocaleTimeString();        document.querySelector('.clock').textContent = time;      }displayTime();      const createClock = setInterval(displayTime, 1000);
+~~~~
+
+
+
+Cancelando Intervals
+
+~~~~javascript
+const myInterval = setInterval(myFunction, 2000);clearInterval(myInterval);
+~~~~
+
+
+
+#### requestAnimationFrame
+
+Uma versão moderna de `setInterval()`. Ela executa um bloc de código específico antes do navegador renderizar a tela novamento, permitindo que seja executada em uma taxa de quadros adequada, independentemente do ambiente em que está sendo executado. Não é possível definir o tempo e, por esse motivo, a função será executada de imediato.
+
+~~~~javascript
+function draw() {   // Drawing code goes here   requestAnimationFrame(draw);}draw();
+~~~~
+
+
+
+
+
+# Node➰
+
+O Node executa códigos JavaScript tanto backend/servidor quanto no frontend/interface.
+
+
+
+## **Sistema de Módulos**
+
+Em Node, cada arquivo representa um módulo. Isto é, apenas uma parte do código geral.
+
+A partir desse conceito, é possível importar e exportar códigos de um arquivo para o outro.
+
+
+
+### Formas de importar e exportar módulo
+
+**Exemplos 1**
+
+Nome do arquivo: "moduloA"
+
+~~~~javascript
+this.ola = "Olá, mundo"
+~~~~
+
+~~~~javascript
+exports.bemVindo = "Bem Vindo ao Node"
+~~~~
+
+~~~~javascript
+module.exports.ateLogo = 'Até logo'
+~~~~
+
+
+
+**Exemplo 2 (modo clássico)**
+
+Nome do arquivo: "moduloB"
+
+~~~~javascript
+module.exports = {    bomDia: 'Bom dia',    boaNoite(){        return "Boa Noite"    }}
+~~~~
+
+Agora, os objetos criados estarão disponíveis para exportação
+
+
+
+Importando os módulos em um novo arquivo
+
+~~~~~~~~javascript
+const moduloA = require('./moduloA')const moduloB = require('./moduloB')console.log(moduloA.ola)console.log(moduloA.bemVindo)console.log(moduloA.ateLogo)console.log(moduloB.bomDia)
+~~~~
+
+
+
+#### Usando Módulos de Terceiros
+
+~~~~javascript
+npm //método responsável por baixar módulos, bibliotecas e afins
+~~~~
+
+
+
+No terminal do Node
+
+~~~~javascript
+npm i lodash
+~~~~
+
+
+
+**Exemplo 1** **- Instalando um módulo a partir de uma pasta**
+
+Utilizaremos a função random que está contida no lodash
+
+~~~~javascript
+const _ = require('lodash') //A partir daí, o próprio node irá procurar os arquivos dentro da pasta de módulossetInterval(() => console.log(_.random(1,1000)),2000)
+~~~~
+
+
+
+**Exemplo 2 - Instalando do módulo nodemon de forma global**
+
+O nodemon é um utilitário que irá monitorar todas as alterações nos arquivos de sua aplicação e reiniciar automaticamente o servidor quando for necessário.
+
+No terminal (no caso do windows, sem o sudo)
+
+~~~~
+sudo npm i -g nodemon
+~~~~
+
+Após isso, o comando nodemon estará disponível.
+
+
+
+#### Sistemas de Módulo Require
+
+**Exemplos**
+
+~~~~javascript
+const moduloA = require("../../moduloA") //os ..console.log(moduloA.ola)
+~~~~
+
+
+
+[INSERIR CONTINUAÇÃO DO CONTEÚDO]
+
+
+
+
+
+# Integrando HTML,CSS e JS 🌌
+
+
+
+### DOM
+
+O DOM (Document Object Model) representa o mesmo documento para que possa ser manipulado. O DOM é uma representação orientada a objetos da página da web, que pode ser modificada com uma linguagem de script como JavaScript.
+
+<a href="https://imgur.com/cTKAZe3"><img src="https://i.imgur.com/cTKAZe3.png" title="source: imgur.com" /></a>
+
+
+
+### Selecionando elementos com do documentElements
+
+
+
+**Por ID**
+
+~~~~javascript
+document.getElementById('id')//Adicionando uma classedocument.getElementById('id').classList.add('destague')//Removendo uma classedocument.getElementById('id').classList.remove('destague')
+~~~~
+
+
+
+**Selecionando mais de um elemento**
+
+~~~~javascript
+const divs = document.getelementsByTagName('div')Array.from(divs).forEach(e => e.classList.remove('destaque'))
+~~~~
+
+Todos os elementos div serão selecionados, jogados em um array e terão a classe destaque removida
+
+
+
+**Outra forma de transformar os elementos em um array**
+
+~~~~javascript
+const divsArray = [...divs]divsArray.forEach(e => e.classList.add('destaque'))
+~~~~
+
+
+
+**Selecionando por classe**
+
+~~~~javascript
+const ultimosElementos = document.getElementsByClassName('ultimo')for (let e of ultimosElementos){    e.classList.remove('destaque')}
+~~~~
+
+
+
+### Selecionando elementos com o querySelector
+
+O querySelector espera um seletor por CSS
+
+~~~~javascript
+document.querySelector("#id") //observe que neste caso utilizaremos o # ou .
+~~~~
+
+
+
+**Exemplo:**
+
+~~~~javascript
+document.querySelector("#primeiro").classList.add('destaque')
+~~~~
+
+~~~~javascript
+const selecionar = selector =>	document.querySelectorAll(selector).forEach(e => e.classList.add('destaque'))selecionar('div')selecionar('.terceiro.ultimo')selecionar(':not(#primeiro)')
+~~~~
+
+O querySelectorAll seleciona todos os elementos e retorna no formato nodelist. Algumas funções como o forEach estão disponíveis. Para outras, será necessário utilizar um array.
+
+
+
+~~~~javascript
+const deselecionar = seletor = >       document.querySelectorAll(selector).forEach(e => e.classList.remove('destaque'))deselecionar('*')
+~~~~
+
+
+
+### Selecionando forms com o document.forms
+
+~~~~javascript
+console.log(documnet.forms)console.log(document.forms[0])console.log(document.getElementsByName('pesquisa'))//Nome do formulárioconsole.log(document.pesquisa)document.pesquisa.q.value = 'linux' //Altera o valor do input a partir do namedocument.pesquisa.hl.
+~~~~
+
+
+
+### Acessando Atributos
+
+~~~~javascript
+const img = document.querySelector('img') //Seleciona o elementoconst img = document.querySelector('.img') //Seleciona uma classeconst img = document.querySelector('#img') //Seleciona um IDconst img = document.querySelector('[img]') //Seleciona uma propriedade
+~~~~
+
+
+
+Exemplo 1: acessando o src da imagem
+
+~~~~javascript
+//Método 1console.log('getAttribute', img.getAttribute('src'))//Método 2console.log('src', img.src)
+~~~~
+
+
+
+Exemplo 2: alterando o valor de um link
+
+~~~~javascript
+//Método 1const link = document.querySelector('a')link.firstChild.nodeValue = "Novo Texto"//Método 2const link = document.querySelector('a')link.innerHtml = "Texto 2"
+~~~~
+
+
+
+Exemplo 3: acessando as propriedades de um elemento
+
+~~~~html
+<body class='conteudo exercicio'>    <div>        <label for="compras">Compras</label>        <ul id="compras" destino='escritório' data-urgencia="5">            <li>Café</li>            <li>Água</li>            <li>Copo Descartável</li>        </ul>    </div></body> <script>        const lista = document.querySelector('#compras')        //Acessando as propriedades do elemento ul        //Elementos filhos        console.log("childNodes",lista.childNodes)         //valor de um elemento        console.log('destino',lista.destino) //Como 'destino' não é uma propriedade reconhecida, será retornado undefield        //valor de um elemento        console.log('getAttribute',lista.getAttribute('destino'))                //atribuindo um atributo        lista.setAttribute('destino','empresa')        //removendo um atributo        lista.removeAttribute('destino')    </script>
+~~~~
+
+
+
+Exemplo 4: acessando somente leitura
+
+~~~~html
+<body class='conteudo exercicio'>    <div>        <ul id="compras" destino='escritório' data-urgencia="5">            <li>Café</li>            <li>Água</li>            <li>Copo Descartável</li>        </ul>    </div></body><script>        const lista = document.querySelector('#compras')        //Somente leitura        console.log(lista.attributes)        console.log(lista.attributes[0])        console.log(lista.attributes[1])        console.log(lista.attributes.id)        console.log(lista.attributes.destino)        console.log(lista.attributes['data-urgencia'])            </script>
+~~~~
+
+
+
+
+
+### Acessando Classes
+
+~~~~html
+<body class='conteudo exercicio'>    <div>        Classes    </div>    </body><script>        //obtendo a lista de classes do elemento div        const classes = document.querySelector('div').classList        //adicionando classe        classes.add('destaque')        //removendo classe        classs.remove('destaque')        //verificando se uma classe está inserida no elemento        console.log(classes.contains('destaque'))        //quantidade de classes        console.log(classes.length)            </script>
+~~~~
+
+
+
+### Modificando o HTML
+
+
+
+~~~~html
+<body class='conteudo exercicio'>    <script>       const body = document.querySelector('body')        //Criando uma div       const div1 = document.createElement('div')       //adicionando classe na div       div1.classList.add('destaque')       //adicionando texto na div       div1.innerHTML = 'Primeiro'       const div2 = document.createElement('div')       div2.setAttribute('wm-atributo','valor')       div2.innerHTML = 'Segundo'       const p = document.createElement('p')       p.innerHTML = 'Terceiro'       const div3 = document.createElement('div')       //enviando a div 3 para o último elemento do p       div3.appendChild(p)        //enviando a div criada para o body do HTML       body.appendChild(div1)       body.appendChild(div2)       body.appendChild(div3)        //clonando um elemento        const div4 = div3.cloneNode(true)        body.appendChild(div4)  </script>
+~~~~
+
+
+
+~~~~html
+<body class='conteudo exercicio'>    <div>        <p>Texto Inicial</p>    </div>    <script>        //Substituíndo os elementos de dentro div       const div = documnet.querySelector('div')       div.innerHTML = 'Texto Alterado'            //substituíndo o prório elemento      div.outerHTML = "Texto Alterado"      //Inserindo um elemento antes do refenciado      div.insertAdjacentHTML('beforebegin','<p> Texto </p>')      //Inserindo um elemento depois do início       div.insertAdjacentHTML('afterbegin','<p> Texto </p>')      //Inserindo um elemento antes do fim       div.insertAdjacentHTML('beforeend','<p> Texto </p>')      //Inserindo um elemento depois do fim       div.insertAdjacentHTML('afterend','<p> Texto </p>')    </script></body>
+~~~~
+
+Obtendo apenas do texto de um elemento
+
+~~~~javascript
+console.log(div.innerText)
+~~~~
+
+
+
+### Eventos
+
+Criando um evento de click
+
+~~~~html
+<div>
+        <a href="https://google.com.br" onclick="navegarEm5s(event)">Google</a>
+    </div>
+    <script>
+       function navegarEm5s(e){
+           e.preventDefault()//previne que o comportamento pradão do site ocorra. Sem essa condição, o comportamento do tempo não será aceito.
+            console.log("Saindo em 5 segundos...")
+            
+            setTimeout(() =>{
+                const link = e.target //o target reponsável por ativar o evento em uma tag link. 
+                window.location.href = link.href // substituíndo o link do endereçamento
+                //isso fica como: e.target.href
+            },5000)//Estabelecendo o tempo de execução da função
+       }
+    </script>
+~~~~
+
+
+
+Outro método: o onclick estará inserido dentro do próprio script
+
+~~~~html
+<div>
+        <a href="https://google.com.br">Google</a>
+    </div>
+<script>
+	function navegarEm5s(e){
+          e.preventDefault();
+          console.log('Saindo em 5s...');
+          setTimeout(()=> {
+              const link = e.target
+              window.location.href = link.href 
+          },5000)
+       }
+    
+    const a = document.queryselector('a')
+    a.onclick = navegarEm5s
+</script>
+
+~~~~
+
+
+
+Criando um evento com atributo personalizado
+
+~~~~html
+<div>
+        <a esperar-carregamento href="https://google.com.br" >Google</a>
+    </div>
+    <script>
+        
+       function navegarEm5s(e){
+           e.preventDefault()
+            console.log("Saindo em 5 segundos...")
+            
+            setTimeout(() =>{
+                const link = e.target 
+                window.location.href = link.href 
+            },5000)
+
+        const a = document.querySelector('[esperar-carregamento]')
+        a.onclick = navegarEm5s
+       }
+    </script>
+~~~~
+
+
+
+Exemplo: Mover uma div com o mouse
+
+~~~~html
+<body class="conteudo exercicio">
+    <div>Elemento</div>
+
+    <script>
+        const item = document.querySelector('div')
+        //definindo a posição da div em absolute
+        item.style.position = 'absolute'
+        //Adicionando uma função para arrastar a div com o mouse
+        item.onmousemove = e => {
+            // e -> o evento (parâmetro)
+            // item -> div responsável por disparar o evento
+            const item = e.target
+            item.style.cursor = 'move'
+            
+            if (e.buttons){              
+                // target.style.top -> div cujo position é top
+                // e.clientY = cursor do mouse no eixo Y que será subtraído pela metade da altura
+                item.style.top = `${e.clientY - (item.clientHeight / 2)}px`
+                // e.clientX = cursor do mouse no eixo X que será subtraído pela metade da largura
+                item.style.left = `${e.clientX - (item.clientWidth / 2)}px`
+            }
+        }
+
+    </script>
+</body>
+~~~~
+

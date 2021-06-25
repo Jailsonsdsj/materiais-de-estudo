@@ -1960,7 +1960,9 @@ console.log(teste)
 
 
 
-### Funções importantes de Objects
+### Funções importantes de objects
+
+
 
 ~~~~javascript
 const pessoas = {
