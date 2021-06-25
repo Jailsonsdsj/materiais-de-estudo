@@ -9,21 +9,19 @@
 
 <body class="conteudo exercicio">
     <div>
-        <a esperar-carregamento href="https://google.com.br" >Google</a>
+        <a href="https://google.com.br"  onclick="navegarEm5s(event)">Google</a>
     </div>
+
+
     <script>
         
        function navegarEm5s(e){
-           e.preventDefault()
-            console.log("Saindo em 5 segundos...")
-            
-            setTimeout(() =>{
-                const link = e.target 
-                window.location.href = link.href 
-            },5000)
-
-        const a = document.querySelector('[esperar-carregamento]')
-        a.onclick = navegarEm5s
+          e.preventDefault();
+          console.log('Saindo em 5s...');
+          setTimeout(()=> {
+              const link = e.target
+              window.location.href = link.href 
+          },5000)
        }
     </script>
 </body>

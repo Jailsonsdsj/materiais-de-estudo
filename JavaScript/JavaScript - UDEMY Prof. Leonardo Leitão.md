@@ -1940,11 +1940,7 @@ console.log(pessoa)
 
 
 
-
-
 ### Getters/Setters
-
-
 
 ~~~~~~~~javascript
 const sequencia = {
@@ -2766,6 +2762,94 @@ console.log(notas2)
 
 
 
+## 📌Métodos além do curso
+
+
+
+### Timeouts e intervalos
+
+#### **setTimeout**
+
+Executa um bloco específico uma vez depois de um determinado tempo
+
+~~~~javascript
+// With a named function
+let myGreeting = setTimeout(function sayHi() {
+  alert('Hello, Mr. Universe!');
+}, 2000) //the function will run after 2 secounds
+
+// With a function defined separately
+function sayHi() {
+  alert('Hello Mr. Universe!');
+}
+
+let myGreeting = setTimeout(sayHi, 2000);
+~~~~
+
+
+
+Passando parâmetros para a função setTimeout()
+
+~~~~javascript
+function sayHi(who) {
+  alert(`Hello ${who}!`);
+}
+let myGreeting = setTimeout(sayHi, 2000, 'Mr. Universe');
+~~~~
+
+
+
+Cancelando timeouts
+
+~~~~javascript
+clearTimeout(myGreeting);
+~~~~
+
+
+
+#### setInterval
+
+Executa um bloco específico repetidamente com um intervalo fixo entre cada chamada.
+
+~~~~javascript
+function displayTime() {
+        let date = new Date();
+        let time = date.toLocaleTimeString();
+        document.querySelector('.clock').textContent = time;
+      }
+
+displayTime();
+      const createClock = setInterval(displayTime, 1000);
+~~~~
+
+
+
+Cancelando Intervals
+
+~~~~javascript
+const myInterval = setInterval(myFunction, 2000);
+clearInterval(myInterval);
+~~~~
+
+
+
+#### requestAnimationFrame
+
+Uma versão moderna de `setInterval()`. Ela executa um bloc de código específico antes do navegador renderizar a tela novamento, permitindo que seja executada em uma taxa de quadros adequada, independentemente do ambiente em que está sendo executado. Não é possível definir o tempo e, por esse motivo, a função será executada de imediato.
+
+~~~~javascript
+function draw() {
+   // Drawing code goes here
+   requestAnimationFrame(draw);
+}
+
+draw();
+~~~~
+
+
+
+
+
 # Node➰
 
 O Node executa códigos JavaScript tanto backend/servidor quanto no frontend/interface.
@@ -3051,7 +3135,8 @@ Exemplo 3: acessando as propriedades de um elemento
             <li>Copo Descartável</li>
         </ul>
     </div>
-    <script>
+</body>
+ <script>
         const lista = document.querySelector('#compras')
         //Acessando as propriedades do elemento ul
 
@@ -3071,7 +3156,6 @@ Exemplo 3: acessando as propriedades de um elemento
         lista.removeAttribute('destino')
 
     </script>
-</body>
 ~~~~
 
 
@@ -3087,7 +3171,9 @@ Exemplo 4: acessando somente leitura
             <li>Copo Descartável</li>
         </ul>
     </div>
-    <script>
+</body>
+<script>
+        const lista = document.querySelector('#compras')
         //Somente leitura
         console.log(lista.attributes)
         console.log(lista.attributes[0])
@@ -3097,7 +3183,6 @@ Exemplo 4: acessando somente leitura
         console.log(lista.attributes['data-urgencia'])
         
     </script>
-</body>
 ~~~~
 
 
@@ -3106,12 +3191,14 @@ Exemplo 4: acessando somente leitura
 
 ### Acessando Classes
 
-~~~~javascript
+~~~~html
 <body class='conteudo exercicio'>
     <div>
         Classes
     </div>
-    <script>
+    
+</body>
+<script>
         //obtendo a lista de classes do elemento div
         const classes = document.querySelector('div').classList
         //adicionando classe
@@ -3125,7 +3212,6 @@ Exemplo 4: acessando somente leitura
         
 
     </script>
-</body>
 ~~~~
 
 
@@ -3134,7 +3220,7 @@ Exemplo 4: acessando somente leitura
 
 
 
-~~~~javascript
+~~~~html
 <body class='conteudo exercicio'>
     <script>
        const body = document.querySelector('body')
@@ -3171,7 +3257,7 @@ Exemplo 4: acessando somente leitura
 
 
 
-~~~~javascript
+~~~~html
 <body class='conteudo exercicio'>
     <div>
         <p>Texto Inicial</p>
@@ -3212,7 +3298,7 @@ console.log(div.innerText)
 
 Criando um evento de click
 
-~~~~javascript
+~~~~html
 <div>
         <a href="https://google.com.br" onclick="navegarEm5s(event)">Google</a>
     </div>
@@ -3222,16 +3308,44 @@ Criando um evento de click
             console.log("Saindo em 5 segundos...")
             
             setTimeout(() =>{
-                const link = e.target //o target do link (e) recebido por parâmetro será salvo numa variável
+                const link = e.target //o target reponsável por ativar o evento em uma tag link. 
                 window.location.href = link.href // substituíndo o link do endereçamento
+                //isso fica como: e.target.href
             },5000)//Estabelecendo o tempo de execução da função
        }
     </script>
 ~~~~
 
+
+
+Outro método: o onclick estará inserido dentro do próprio script
+
+~~~~html
+
+<div>
+        <a href="https://google.com.br">Google</a>
+    </div>
+<script>
+	function navegarEm5s(e){
+          e.preventDefault();
+          console.log('Saindo em 5s...');
+          setTimeout(()=> {
+              const link = e.target
+              window.location.href = link.href 
+          },5000)
+       }
+    
+    const a = document.queryselector('a')
+    a.onclick = navegarEm5s
+</script>
+
+~~~~
+
+
+
 Criando um evento com atributo personalizado
 
-~~~~javascript
+~~~~html
 <div>
         <a esperar-carregamento href="https://google.com.br" >Google</a>
     </div>
@@ -3256,7 +3370,7 @@ Criando um evento com atributo personalizado
 
 Exemplo: Mover uma div com o mouse
 
-~~~~javascript
+~~~~html
 <body class="conteudo exercicio">
     <div>Elemento</div>
 

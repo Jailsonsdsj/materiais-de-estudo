@@ -466,7 +466,7 @@ Arquivo JSON
 
 
 
-#### Listado os dados
+#### Listando os dados
 
 ~~~~html
 <script>
