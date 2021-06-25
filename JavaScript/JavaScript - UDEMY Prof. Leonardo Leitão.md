@@ -1933,6 +1933,11 @@ pessoa = {nome : 'Pedro'}
 
 Porém, é possível alterar o atributo do objeto
 
+~~~javascript
+pessoa.nome = 'Pedro'
+console.log(pessoa)
+~~~
+
 
 
 ### Getters/Setters
@@ -1947,8 +1952,11 @@ const sequencia = {
         this._valor = valor
     }
 }
-
 ~~~~
+
+~~~javascript
+console.log(teste)
+~~~
 
 
 
@@ -3392,5 +3400,4 @@ Exemplo: Mover uma div com o mouse
     </script>
 </body>
 ~~~~
-
 
