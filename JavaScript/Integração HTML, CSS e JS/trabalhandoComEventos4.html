@@ -3,7 +3,7 @@
 
 <head>
     <meta charset='UTF-8'>
-    <title>Trabalhando com Eventos #04</title>
+    <title>Handling forms data</title>
     <link rel='stylesheet' href='css/estilo.css'>
     <style>
         form {
@@ -31,6 +31,21 @@
         <button wm-submit>Pesquisar</button>
     </form>
     <script>
-        // ...
-    </script>
+        const submit = document.querySelector('[wm-submit]')
+        submit.onclick = function(e){
+            e.preventDefault()
+ 
+            const form = e.target.parentNode//e.target está no botão de pesquisa e o parentNode é quem envolve esse botão, ou seja, o formulário
+ 
+            const formData = new FormData(form)
+            formData.append('ajax',true) //adicionando uma informação ao formulário
+            console.log(formData.get('q')) //retorna os valores dentro do campo 'q' 
+            console.log(formData.has('hl')) //retorna se um campo foi preenchido (boolean)
+ 
+             //criando um for para exibir todos os dados do form
+            for (let dado of formData){
+                console.log(dado) 
+            }
+        }
+     </script>
 </body>

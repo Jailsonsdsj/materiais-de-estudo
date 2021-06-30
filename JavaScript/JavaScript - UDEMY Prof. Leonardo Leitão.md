@@ -3450,8 +3450,85 @@ Exemplo: Mover uma div com o mouse
 
 
 
-Exemplo: criando
+Exemplo: criando animações básicas
 
-~~~~javascript
+- [Move container](https://github.com/Jailsonsdsj/animations-js/blob/master/Move%20container.html)
+
+- [Dropzone flex](https://github.com/Jailsonsdsj/animations-js/blob/master/dropzone%20-%20flex.html)
+
+- [Dropzone solid](https://github.com/Jailsonsdsj/animations-js/blob/master/dropzone%20-%20solid.html)
+
+
+
+#### Tratando as informações do formulário
+
+Método I
+
+~~~~html
+<body class="conteudo exercicio">
+    <h1>Formulário</h1>
+    <form name="pesquisa" action="http://www.google.com.br/search">
+        <input type="text" name="q" placeholder="Digite o termo...">
+        <select name="hl">
+                <option value="pt-br">Português (Brasil)</option>
+                <option value="en-us">Inglês (Americano)</option>
+            </select>
+        <button wm-submit>Pesquisar</button>
+    </form>
+    <script>
+       const submit = document.querySelector('[wm-submit]')
+       submit.onclick = function(e){
+           e.preventDefault()
+
+           const form = e.target.parentNode//e.target está no botão de pesquisa e o parentNode é quem envolve esse botão, ou seja, o formulário
+
+           const formData = new FormData(form)
+           formData.append('ajax',true) //adicionando uma informação ao formulário
+           console.log(formData.get('q')) //retorna os valores dentro do campo 'q' 
+           console.log(formData.has('hl')) //retorna se um campo foi preenchido (boolean)
+
+            //criando um for para exibir todos os dados do form
+           for (let dado of formData){
+               console.log(dado) 
+           }
+       }
+    </script>
+</body>
 ~~~~
 
+
+
+Método II
+
+~~~~html
+<body class="conteudo exercicio">
+    <h1>Formulário</h1>
+    <form name="pesquisa" action="http://www.google.com.br/search">
+        <input type="text" name="q" placeholder="Digite o termo...">
+        <select name="hl">
+                <option value="pt-br">Português (Brasil)</option>
+                <option value="en-us">Inglês (Americano)</option>
+            </select>
+        <button wm-submit>Pesquisar</button>
+    </form>
+    <script>
+       const form = document.forms[0] //considera o primeiro form do html
+       form.onsubmit = function(e){
+           e.preventDefault()
+
+           const data = e.target //neste caso, o e.target já é o próprio form e não mais o botão
+
+           const formData = new FormData(data)
+           formData.append('ajax',true) 
+           console.log(formData.get('q')) 
+           console.log(formData.has('hl')) 
+           
+           for (let dado of formData){
+               console.log(dado) 
+           }
+       }
+    </script>
+</body>
+~~~~
+
+observação: const form e const data tratam-se do mesmo objeto: o formulário. Nesse sentido, basta utilizar apenas o 
