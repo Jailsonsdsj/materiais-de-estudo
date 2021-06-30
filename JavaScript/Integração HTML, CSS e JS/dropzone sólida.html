@@ -49,11 +49,9 @@
 
         //Definindo o evento ao segurar o elemento com o mouse
        const items = document.querySelectorAll('[wm-dropzone] .item');
-
        items.forEach((item, index) =>{
            item.draggable = true; //permite que o item mova ao manter o mouse pressionado
            item.id = item.id || `draggable-item-${index}`; //aplica um id a cada item por meio do index
-           
            //ao arrastar um elemento, o evento será ativado
            item.ondragstart = e =>
                 e.dataTransfer.setData('item-id', e.target.id)
@@ -66,7 +64,7 @@
            dropzone.ondrop = function(e){
                const id = e.dataTransfer.getData('item-id');
                const item = document.getElementById(id);
-               dropzone.appendChild(item) //agora, os blocos não permitem ser encaixados dentro de outras
+               dropzone.appendChild(item) //agora, os blocos não permitem ser encaixados dentro de outras divs
            }
            
        })

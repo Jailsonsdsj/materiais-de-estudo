@@ -5,14 +5,92 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Draft</title>
+    <style>
+       body{
+            margin: 0;
+            display: flex; 
+        }
+        .step{
+            height: 900px;
+            width: 50%;
+        }
+        .left{
+            background-color:rgb(170, 72, 72);  
+        }
+        .right{
+            background-color:rgb(28, 30, 131)
+        }
+        .block{
+            width: 100px;
+            height: 100px;
+        }
+        .yellow{
+            background-color:yellow;
+        }
+        .blue{
+            background-color:blue;
+        }
+        .greenyellow{
+            background-color:greenyellow;
+        }
+        .red{
+            background-color:red;
+        }
+        .pink{
+            background-color:pink;
+        }
+        .black{
+            background-color:black;
+        }
+        .orange{
+            background-color:orange;
+        }
+        .purple{
+            background-color:purple;
+        }
+        .grey{
+            background-color:grey;   
+        }
+    </style>
 </head>
 <body>
-    <div>
-       
-
+    <div class="left step">
+        <div class="grey block "></div>
+        <div class="yellow block"></div>
+        <div class="blue block"></div>
+        <div class="greenyellow block"></div>
+        <div class="red block"></div>
+        <div class="pink block"></div>
+        <div class="black block"></div>
+        <div class="orange block"></div>
+        <div class="purple block"></div>
     </div>
+    <div class="right step"></div>
+    
     <script>
-      
+       const blocks = document.querySelectorAll('.step .block');
+       
+       blocks.forEach((block,i)=>{
+           block.draggable = true;
+           block.id = block.id || `${i}` //inserindo IDs nas divs
+
+           block.ondragstart = e =>
+                e.dataTransfer.setData('id-block', e.target.id)
+       });
+
+       const drapzones = document.querySelectorAll('.step');
+
+       drapzones.forEach(dropzone => {
+        dropzone.ondragover = e => e.preventDefault();
+
+        dropzone.ondrop = function(e){
+            const id = e.dataTransfer.getData('id-block');
+
+            const block = document.getElementById(id);
+
+            dropzone.appendChild(block)
+        }
+       })
     </script>
 </body>
 </html>

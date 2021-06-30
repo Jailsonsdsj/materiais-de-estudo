@@ -906,7 +906,7 @@ div {
 
 
 
-## Exemplos práticos
+## Exemplos práticos (conteúdo além do curso)
 
 
 
@@ -963,14 +963,32 @@ transition: 0.5s ease all;
 ### Variáveis em CSS
 
 ~~~~css
+//definindo as variáveis
+:root {
+    --primary: rgb(249,249,249);
+    --secoundary: rgb(196,23,12);
+    --text: #FFFF;
+}
 
+//aplicando em um elemento
+body{
+    background-color: var(--primary);
+}
 ~~~~
 
 
+
+### Alterar o cursor do mouse
 
 ~~~~css
-
+div{
+    cursor:move;
+}
 ~~~~
+
+Para mais efeitos: https://developer.mozilla.org/pt-BR/docs/Web/CSS/cursor
+
+
 
 
 

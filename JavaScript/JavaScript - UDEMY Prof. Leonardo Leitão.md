@@ -2853,6 +2853,51 @@ draw();
 
 
 
+### Diferença entre This e e.target
+
+O `this` se refere ao elemento ao qual foi anexado o evento. Já o `event.target` se refere ao elemento que disparou o evento.
+
+Por exemplo, suponha que você esteja manipulando uma tabela e queira pegar o evento `click` em uma `td`.
+
+~~~~html
+<table>
+    <tr>
+        <td id="teste">
+            <img src="testando.png" />
+        </td>
+    </tr>
+</table>
+<script>
+	$("#teste").on("click", function(event) {
+    console.log(this);
+    console.log(event.target);
+});
+</script>
+~~~~
+
+O `this` se refere ao elemento ao qual foi anexado o evento. Já o `event.target` se refere ao elemento que disparou o evento.
+
+Por exemplo, suponha que você esteja manipulando uma tabela e queira pegar o evento `click` em uma `td`.
+
+```js
+<table>
+    <tr>
+        <td id="teste">
+            <img src="testando.png" />
+        </td>
+    </tr>
+</table>
+
+$("#teste").on("click", function(event) {
+    console.log(this);
+    console.log(event.target);
+});
+```
+
+Neste exemplo, se o usuário clicar na **imagem**, o `event.target` se refere a imagem e o `this` se refere a `td#teste`.
+
+Fonte: https://pt.stackoverflow.com/questions/51206/qual-a-diferen%C3%A7a-do-this-e-do-event-target
+
 
 
 # Node➰
@@ -3012,7 +3057,7 @@ document.getElementById('id').classList.remove('destague')
 **Selecionando mais de um elemento**
 
 ~~~~javascript
-const divs = document.getelementsByTagName('div')
+const divs = document.getElementsByTagName('div')
 Array.from(divs).forEach(e => e.classList.remove('destaque'))
 ~~~~
 
@@ -3385,7 +3430,7 @@ Exemplo: Mover uma div com o mouse
         item.style.position = 'absolute'
         //Adicionando uma função para arrastar a div com o mouse
         item.onmousemove = e => {
-            // e -> o evento (parâmetro)
+            // e -> o [e]vento (parâmetro)
             // item -> div responsável por disparar o evento
             const item = e.target
             item.style.cursor = 'move'
@@ -3401,5 +3446,12 @@ Exemplo: Mover uma div com o mouse
 
     </script>
 </body>
+~~~~
+
+
+
+Exemplo: criando
+
+~~~~javascript
 ~~~~
 
