@@ -286,11 +286,11 @@ git clone <link>
 
 
 
-# Informações Extras
+# Lidando com erros
 
 
 
-### **Lidando com o erro Failed to push some refs to...**
+### **Failed to push some refs to...**
 
 O erro aconteceu ao tentar enviar o repositório local para o remoto. Para resolver, basta listar os repositórios integrados através do seguinte comando:
 
@@ -336,4 +336,10 @@ Alternar URLs remotes de SSH para HTTPS
 ~~~~
 $ git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
 ~~~~
+
+
+
+### Another repository inside your current repository
+
+ref: https://gist.github.com/claraj/e5563befe6c2fb108ad0efb6de47f265
 
