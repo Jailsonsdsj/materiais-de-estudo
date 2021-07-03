@@ -1338,47 +1338,11 @@ O é um bind método responsável por "amarrar" um determinado objeto.
 
 #### Exemplo
 
-Neste caso, a função não irá exibir a idade, pois o this está se referindo a outro objeto
-
 ~~~~javascript
 function Pessoa(){
-    this.idade= 0
+    this.idade = 0
 
-    setInterval(function(){ //Ativa outra função a partir de um intervalo de tempo
-        this.idade++
-        console.log(this.idade)
-    },1000)
-}
-
-new Pessoa
-~~~~
-
-
-
-Para solucionar o problema, faremos da seguinte maneira
-
-~~~~javascript
-function Pessoa(){
-    this.idade= 0
-
-    setInterval(function(){ 
-        this.idade++
-        console.log(this.idade)
-    },bind(this),1000); //A partir de agora, o This irá apontar para pessoa
-}
-
-new Pessoa
-~~~~
-
-
-
-#### Outra forma
-
-~~~~javascript
-function Pessoa(){
-    this.idade= 0
-
-    const self=this //Após "salvar" a posição do this numa constante, não será necessário utilizar o bind
+    const self = this //Após "salvar" a posição do this numa constante, não será necessário utilizar o bind
     setInterval(function(){ 
         self.idade++
         console.log(self.idade)
@@ -2003,6 +1967,8 @@ Object.entries(pessoas).forEach (([chave,valor]) => {
 })
 ~~~~
 
+O método `Object.entries()` retorna uma array dos próprios pares  `[key, value] `enumeráveis de um dado objeto
+
 
 
 **Definindo a propriedade dos atributos de um objeto**
@@ -2250,7 +2216,13 @@ console.log(filho)
 
 ~~~~javascript
 var frutas = ['Maçã', 'Banana'];
+~~~~
 
+
+
+**Contando os índices de um array**
+
+~~~~javascript
 console.log(frutas.length);
 // 2
 ~~~~
@@ -2397,6 +2369,8 @@ aprovados.forEach(function(nome,indice){
     console.log(`${indice} - ${nome}`)
 })
 ~~~~
+
+Obs: para percorrer apenas o valor de um array, basta colocar um parâmetro na função.
 
 
 
@@ -2603,12 +2577,6 @@ const alunos = [
     { nome: 'Ana', nota: 7.0, bolsista: false},
     { nome: 'Ricardo', nota: 6.0, bolsista: true},
 ]
-
-~~~~
-
-
-
-~~~~javascript
 console.log(alunos.map(a => a.nota))
 
 const resultado = alunos.map(a => a.nota). reduce(function(acumulador, atual){
@@ -2617,6 +2585,12 @@ const resultado = alunos.map(a => a.nota). reduce(function(acumulador, atual){
 },0)
 
 console.log(resultado)
+~~~~
+
+
+
+~~~~javascript
+
 ~~~~
 
 
@@ -3036,6 +3010,51 @@ O DOM (Document Object Model) representa o mesmo documento para que possa ser ma
 
 
 
+### Objeto Window
+
+representa uma janela ou quadro de navegador Web e pode ser referenciado através do identificador `window`. O objeto Window está no topo do encadeamento de escopo e que suas propriedades e métodos são efetivamente variáveis globais e funções globais.
+
+Representações e referências de propriedades:
+
+- Document
+- Location
+- Screen
+  - screen.top
+  - screen.left
+  - screen.width
+  - scree.height
+- onload
+
+
+
+Exemplo:
+
+~~~javascript
+// Criamos uma variável gobal
+suasVariaveis = 123;
+
+// Agora ela faz parte do objeto window e
+// está poluindo o escopo global(window)
+console.log(window.suasVariaveis); // 123
+
+// Criando o objeto
+objContainer = {}
+
+// Ele também polui o espaço global...
+console.log(window.objContainer); // Object { }
+
+// ...mas sua variáveis (propriedades) não poluem,pois estão contidas dentro do objeto
+objContainer.outraVariavel = 456;
+
+// Prova:
+console.log(window.outraVariavel); // undefined
+console.log(window.objContainer.outraVariavel); // 456
+~~~
+
+
+
+
+
 ### Selecionando elementos com do documentElements
 
 
@@ -3346,7 +3365,7 @@ console.log(div.innerText)
 
 ### Eventos
 
-Criando um evento de click
+### Criando um evento de click
 
 ~~~~html
 <div>
@@ -3532,3 +3551,25 @@ Método II
 ~~~~
 
 observação: const form e const data tratam-se do mesmo objeto: o formulário. Nesse sentido, basta utilizar apenas o 
+
+
+
+### Canvas
+
+Definindo o contexto de desenho do canvas
+
+~~~~~javascript
+context = canvas.getContext("2d");
+~~~~~
+
+Tipos:
+
+- `"2d"`, levando a criação de um objeto [`CanvasRenderingContext2D`](https://developer.mozilla.org/pt-BR/docs/Web/API/CanvasRenderingContext2D) representando uma renderização bidimensional.
+- `"webgl"` (or `"experimental-webgl"`) que criará um objeto [`WebGLRenderingContext` (en-US)](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext) representando uma renderização tridimensional. Esse contexto está disponivel somente em browsers que implementam [WebGL](https://developer.mozilla.org/en-US/docs/Web/WebGL) versão 1 (OpenGL ES 2.0).
+- `"webgl2"` que criará um objeto [`WebGL2RenderingContext` (en-US)](https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext) representando uma renderização tridimensional. Esse contexto está disponivel somente em browsers que implementam [WebGL](https://developer.mozilla.org/en-US/docs/Web/WebGL) versão 2 (OpenGL ES 3.0). 
+- `"bitmaprenderer"` que criará um [`ImageBitmapRenderingContext` (en-US)](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContext) que apenas provê a funcionalidade de substituir o conteúdo do canvas pelo de um [`ImageBitmap` (en-US)](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap).
+
+Para mais: https://developer.mozilla.org/pt-BR/docs/Web/API/HTMLCanvasElement/getContext
+
+
+
