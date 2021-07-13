@@ -12,23 +12,39 @@
 <body>
     
     <script>
-        function createProduct(name,type,price,discount = 0){
-            return{
-                name,
-                type,
-                price,
-                discount
+        class Product{
+            constructor(name,type,price,discount=0){
+                this.name = name;
+                this.type = type;
+                this.price = price;
+                this.discount = discount;   
             }
-            
+            calculateDiscount(){
+                if (this.discount > 0){
+                    return this.price * (thisdiscount/100)
+                }
+            }
+
+            productDescription(){
+                return{
+                    name,type,price,discount
+                }
+            }
+            get productDescription(){
+                return this.productDescription();
+            }
+
+            get discountPrice(){
+                return this.calculateDiscount()
+                }
+
         }
-             
-        function discountPrice(product){
-                let newPrice = 0
-                newPrice = product.price-(product.price*(product.discount/100))
-                console.log(newPrice)
-        }
-        const notebook = createProduct("notebook","eletronic",4.572,15)
-        discountPrice(notebook)
+
+        const notebook = new Product("Notebook","Eletronic",4.500,15)
+        const tv = new Product("tv","Eletronic",4.800,10)
+
+        const newNotebook = (notebook.discountPrice)
+        console.log(newNotebook)
 
     </script>
 </body>
